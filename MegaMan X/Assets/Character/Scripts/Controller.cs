@@ -1,4 +1,5 @@
 using Cinemachine;
+using EasyAudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -233,6 +234,9 @@ public class Controller : MonoBehaviour
         animator.Play("Movement");
         animator.applyRootMotion = false;
     }
+
+
+  
 
    
 
