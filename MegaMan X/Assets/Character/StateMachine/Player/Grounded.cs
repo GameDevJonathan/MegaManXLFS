@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Grounded : PlayerBaseState  
 {
@@ -36,6 +35,11 @@ public class Grounded : PlayerBaseState
   
     public override void Tick(float deltaTime)
     {
+        if (stateMachine.InputReader.isAiming)
+        {
+            stateMachine.SwitchState(new AimingState(stateMachine));
+            return;
+        }
         
         
 
@@ -68,8 +72,7 @@ public class Grounded : PlayerBaseState
 
 
         freeLookValue = Mathf.Clamp(
-            Mathf.Abs(stateMachine.InputReader.MovementValue.x) +
-            Mathf.Abs(stateMachine.InputReader.MovementValue.y), 0f, 1f);
+            stateMachine.InputReader.MovementValue.magnitude, 0f, 1f);
 
 
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, freeLookValue, AnimatorDampTime, deltaTime);

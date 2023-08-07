@@ -71,6 +71,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AIm"",
+                    ""type"": ""Button"",
+                    ""id"": ""76dc2962-2464-42ad-877d-129d414c1561"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -282,6 +291,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de0d03ea-b46f-4b4c-8c8e-36d211865098"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""AIm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2af9ad2-fe54-4072-8274-652dec0001c7"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AIm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -323,6 +354,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Modifier = m_Player.FindAction("Modifier", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_AIm = m_Player.FindAction("AIm", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -389,6 +421,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Modifier;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_AIm;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -398,6 +431,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Modifier => m_Wrapper.m_Player_Modifier;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @AIm => m_Wrapper.m_Player_AIm;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -422,6 +456,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
+            @AIm.started += instance.OnAIm;
+            @AIm.performed += instance.OnAIm;
+            @AIm.canceled += instance.OnAIm;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -441,6 +478,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
+            @AIm.started -= instance.OnAIm;
+            @AIm.performed -= instance.OnAIm;
+            @AIm.canceled -= instance.OnAIm;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -483,5 +523,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnModifier(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnAIm(InputAction.CallbackContext context);
     }
 }

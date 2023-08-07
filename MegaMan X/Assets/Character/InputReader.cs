@@ -19,6 +19,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool shoot;
     public bool charge;
     public bool fire;
+    [field: SerializeField] public bool isAiming { get; private set; }
 
     public float chargeAmount;
     public float chargeRate;
@@ -178,5 +179,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
                 Debug.Log("Max Charge Shot");
             }
         }
+    }
+
+    public void OnAIm(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isAiming = true;
+        }else if (context.canceled)
+        {
+            isAiming = false;
+        }
+        
     }
 }
