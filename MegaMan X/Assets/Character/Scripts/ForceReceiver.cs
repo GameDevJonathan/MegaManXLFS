@@ -13,7 +13,7 @@ public class ForceReceiver : MonoBehaviour
 
     private Vector3 dampingVelocity;
     private Vector3 impact;
-    private float verticalVelocity = 0f;
+    private float verticalVelocity = 0f;    
     [SerializeField] private float fallSpeed = 5f;
     public Vector3 Movement => impact + Vector3.up * verticalVelocity;
 
@@ -54,6 +54,7 @@ public class ForceReceiver : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         impact += force;
+        Debug.Log($"force direction: {force}");
         if (agent != null)
         {
             agent.enabled = false;

@@ -40,6 +40,12 @@ public class Grounded : PlayerBaseState
             stateMachine.SwitchState(new AimingState(stateMachine));
             return;
         }
+
+        if (stateMachine.InputReader.isDashing)
+        {
+            stateMachine.SwitchState(new DashState(stateMachine));
+            return;
+        }
         
         
 

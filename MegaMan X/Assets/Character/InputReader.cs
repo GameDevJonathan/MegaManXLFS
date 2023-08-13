@@ -19,6 +19,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool shoot;
     public bool charge;
     public bool fire;
+
+    [field: SerializeField] public bool isDashing { get; private set; }
     [field: SerializeField] public bool isAiming { get; private set; }
 
     public float chargeAmount;
@@ -63,7 +65,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         controls = new Controls();
         controls.Player.SetCallbacks(this);
 
-        controls.Player.Enable();        
+        controls.Player.Enable();
+
+        _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
     }
 
     private void Update()
@@ -77,7 +81,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             chargeAmount = 0;
         }
-        
+
         chargeAmount = Mathf.Clamp(chargeAmount, 0, 100);
     }
 
@@ -150,31 +154,32 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (context.started)
         {
-            
-            shoot = true;            
+
+            shoot = true;
             fire = false;
             Debug.Log("Firing");
-            
+
         }
         else
         if (context.performed)
-        {            
-            shoot = false;            
+        {
+            shoot = false;
             charge = true;
-            if(chargeAmount> 20)
+            if (chargeAmount > 20)
             {
                 Debug.Log("Charging");
             }
         }
         else
         if (context.canceled)
-        {            
-            charge = false;            
+        {
+            charge = false;
             fire = true;
-            if(chargeAmount > 5 &&  chargeAmount <= 99)
+            if (chargeAmount > 5 && chargeAmount <= 99)
             {
                 Debug.Log("Meduim Shot");
-            }else if(chargeAmount > 99)
+            }
+            else if (chargeAmount > 99)
             {
                 Debug.Log("Max Charge Shot");
             }
@@ -186,10 +191,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (context.performed)
         {
             isAiming = true;
-        }else if (context.canceled)
+        }
+        else if (context.canceled)
         {
             isAiming = false;
         }
-        
+
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isDashing = true;
+        }
+        else if (context.canceled)
+        {
+            isDashing = false;
+        }
     }
 }

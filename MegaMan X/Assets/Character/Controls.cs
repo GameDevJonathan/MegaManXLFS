@@ -80,6 +80,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""a13b11bb-62a5-4566-a754-77d2ec8f04be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -240,7 +249,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""435b873a-61ec-4c23-9255-409189039756"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamePad"",
@@ -313,6 +322,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""AIm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0bb89bc8-1e75-4d60-a3d4-199ffaf6cc67"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7b3c214-a23c-4232-a12b-e68c80bd0ccc"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -355,6 +386,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_AIm = m_Player.FindAction("AIm", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -422,6 +454,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_AIm;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -432,6 +465,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @AIm => m_Wrapper.m_Player_AIm;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -459,6 +493,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @AIm.started += instance.OnAIm;
             @AIm.performed += instance.OnAIm;
             @AIm.canceled += instance.OnAIm;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -481,6 +518,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @AIm.started -= instance.OnAIm;
             @AIm.performed -= instance.OnAIm;
             @AIm.canceled -= instance.OnAIm;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -524,5 +564,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnAIm(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

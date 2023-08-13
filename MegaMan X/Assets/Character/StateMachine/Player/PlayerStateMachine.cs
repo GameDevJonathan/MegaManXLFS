@@ -19,6 +19,9 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationSmoothValue { get; private set; }
 
+    [field: SerializeField] public float DashForceTime { get; private set; }
+    [field: SerializeField] public float DashForce { get; private set; }
+
     private void Start()
     {
         MainCameraTransform = Camera.main.transform;

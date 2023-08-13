@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "a13b11bb-62a5-4566-a754-77d2ec8f04be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -218,7 +227,7 @@
                 {
                     "name": "",
                     "id": "435b873a-61ec-4c23-9255-409189039756",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "GamePad",
@@ -289,6 +298,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "AIm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0bb89bc8-1e75-4d60-a3d4-199ffaf6cc67",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f7b3c214-a23c-4232-a12b-e68c80bd0ccc",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
