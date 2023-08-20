@@ -18,6 +18,7 @@ public class DashState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(DashStart, crossFadeTime);
+        stateMachine.InputReader.isDashing = true;
     }
 
     public override void Tick(float deltaTime)
@@ -46,7 +47,7 @@ public class DashState : PlayerBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.InputReader.isDashing = false;
     }
 
     public void TryApplyForce()

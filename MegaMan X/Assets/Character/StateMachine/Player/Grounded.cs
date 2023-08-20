@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grounded : PlayerBaseState  
+public class Grounded : PlayerBaseState
 {
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
     private readonly int FreeLookBlendTreeHash = Animator.StringToHash("Movement");
@@ -21,18 +21,20 @@ public class Grounded : PlayerBaseState
 
     public override void Enter()
     {
+
         if (!shouldFade)
             stateMachine.Animator.Play(FreeLookBlendTreeHash);
         else
             stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
-        
+
         stateMachine.InputReader.JumpEvent += OnJump;
+        stateMachine.InputReader.DashEvent += OnDash;
         //stateMachine.InputReader.AttackEvent += OnAttack; 
-        
+
 
     }
 
-  
+
     public override void Tick(float deltaTime)
     {
         if (stateMachine.InputReader.isAiming)
@@ -41,14 +43,6 @@ public class Grounded : PlayerBaseState
             return;
         }
 
-        if (stateMachine.InputReader.isDashing)
-        {
-            stateMachine.SwitchState(new DashState(stateMachine));
-            return;
-        }
-        
-        
-
         if (stateMachine.InputReader.Modified)
         {
             //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
@@ -56,7 +50,7 @@ public class Grounded : PlayerBaseState
         else
         {
             //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
-        }     
+        }
 
 
 
@@ -69,7 +63,7 @@ public class Grounded : PlayerBaseState
         //    stateMachine.SwitchState(new AttackingState(stateMachine));
         //    return;
         //}
-        
+
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
@@ -98,13 +92,22 @@ public class Grounded : PlayerBaseState
         return;
     }
 
+    private void OnDash()
+    {
+        stateMachine.SwitchState(new DashState(stateMachine));
+        return;
+    }
+
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
+        stateMachine.InputReader.DashEvent -= OnDash;
         //stateMachine.InputReader.AttackEvent -= OnAttack;
-        
+
 
     }
+
+
 
     private Vector3 CalculateMovement()
     {

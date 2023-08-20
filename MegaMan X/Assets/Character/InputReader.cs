@@ -20,13 +20,14 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool charge;
     public bool fire;
 
-    [field: SerializeField] public bool isDashing { get; private set; }
+    [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
 
     public float chargeAmount;
     public float chargeRate;
 
     public event Action JumpEvent;
+    public event Action DashEvent;
     //public event Action AttackEvent;
 
 
@@ -104,52 +105,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         JumpEvent?.Invoke();
     }
 
-    public void OnModifier(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Modified = true;
-        }
-        else if (context.canceled)
-        {
-            Modified = false;
-        }
-
-        Debug.Log("Modified: " + Modified);
-    }
-
-    public void OnCamera(InputAction.CallbackContext context)
-    {
-        CameraValue = context.ReadValue<Vector2>();
-    }
-
-    private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-    {
-        if (lfAngle < -360f) lfAngle += 360f;
-        if (lfAngle > 360f) lfAngle -= 360f;
-        return Mathf.Clamp(lfAngle, lfMin, lfMax);
-    }
-
-    private void CameraRotation()
-    {
-        if (CameraValue.sqrMagnitude >= _threshold)
-        {
-            float deltaTimeMultiplier = Time.deltaTime;
-
-            _cinemachineTargetYaw -= CameraValue.x;
-            _cinemachineTargetPitch -= CameraValue.y;
-        }
-
-        // clamp our rotations so our values are limited 360 degrees
-        _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-        // Cinemachine will follow this target
-        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-            _cinemachineTargetYaw, 0.0f);
-
-    }
-
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -201,13 +156,57 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (!context.performed) { return; }
+            DashEvent?.Invoke();
+    }
+
+
+
+    public void OnModifier(InputAction.CallbackContext context)
+    {
         if (context.performed)
         {
-            isDashing = true;
+            Modified = true;
         }
         else if (context.canceled)
         {
-            isDashing = false;
+            Modified = false;
         }
+
+        Debug.Log("Modified: " + Modified);
     }
+
+    public void OnCamera(InputAction.CallbackContext context)
+    {
+        CameraValue = context.ReadValue<Vector2>();
+    }
+
+    private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
+    {
+        if (lfAngle < -360f) lfAngle += 360f;
+        if (lfAngle > 360f) lfAngle -= 360f;
+        return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+
+    private void CameraRotation()
+    {
+        if (CameraValue.sqrMagnitude >= _threshold)
+        {
+            float deltaTimeMultiplier = Time.deltaTime;
+
+            _cinemachineTargetYaw += CameraValue.x;
+            _cinemachineTargetPitch -= CameraValue.y;
+        }
+
+        // clamp our rotations so our values are limited 360 degrees
+        _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
+        _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+
+        // Cinemachine will follow this target
+        CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
+            _cinemachineTargetYaw, 0.0f);
+
+    }
+
+    
 }
