@@ -10,6 +10,7 @@ public class ForceReceiver : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float drag = 0.3f;
     [SerializeField] private bool isGrounded;
+    [SerializeField] public bool useGravity = true;
 
     private Vector3 dampingVelocity;
     private Vector3 impact;
@@ -19,15 +20,21 @@ public class ForceReceiver : MonoBehaviour
 
     private void Update()
     {
-        if (verticalVelocity < 0f && controller.isGrounded)
-        {
-            verticalVelocity = -fallSpeed * Time.deltaTime;
 
-        }
-        else
+        if (useGravity)
         {
-            verticalVelocity += -fallSpeed * Time.deltaTime;
+            if (verticalVelocity < 0f && controller.isGrounded)
+            {
+                verticalVelocity = -fallSpeed * Time.deltaTime;
+
+            }
+            else
+            {
+                verticalVelocity += -fallSpeed * Time.deltaTime;
+            }
         }
+        
+        
 
         isGrounded = controller.isGrounded;
 

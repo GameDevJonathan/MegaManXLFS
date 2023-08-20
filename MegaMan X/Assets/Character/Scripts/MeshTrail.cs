@@ -48,6 +48,7 @@ public class MeshTrail : MonoBehaviour
                 GameObject gObj = new GameObject();
                 gObj.transform.SetPositionAndRotation(positionToSpawn.position,positionToSpawn.rotation);
 
+                
                 MeshRenderer mr =  gObj.AddComponent<MeshRenderer>();
                 MeshFilter mf =  gObj.AddComponent<MeshFilter>();
 
@@ -56,8 +57,7 @@ public class MeshTrail : MonoBehaviour
                 
                 mf.mesh = mesh;
                 //mr.material = skinnedRenders[i].material;
-                mr.material = mat;
-                //mr.materials[0] = skinnedRenders[i].material;
+                mr.material = mat;                
                 Destroy(gObj, meshDestroyDelay);
             }
             yield return new WaitForSeconds(meshRefreshRate);

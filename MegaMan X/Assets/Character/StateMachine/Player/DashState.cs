@@ -22,6 +22,8 @@ public class DashState : PlayerBaseState
         stateMachine.InputReader.isDashing = true;
         UniversalAudioPlayer.PlayInGameSFX("Dash");
         //UniversalAudioPlayer.PlayVO(0);
+        stateMachine.ForceReceiver.useGravity = false;
+        
     }
 
     public override void Tick(float deltaTime)
@@ -50,15 +52,15 @@ public class DashState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.InputReader.isDashing = false;
+        stateMachine.ForceReceiver.Reset();
+        stateMachine.ForceReceiver.useGravity = true;
     }
 
     public void TryApplyForce()
     {
-
         if (alreadyAppliedForce) return;
         stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * stateMachine.DashForce);
         alreadyAppliedForce = true;
-
     }
 
   
