@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EasyAudioManager;
 
 public class DashState : PlayerBaseState
 {
@@ -19,13 +20,14 @@ public class DashState : PlayerBaseState
     {
         stateMachine.Animator.CrossFadeInFixedTime(DashStart, crossFadeTime);
         stateMachine.InputReader.isDashing = true;
+        UniversalAudioPlayer.PlayInGameSFX("Dash");
+        //UniversalAudioPlayer.PlayVO(0);
     }
 
     public override void Tick(float deltaTime)
     {
         Move(deltaTime);
-        float normalizedTime = GetNormalizedTime(stateMachine.Animator, "Dashing");
-        //Debug.Log(normalizedTime);
+        float normalizedTime = GetNormalizedTime(stateMachine.Animator, "Dashing");        
             
 
         if(normalizedTime > previousFrameTime && normalizedTime < 1f) 

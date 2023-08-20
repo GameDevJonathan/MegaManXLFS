@@ -8,12 +8,17 @@ public class MeshTrail : MonoBehaviour
     public Animator anim;
     public PlayerStateMachine stateMachine;
 
+    public float activeTime = 2f;
 
     [Header("Mesh Related")]
-    public float meshRefreshRate;
-    public float activeTime;
-    public bool isTrailActive;
+    public float meshRefreshRate = 0.1f;
+    public Transform positionToSpawn;
+    public float meshDestroyDelay = 3f;
 
+
+    [Header("Shader Related")]
+    public Material mat;
+    public bool isTrailActive;
     private SkinnedMeshRenderer[] skinnedRenders;
 
 
@@ -36,9 +41,12 @@ public class MeshTrail : MonoBehaviour
             if (skinnedRenders == null)
                 skinnedRenders = GetComponentsInChildren<SkinnedMeshRenderer>();
 
+
             for(int i=0; i < skinnedRenders.Length; i++)
             {
+                Debug.Log($"skinned mesh renderers:: {skinnedRenders[i]}");
                 GameObject gObj = new GameObject();
+                gObj.transform.SetPositionAndRotation(positionToSpawn.position,positionToSpawn.rotation);
 
                 MeshRenderer mr =  gObj.AddComponent<MeshRenderer>();
                 MeshFilter mf =  gObj.AddComponent<MeshFilter>();
@@ -47,10 +55,11 @@ public class MeshTrail : MonoBehaviour
                 skinnedRenders[i].BakeMesh(mesh);
                 
                 mf.mesh = mesh;
+                //mr.material = skinnedRenders[i].material;
+                mr.material = mat;
+                //mr.materials[0] = skinnedRenders[i].material;
+                Destroy(gObj, meshDestroyDelay);
             }
-
-
-
             yield return new WaitForSeconds(meshRefreshRate);
         }
 

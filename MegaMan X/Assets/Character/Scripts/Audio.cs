@@ -11,6 +11,5 @@ public class Audio : MonoBehaviour
     public void FootstepSFX()
     {
         UniversalAudioPlayer.PlayInGameSFX("Footstep");
-
-    }
+    }    
 }

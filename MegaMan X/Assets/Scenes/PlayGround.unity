@@ -459,7 +459,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28178
+  m_Name: pb_Mesh29746
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -913,7 +913,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28216
+  m_Name: pb_Mesh29784
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1077,7 +1077,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28124
+  m_Name: pb_Mesh29692
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2030,7 +2030,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28138
+  m_Name: pb_Mesh29706
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2194,7 +2194,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28232
+  m_Name: pb_Mesh29800
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3205,7 +3205,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28022
+  m_Name: pb_Mesh29590
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3897,7 +3897,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28088
+  m_Name: pb_Mesh29656
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4704,13 +4704,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
         type: 3}
+      propertyPath: InGameSFXList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
       propertyPath: InGameSFXList.Array.data[0].name
       value: Footstep
       objectReference: {fileID: 0}
     - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
         type: 3}
+      propertyPath: InGameSFXList.Array.data[1].name
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[2].name
+      value: VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: VOList.Array.data[0].clip.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[1].mixerGroup
+      value: 
+      objectReference: {fileID: 5689698289935052215, guid: 083427700a3cf0544a775e30dcd84e1f,
+        type: 2}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[2].mixerGroup
+      value: 
+      objectReference: {fileID: 7416943468253140882, guid: 083427700a3cf0544a775e30dcd84e1f,
+        type: 2}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: VOList.Array.data[0].clip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 895ae307f87caeb448207e724eba9d06, type: 3}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
       propertyPath: InGameSFXList.Array.data[0].clip.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[1].clip.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[2].clip.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
         type: 3}
@@ -4722,6 +4769,21 @@ PrefabInstance:
       propertyPath: InGameSFXList.Array.data[0].clip.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 7ed5dc494c3c17b4896d3e1b29f3102b, type: 3}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[1].clip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 3641c91c59dc7c247a8bbf95b0e35b52, type: 3}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[1].clip.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ed5dc494c3c17b4896d3e1b29f3102b, type: 3}
+    - target: {fileID: 8367432932764351998, guid: efb60f82456491c458ae6418670513bf,
+        type: 3}
+      propertyPath: InGameSFXList.Array.data[2].clip.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 895ae307f87caeb448207e724eba9d06, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efb60f82456491c458ae6418670513bf, type: 3}
 --- !u!1 &1872415663
@@ -5020,7 +5082,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28068
+  m_Name: pb_Mesh29636
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5275,7 +5337,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28042
+  m_Name: pb_Mesh29610
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6948,8 +7010,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 6814165339451037522}
   stateMachine: {fileID: 6814165339451037525}
+  activeTime: 0.4
   meshRefreshRate: 0.1
-  activeTime: 0.5
+  positionToSpawn: {fileID: 6814165339451037519}
+  meshDestroyDelay: 0.2
+  mat: {fileID: 2100000, guid: b85da8fb17816434fba67e9b02ce0906, type: 2}
   isTrailActive: 0
 --- !u!137 &6825972854291328862
 SkinnedMeshRenderer:
