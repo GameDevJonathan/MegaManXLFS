@@ -8,25 +8,28 @@ public class PlayerLandState : PlayerBaseState
     private readonly int LandHash = Animator.StringToHash("JumpEnd");
     private readonly int RollingLandHash = Animator.StringToHash("LandingRoll");
     private const float CrossFadeDuration = 0.3f;
+    private float falltime;
     Vector3 Momentum;
 
-    public PlayerLandState(PlayerStateMachine stateMachine, Vector2 inputMovement) : base(stateMachine)
+    public PlayerLandState(PlayerStateMachine stateMachine, Vector2 inputMovement, float fallTime) : base(stateMachine)
     {
         this.inputMovement = stateMachine.InputReader.MovementValue;
+        this.falltime = fallTime;
 
     }
 
     public override void Enter()
     {
+        //stateMachine.InputReader.isDashing = false;
         //Momentum = new Vector3(0f, 0f, stateMachine.CharacterController.velocity.z*.7f);
-        if (inputMovement != Vector2.zero) 
+        if (inputMovement != Vector2.zero && falltime >= 1.5f) 
         {
             Debug.Log("Rolling Land");
             stateMachine.Animator.CrossFadeInFixedTime(RollingLandHash,0.01f);
             stateMachine.Animator.applyRootMotion = true;
 
         }
-        else if (inputMovement == Vector2.zero)
+        else if (falltime < 1.5f)
         {
             stateMachine.Animator.CrossFadeInFixedTime(LandHash, CrossFadeDuration);
 
@@ -35,14 +38,24 @@ public class PlayerLandState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        //Move(Momentum,deltaTime);
-        //if (stateMachine.Animator.GetCurrentAnimatorStateInfo(0).IsName("LandingRoll"))
-        //{
-        //    Debug.Log("True");
-        //}
+        AnimatorStateInfo currentInfo = stateMachine.Animator.GetCurrentAnimatorStateInfo(0);
+        AnimatorStateInfo nextInfo = stateMachine.Animator.GetNextAnimatorStateInfo(0);
+
+        if (stateMachine.Animator.IsInTransition(0) && nextInfo.IsName("JumpEnd"))
+        {
+            if(inputMovement != Vector2.zero)
+            {
+                ReturnToLocomotion();
+                return;
+            }
+        }
+
+
+
 
         if (GetNormalizedTime(stateMachine.Animator, "Landing") < 1f) { return; }
         ReturnToLocomotion();
+
 
     }
 

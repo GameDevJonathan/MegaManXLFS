@@ -44,7 +44,7 @@ public class MeshTrail : MonoBehaviour
 
             for(int i=0; i < skinnedRenders.Length; i++)
             {
-                Debug.Log($"skinned mesh renderers:: {skinnedRenders[i]}");
+                //Debug.Log($"skinned mesh renderers:: {skinnedRenders[i]}");
                 GameObject gObj = new GameObject();
                 gObj.transform.SetPositionAndRotation(positionToSpawn.position,positionToSpawn.rotation);
 

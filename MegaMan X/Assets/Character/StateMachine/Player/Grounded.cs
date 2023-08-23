@@ -43,6 +43,12 @@ public class Grounded : PlayerBaseState
             return;
         }
 
+        if (stateMachine.InputReader.AttackButtonPressed)
+        {
+            stateMachine.SwitchState(new FiringState(stateMachine));
+            return;
+        }
+
         if (stateMachine.InputReader.Modified)
         {
             //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);

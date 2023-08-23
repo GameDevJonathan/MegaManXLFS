@@ -10,7 +10,7 @@ public class Audio : MonoBehaviour
 
     public void Start()
     {
-        UniversalAudioPlayer.PlayMusic(0);
+        //UniversalAudioPlayer.PlayMusic(0);
     }
 
 

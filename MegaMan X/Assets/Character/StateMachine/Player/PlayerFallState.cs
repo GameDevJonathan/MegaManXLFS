@@ -7,6 +7,8 @@ public class PlayerFallState : PlayerBaseState
     private readonly int FallHash = Animator.StringToHash("JumpLoop");
     private const float CrossFadeDuration = 0.3f;
     private Vector3 Momentum;
+    private float fallTime = 0f;
+    private float fallTimeRate = 1f;
     
     public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -15,6 +17,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.InputReader.isDashing = false;
         Momentum = stateMachine.CharacterController.velocity;
         Momentum.y = 0f;
         stateMachine.Animator.CrossFadeInFixedTime(FallHash, CrossFadeDuration);
@@ -23,6 +26,9 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+
+        fallTime += fallTimeRate * Time.deltaTime;
+        //Debug.Log($"FallTime:{fallTime}");
         Vector3 movement = CalculateMovement();
 
         //Move(Momentum, deltaTime);
@@ -33,7 +39,7 @@ public class PlayerFallState : PlayerBaseState
 
         if (stateMachine.CharacterController.isGrounded)
         {
-            stateMachine.SwitchState(new PlayerLandState(stateMachine,movement));
+            stateMachine.SwitchState(new PlayerLandState(stateMachine,movement,fallTime));
         }
     }
 

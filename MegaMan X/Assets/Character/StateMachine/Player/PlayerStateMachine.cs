@@ -13,6 +13,9 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public WallRun WallRun { get; private set; }
     [field: SerializeField] public Attacks[] Attacks { get; private set; }
 
+    [field: SerializeField] public Transform FirePoint { get; private set; }
+    [field: SerializeField] public GameObject BusterShot { get; private set; }
+
     [field: Space]
     [field: Header("Movement Values")]
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
@@ -26,5 +29,10 @@ public class PlayerStateMachine : StateMachine
     {
         MainCameraTransform = Camera.main.transform;
         SwitchState(new Grounded(this));
+    }
+
+    public void FireBullet()
+    {
+        Instantiate(BusterShot, FirePoint.position, FirePoint.rotation);
     }
 }

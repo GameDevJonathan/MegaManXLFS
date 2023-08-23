@@ -61,7 +61,7 @@ public class ForceReceiver : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         impact += force;
-        Debug.Log($"force direction: {force}");
+        //Debug.Log($"force direction: {force}");
         if (agent != null)
         {
             agent.enabled = false;

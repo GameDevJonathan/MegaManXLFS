@@ -9,6 +9,7 @@ public class DashState : PlayerBaseState
     private float crossFadeTime = 0.1f;
     private float previousFrameTime;
     private bool alreadyAppliedForce;
+    private bool dashJump = false;
 
 
     public DashState(PlayerStateMachine stateMachine) : base(stateMachine)
@@ -38,10 +39,21 @@ public class DashState : PlayerBaseState
             {
                 TryApplyForce();
             }
+
+            if (stateMachine.InputReader.JumpButtonPressed 
+                && stateMachine.CharacterController.isGrounded 
+                && !dashJump
+                && normalizedTime < .8f)
+            {
+                dashJump = true;
+                stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+                return;
+            }
         }
         else if(normalizedTime > 1f) 
         {
             stateMachine.SwitchState(new Grounded(stateMachine,true));
+            return;
         }
 
 
@@ -51,9 +63,9 @@ public class DashState : PlayerBaseState
 
     public override void Exit()
     {
-        stateMachine.InputReader.isDashing = false;
         stateMachine.ForceReceiver.Reset();
         stateMachine.ForceReceiver.useGravity = true;
+        stateMachine.InputReader.isDashing = dashJump ? true : false;
     }
 
     public void TryApplyForce()
