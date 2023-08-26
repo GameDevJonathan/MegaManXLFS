@@ -14,7 +14,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Attacks[] Attacks { get; private set; }
 
     [field: SerializeField] public Transform FirePoint { get; private set; }
-    [field: SerializeField] public GameObject BusterShot { get; private set; }
+    [field: SerializeField] public GameObject[] BusterShot { get; private set; }
 
     [field: Space]
     [field: Header("Movement Values")]
@@ -31,8 +31,20 @@ public class PlayerStateMachine : StateMachine
         SwitchState(new Grounded(this));
     }
 
+    public void ChargedLevel()
+    {
+        if(InputReader.chargedShot)
+        Instantiate(BusterShot[2], FirePoint.position, FirePoint.rotation);
+        else if(InputReader.mediumShot)
+        Instantiate(BusterShot[1], FirePoint.position, FirePoint.rotation);
+        else
+        Instantiate(BusterShot[0], FirePoint.position, FirePoint.rotation);
+
+    }
+    
     public void FireBullet()
     {
-        Instantiate(BusterShot, FirePoint.position, FirePoint.rotation);
+        Invoke("ChargedLevel", 0);
+
     }
 }

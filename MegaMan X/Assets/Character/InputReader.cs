@@ -19,6 +19,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool shoot;
     public bool charge;
     public bool fire;
+    public bool mediumShot = false;
+    public bool chargedShot = false;
 
     [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
@@ -113,7 +115,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             shoot = true;
             fire = false;
             Debug.Log("Firing");
-
+            mediumShot = false;
+            chargedShot = false;
         }
         else
         if (context.performed)
@@ -121,9 +124,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             shoot = false;
             charge = true;
             if (chargeAmount > 20)
-            {
                 Debug.Log("Charging");
-            }
+
+
         }
         else
         if (context.canceled)
@@ -133,11 +136,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             if (chargeAmount > 5 && chargeAmount <= 99)
             {
                 Debug.Log("Meduim Shot");
+                mediumShot = true;
+
+                
             }
             else if (chargeAmount > 99)
             {
                 Debug.Log("Max Charge Shot");
+                
+                chargedShot = true;
             }
+            chargeAmount = 0;
         }
     }
 
@@ -157,7 +166,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnDash(InputAction.CallbackContext context)
     {
         if (!context.performed) { return; }
-            DashEvent?.Invoke();
+        DashEvent?.Invoke();
     }
 
 
@@ -208,5 +217,5 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     }
 
-    
+
 }

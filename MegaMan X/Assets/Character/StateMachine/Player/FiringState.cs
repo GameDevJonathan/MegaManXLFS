@@ -26,7 +26,8 @@ public class FiringState : PlayerBaseState
 
     public override void Exit()
     {
-        
+        stateMachine.InputReader.mediumShot = false;
+        stateMachine.InputReader.chargedShot = false;
     }
 
 }
