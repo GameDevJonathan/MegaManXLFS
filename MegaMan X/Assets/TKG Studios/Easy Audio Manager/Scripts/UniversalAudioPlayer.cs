@@ -32,10 +32,13 @@ namespace EasyAudioManager
 
         public static void PlayMusic(int audioTrackID)
         {
+            
             if (audioManager != null)
             {
+                
 
-                audioManager.stopMusic("Music");
+                audioManager?.stopMusic("Music");
+                
                 audioManager.playMusic("Music", audioTrackID);
             }
         }

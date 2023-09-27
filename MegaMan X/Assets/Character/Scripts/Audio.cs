@@ -1,7 +1,7 @@
-using EasyAudioManager;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EasyAudioManager;
 
 
 public class Audio : MonoBehaviour

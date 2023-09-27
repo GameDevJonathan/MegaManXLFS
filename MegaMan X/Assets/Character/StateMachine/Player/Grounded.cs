@@ -37,6 +37,8 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+
+        #region Inputs  
         if (stateMachine.InputReader.isAiming)
         {
             stateMachine.SwitchState(new AimingState(stateMachine));
@@ -71,9 +73,7 @@ public class Grounded : PlayerBaseState
         {
             //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
         }
-
-
-
+        #endregion
 
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);

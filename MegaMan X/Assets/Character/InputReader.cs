@@ -11,6 +11,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private Controls controls;
 
+    //[SerializeField] Animator animator;
+    [SerializeField,Range(0,20)] private float _lerpTime = 5f;
+
     public bool Modified;
 
     public bool JumpButtonPressed => controls.Player.Jump.WasPressedThisFrame();
@@ -27,10 +30,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public float chargeAmount;
     public float chargeRate;
+    public float _minRate = 25f;
+    public float _maxRate = 100f;
 
     public event Action JumpEvent;
     public event Action DashEvent;
+    public Transform Player;
     //public event Action AttackEvent;
+
+
 
 
 
@@ -40,11 +48,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     Transform cam;
 
     [Header("Cinemachine")]
+    [Tooltip("Camera Sensitivity")]
+    public float Sensitivity = 1;
+    
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
 
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
+    
 
     [Tooltip("How far in degrees can you move the camera down")]
     public float BottomClamp = -30.0f;
@@ -59,12 +71,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool LockCameraPosition = false;
 
     // cinemachine
-    private float _cinemachineTargetYaw;
-    private float _cinemachineTargetPitch;
+    [SerializeField]private float _cinemachineTargetYaw;
+    [SerializeField]private float _cinemachineTargetPitch;
     private const float _threshold = 0.01f;
 
     private void Start()
     {
+        //animator = GetComponent<Animator>(); 
         controls = new Controls();
         controls.Player.SetCallbacks(this);
 
@@ -75,6 +88,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private void Update()
     {
+        //if (isAiming)
+        //{
+        //    animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f,
+        //        Time.deltaTime * _lerpTime));
+        //}
+        //else
+        //{
+        //    animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f,
+        //        Time.deltaTime * _lerpTime));
+        //}
+
         if (charge)
         {
             chargeAmount += chargeRate * Time.deltaTime;
@@ -92,7 +116,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private void LateUpdate()
     {
-        CameraRotation();
+        
+            CameraRotation();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -123,7 +148,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             shoot = false;
             charge = true;
-            if (chargeAmount > 20)
+            if (chargeAmount > _minRate)
                 Debug.Log("Charging");
 
 
@@ -133,17 +158,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             charge = false;
             fire = true;
-            if (chargeAmount > 5 && chargeAmount <= 99)
+            if (chargeAmount >= _minRate && chargeAmount < _maxRate)
             {
                 Debug.Log("Meduim Shot");
                 mediumShot = true;
 
-                
+
             }
-            else if (chargeAmount > 99)
+            else if (chargeAmount >=_maxRate)
             {
                 Debug.Log("Max Charge Shot");
-                
+
                 chargedShot = true;
             }
             chargeAmount = 0;
@@ -155,6 +180,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (context.performed)
         {
             isAiming = true;
+
+            CinemachineCameraTarget.transform.rotation = Player.transform.rotation;
+
         }
         else if (context.canceled)
         {
@@ -168,8 +196,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (!context.performed) { return; }
         DashEvent?.Invoke();
     }
-
-
 
     public void OnModifier(InputAction.CallbackContext context)
     {
@@ -203,8 +229,16 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             float deltaTimeMultiplier = Time.deltaTime;
 
-            _cinemachineTargetYaw += CameraValue.x;
-            _cinemachineTargetPitch -= CameraValue.y;
+            if (isAiming)
+            {
+                _cinemachineTargetYaw += CameraValue.x * Sensitivity;
+                _cinemachineTargetPitch -= CameraValue.y * Sensitivity;
+            }
+            else
+            {
+                _cinemachineTargetYaw += CameraValue.x;
+                _cinemachineTargetPitch -= CameraValue.y;
+            }
         }
 
         // clamp our rotations so our values are limited 360 degrees
@@ -214,8 +248,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         // Cinemachine will follow this target
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
-
     }
 
-
+    public void ResetCamera()
+    {
+        _cinemachineTargetYaw = 180;
+        _cinemachineTargetPitch = 0;
+    }
 }

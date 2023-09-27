@@ -22,7 +22,7 @@ namespace EasyAudioManager
 
 
         //Global Variables
-        [HideInInspector] public AudioSource ASM;
+        /*[HideInInspector]*/ public AudioSource ASM;
         [HideInInspector] public AudioSource ASV;
         [HideInInspector] public GameObject music;
         [HideInInspector] public GameObject VO;
@@ -92,10 +92,12 @@ namespace EasyAudioManager
 
         public void playMusic(string name, int audioID)
         {
+            
             foreach (AudioAsset s in MusicList)
             {
                 if (s.name == name)
                 {
+                    
 
                     ASM.clip = s.clip[audioID];
                     ASM.loop = true;
@@ -107,6 +109,7 @@ namespace EasyAudioManager
 
         public void stopMusic(string name)
         {
+
             foreach (AudioAsset s in MusicList)
             {
                 if (s.name == name)

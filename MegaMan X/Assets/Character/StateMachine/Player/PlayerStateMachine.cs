@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EasyAudioManager;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -25,6 +26,13 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float DashForceTime { get; private set; }
     [field: SerializeField] public float DashForce { get; private set; }
 
+    [field: Header("Cameras")]
+    [field: SerializeField] public GameObject _thirdPersonCam { get; private set; }
+    [field: SerializeField] public GameObject _AimCam { get; private set; }
+    [field: SerializeField] public LayerMask aimColliderMask { get; private set; }
+    [field: SerializeField] public Transform debugTransform { get; private set; }
+
+
     private void Start()
     {
         MainCameraTransform = Camera.main.transform;
@@ -33,15 +41,31 @@ public class PlayerStateMachine : StateMachine
 
     public void ChargedLevel()
     {
-        if(InputReader.chargedShot)
-        Instantiate(BusterShot[2], FirePoint.position, FirePoint.rotation);
-        else if(InputReader.mediumShot)
-        Instantiate(BusterShot[1], FirePoint.position, FirePoint.rotation);
+        if (InputReader.chargedShot)
+        {
+            Instantiate(BusterShot[2], FirePoint.position, FirePoint.rotation);
+            UniversalAudioPlayer.PlayInGameSFX("MaxShot");
+            return;
+
+
+        }
+        else if (InputReader.mediumShot)
+        {
+            Instantiate(BusterShot[1], FirePoint.position, FirePoint.rotation);
+            UniversalAudioPlayer.PlayInGameSFX("ChargedShot");
+            return;
+
+        }
         else
-        Instantiate(BusterShot[0], FirePoint.position, FirePoint.rotation);
+        {
+            Instantiate(BusterShot[0], FirePoint.position, FirePoint.rotation);
+            UniversalAudioPlayer.PlayInGameSFX("BusterShot");
+            return;
+
+        }
 
     }
-    
+
     public void FireBullet()
     {
         Invoke("ChargedLevel", 0);
