@@ -25,8 +25,14 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool mediumShot = false;
     public bool chargedShot = false;
 
+    [Header("Aiming")]   
+
     [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
+    [field: Space]
+    [field:Header("Weapons")]
+    [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
+    [field: SerializeField] public bool equipingWeapon { get; private set; } = false;
 
     public float chargeAmount;
     public float chargeRate;
@@ -254,5 +260,16 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         _cinemachineTargetYaw = 180;
         _cinemachineTargetPitch = 0;
+    }
+
+    public void OnEquip(InputAction.CallbackContext context)
+    {
+        if (equipingWeapon) return;
+        if (context.performed)
+        {
+            SaberEquiped = !SaberEquiped;
+            equipingWeapon = true;
+            return;
+        }
     }
 }

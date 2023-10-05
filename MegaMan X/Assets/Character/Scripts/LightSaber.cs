@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class LightSaber : MonoBehaviour
 {
-    private LineRenderer lineRenderer;
+    [SerializeField]private LineRenderer lineRenderer;
     [SerializeField] public Transform startPos;
     [SerializeField] public Transform endPos;
     [SerializeField] private bool on;

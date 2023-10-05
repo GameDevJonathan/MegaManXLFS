@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EasyAudioManager;
+using System;
+using UnityEngine.UIElements;
+using System.Net.Sockets;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -14,8 +17,15 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public WallRun WallRun { get; private set; }
     [field: SerializeField] public Attacks[] Attacks { get; private set; }
 
+    [field:Header("Weapons")]
     [field: SerializeField] public Transform FirePoint { get; private set; }
+    [field: SerializeField] public Transform[] Sockets { get; private set; }
     [field: SerializeField] public GameObject[] BusterShot { get; private set; }
+    [field: SerializeField] public LightSaber LightSaber { get; private set; }
+    [SerializeField] public enum EquipSocket {Back, Hand};
+    [field: SerializeField] public EquipSocket Socket { get; private set; } = EquipSocket.Back;
+    
+
 
     [field: Space]
     [field: Header("Movement Values")]
@@ -69,6 +79,24 @@ public class PlayerStateMachine : StateMachine
     public void FireBullet()
     {
         Invoke("ChargedLevel", 0);
+
+    }
+
+    public void WeaponSocket(string socket)
+    {
+        socket.ToLower();
+        switch (socket)
+        {
+            case "back":
+                Socket = EquipSocket.Back;
+                break;
+
+            case "hand":
+                Socket = EquipSocket.Hand;
+                break;
+        }
+        
+        
 
     }
 }

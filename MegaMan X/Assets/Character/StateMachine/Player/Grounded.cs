@@ -12,6 +12,7 @@ public class Grounded : PlayerBaseState
     private float freeLookMoveSpeed;
     private bool shouldFade;
     private const float CrossFadeDuration = 0.1f;
+    
 
     public Grounded(PlayerStateMachine stateMachine, bool shouldFade = false) : base(stateMachine)
     {
@@ -37,44 +38,54 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        
 
         #region Inputs  
-        if (stateMachine.InputReader.isAiming)
-        {
-            stateMachine.SwitchState(new AimingState(stateMachine));
-            return;
-        }
 
-        if (stateMachine.InputReader.AttackButtonPressed)
+        if (!stateMachine.InputReader.equipingWeapon)
         {
-            stateMachine.SwitchState(new FiringState(stateMachine));
-            return;
-        }
+            if (stateMachine.InputReader.isAiming)
+            {
+                stateMachine.SwitchState(new AimingState(stateMachine));
+                return;
+            }
 
-        if (stateMachine.InputReader.mediumShot)
-        {
-            stateMachine.SwitchState(new FiringState(stateMachine));
-            return;
-        }
+            if (stateMachine.InputReader.AttackButtonPressed)
+            {
+                stateMachine.SwitchState(new FiringState(stateMachine));
+                return;
+            }
 
-        if (stateMachine.InputReader.chargedShot)
-        {
-            stateMachine.SwitchState(new FiringState(stateMachine));
-            return;
-        }
+            if (stateMachine.InputReader.mediumShot)
+            {
+                stateMachine.SwitchState(new FiringState(stateMachine));
+                return;
+            }
+
+            if (stateMachine.InputReader.chargedShot)
+            {
+                stateMachine.SwitchState(new FiringState(stateMachine));
+                return;
+            }
 
 
 
-        if (stateMachine.InputReader.Modified)
-        {
-            //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
+            if (stateMachine.InputReader.Modified)
+            {
+                //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
+            }
+            else
+            {
+                //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
+            }
+
         }
-        else
-        {
-            //Debug.Log("Grounded State:: input reader value: " + stateMachine.InputReader.Modified);
-        }
+        
         #endregion
 
+
+
+        #region Movement
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);
 
@@ -97,6 +108,8 @@ public class Grounded : PlayerBaseState
 
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, freeLookValue, AnimatorDampTime, deltaTime);
         FaceMovement(movement, deltaTime);
+        #endregion
+        
     }
 
     //public void OnAttack()
@@ -108,6 +121,7 @@ public class Grounded : PlayerBaseState
 
     public void OnJump()
     {
+        
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
         return;
     }

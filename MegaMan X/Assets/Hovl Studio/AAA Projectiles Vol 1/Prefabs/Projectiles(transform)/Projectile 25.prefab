@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 108857234956802684}
   - component: {fileID: 54962462914559852}
   - component: {fileID: 135452002061114160}
-  - component: {fileID: 603806980637285609}
+  - component: {fileID: 4225629138891452806}
   m_Layer: 0
   m_Name: Projectile 25
   m_TagString: Untagged
@@ -5000,7 +5000,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &603806980637285609
+--- !u!114 &4225629138891452806
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
