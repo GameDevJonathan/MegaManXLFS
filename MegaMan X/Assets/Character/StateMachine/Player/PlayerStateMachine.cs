@@ -5,6 +5,7 @@ using EasyAudioManager;
 using System;
 using UnityEngine.UIElements;
 using System.Net.Sockets;
+using System.Net.Http.Headers;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -17,14 +18,13 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public WallRun WallRun { get; private set; }
     [field: SerializeField] public Attacks[] Attacks { get; private set; }
 
-    [field:Header("Weapons")]
+    [field: Header("Weapons")]
     [field: SerializeField] public Transform FirePoint { get; private set; }
     [field: SerializeField] public Transform[] Sockets { get; private set; }
     [field: SerializeField] public GameObject[] BusterShot { get; private set; }
     [field: SerializeField] public LightSaber LightSaber { get; private set; }
-    [SerializeField] public enum EquipSocket {Back, Hand};
-    [field: SerializeField] public EquipSocket Socket { get; private set; } = EquipSocket.Back;
-    
+
+
 
 
     [field: Space]
@@ -82,21 +82,30 @@ public class PlayerStateMachine : StateMachine
 
     }
 
-    public void WeaponSocket(string socket)
+    public void SlotWeapon(int slot)
     {
-        socket.ToLower();
-        switch (socket)
+        LightSaber.transform.parent = Sockets[slot].transform;
+        switch (slot)
         {
-            case "back":
-                Socket = EquipSocket.Back;
+            case 0:
+                LightSaber.transform.localPosition = new Vector3(0.013f, -0.1f, -0.3f);
+                LightSaber.transform.localRotation = Quaternion.identity;
+                break;
+            
+            case 1:
+                SaberOn();
+                LightSaber.transform.localPosition = Vector3.zero;
+                LightSaber.transform.localRotation = Quaternion.identity;
                 break;
 
-            case "hand":
-                Socket = EquipSocket.Hand;
-                break;
         }
-        
-        
 
+
+        //LightSaber.TurnOn();
+    }
+
+    public void SaberOn()
+    {
+        LightSaber.TurnOn();
     }
 }

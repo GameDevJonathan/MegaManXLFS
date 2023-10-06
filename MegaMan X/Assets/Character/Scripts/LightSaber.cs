@@ -18,7 +18,11 @@ public class LightSaber : MonoBehaviour
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        
+        if (lineRenderer != null )
         lineRenderer.useWorldSpace = true;
+        
+        if(endPos != null )
         extendedPosition = endPos.localPosition;
 
     }
@@ -27,7 +31,8 @@ public class LightSaber : MonoBehaviour
     {
         Vector3 vector3Extend = new Vector3(.9f,.9f,.9f);
         Vector3 vector3Close = new Vector3(.1f,.1f,.1f);
-        
+
+     
 
 
 
@@ -82,6 +87,12 @@ public class LightSaber : MonoBehaviour
 
         }
 
+      
 
+    }
+
+    public void TurnOn()
+    {
+        on = !on;
     }
 }

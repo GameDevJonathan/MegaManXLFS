@@ -29,16 +29,16 @@ public abstract class PlayerBaseState : State
             deltatime * stateMachine.RotationSmoothValue);
     }
 
-    protected float GetNormalizedTime(Animator animator, string tag)
+    protected float GetNormalizedTime(Animator animator, string tag, int slot = 0)
     {
-        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(0);
-        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(0);
+        AnimatorStateInfo currentInfo = animator.GetCurrentAnimatorStateInfo(slot);
+        AnimatorStateInfo nextInfo = animator.GetNextAnimatorStateInfo(slot);
 
-        if (animator.IsInTransition(0) && nextInfo.IsTag(tag))
+        if (animator.IsInTransition(slot) && nextInfo.IsTag(tag))
         {
             return nextInfo.normalizedTime;
         }
-        else if (!animator.IsInTransition(0) && currentInfo.IsTag(tag))
+        else if (!animator.IsInTransition(slot) && currentInfo.IsTag(tag))
         {
             return currentInfo.normalizedTime;
         }

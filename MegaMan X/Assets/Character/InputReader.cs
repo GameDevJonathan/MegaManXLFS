@@ -12,7 +12,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     private Controls controls;
 
     //[SerializeField] Animator animator;
-    [SerializeField,Range(0,20)] private float _lerpTime = 5f;
+    [SerializeField, Range(0, 20)] private float _lerpTime = 5f;
 
     public bool Modified;
 
@@ -25,12 +25,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool mediumShot = false;
     public bool chargedShot = false;
 
-    [Header("Aiming")]   
+    [Header("Aiming")]
 
     [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
     [field: Space]
-    [field:Header("Weapons")]
+    [field: Header("Weapons")]
     [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
     [field: SerializeField] public bool equipingWeapon { get; private set; } = false;
 
@@ -41,6 +41,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public event Action JumpEvent;
     public event Action DashEvent;
+    public event Action EquipEvent;
     public Transform Player;
     //public event Action AttackEvent;
 
@@ -56,13 +57,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [Header("Cinemachine")]
     [Tooltip("Camera Sensitivity")]
     public float Sensitivity = 1;
-    
+
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
 
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
-    
+
 
     [Tooltip("How far in degrees can you move the camera down")]
     public float BottomClamp = -30.0f;
@@ -77,8 +78,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool LockCameraPosition = false;
 
     // cinemachine
-    [SerializeField]private float _cinemachineTargetYaw;
-    [SerializeField]private float _cinemachineTargetPitch;
+    [SerializeField] private float _cinemachineTargetYaw;
+    [SerializeField] private float _cinemachineTargetPitch;
     private const float _threshold = 0.01f;
 
     private void Start()
@@ -122,8 +123,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private void LateUpdate()
     {
-        
-            CameraRotation();
+
+        CameraRotation();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -171,7 +172,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
 
             }
-            else if (chargeAmount >=_maxRate)
+            else if (chargeAmount >= _maxRate)
             {
                 Debug.Log("Max Charge Shot");
 
@@ -264,12 +265,21 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnEquip(InputAction.CallbackContext context)
     {
+
         if (equipingWeapon) return;
+        if (isAiming) return;
         if (context.performed)
         {
+            EquipEvent?.Invoke();
             SaberEquiped = !SaberEquiped;
-            equipingWeapon = true;
-            return;
+            equipingWeapon = true;            
+
         }
+    }
+
+    public void EquipingWeapon()
+    {
+
+        equipingWeapon = false;
     }
 }

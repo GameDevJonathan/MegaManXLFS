@@ -7,6 +7,8 @@ public class Grounded : PlayerBaseState
 {
     private readonly int FreeLookSpeedHash = Animator.StringToHash("FreeLookSpeed");
     private readonly int FreeLookBlendTreeHash = Animator.StringToHash("Movement");
+    private readonly int EquipHash = Animator.StringToHash("EquipSword");
+    private readonly int SheathHash = Animator.StringToHash("SheathSword");
     public float AnimatorDampTime = 0.05f;
     private float freeLookValue = 1;
     private float freeLookMoveSpeed;
@@ -30,7 +32,7 @@ public class Grounded : PlayerBaseState
 
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
-        //stateMachine.InputReader.AttackEvent += OnAttack; 
+        stateMachine.InputReader.EquipEvent += OnEquip; 
 
 
     }
@@ -40,7 +42,10 @@ public class Grounded : PlayerBaseState
     {
         
 
-        #region Inputs  
+
+        #region Inputs
+
+
 
         if (!stateMachine.InputReader.equipingWeapon)
         {
@@ -132,11 +137,30 @@ public class Grounded : PlayerBaseState
         return;
     }
 
+    private void OnEquip()
+    {
+        switch (stateMachine.InputReader.SaberEquiped)
+        {
+            case false:
+                stateMachine.Animator.Play(EquipHash, 1);
+                break;
+
+            case true:
+                stateMachine.Animator.Play(SheathHash, 1);
+                break;
+        }
+        
+        
+        
+
+
+    }
+
     public override void Exit()
     {
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.DashEvent -= OnDash;
-        //stateMachine.InputReader.AttackEvent -= OnAttack;
+        stateMachine.InputReader.EquipEvent -= OnEquip;
 
 
     }
