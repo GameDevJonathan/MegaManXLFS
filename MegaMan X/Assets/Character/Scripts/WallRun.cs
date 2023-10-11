@@ -82,7 +82,7 @@ public class WallRun : MonoBehaviour
 
     public bool HitWall()
     {
-        if (lastJumpTime <=0 && (wallLeft || wallRight || wallFront))
+        if (lastJumpTime <=0 &&  wallFront/*(wallLeft || wallRight || wallFront)*/)
             return true;
         else
             return false;
@@ -93,7 +93,7 @@ public class WallRun : MonoBehaviour
 
         Vector3 wallNormal = frontWallHit.normal;
 
-        Vector3 wallForward = Vector3.Cross(wallNormal, transform.right);
+        //Vector3 wallForward = Vector3.Cross(-wallNormal, transform.up);
 
 
         //if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
@@ -101,8 +101,10 @@ public class WallRun : MonoBehaviour
 
         //characterController.Move(wallForward * wallRunForce * Time.deltaTime);
         ////push to wall
-        //characterController.Move(-wallNormal * 100 * Time.deltaTime);
-        FaceMovement(wallForward, Time.deltaTime);
+        ///// confirmation et002678772490
+        characterController.Move(-wallNormal * 100 * Time.deltaTime);
+        //FaceMovement(wallForward, Time.deltaTime);
+        FaceMovement(-wallNormal, Time.deltaTime);
     }
 
     public void WallRunningMovement()

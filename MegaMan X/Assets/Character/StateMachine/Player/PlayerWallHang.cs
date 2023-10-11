@@ -19,7 +19,7 @@ public class PlayerWallHang : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        //stateMachine.WallRun.WallHangMovement();
+        stateMachine.WallRun.WallHangMovement();
         Move(deltaTime);      
 
         if (stateMachine.InputReader.MovementValue.y <=0)
