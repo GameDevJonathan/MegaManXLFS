@@ -30,8 +30,11 @@ public class WallRun : MonoBehaviour
     public float minJumpHeight;
     [SerializeField] public RaycastHit leftWallHit;
     [SerializeField] public RaycastHit rightWallHit;
+    [SerializeField] public RaycastHit frontWallHit;
     public bool wallLeft;
     public bool wallRight;
+    public bool wallFront;
+    
 
     [Header("References")]
     public Transform orientation;
@@ -40,15 +43,13 @@ public class WallRun : MonoBehaviour
     
     
 
-    public void Start()
-    {
-        
-
-    }
 
 
     public void Update()
     {
+        Debug.Log($" Touching Ground {AboveGround()}");
+
+
         CheckForWall();
         if(lastJumpTime > 0f)
         {
@@ -65,6 +66,9 @@ public class WallRun : MonoBehaviour
 
         wallLeft = Physics.Raycast(orientation.position, -orientation.right, out leftWallHit, wallCheckDistance, whatIsWall);
         Debug.DrawRay(orientation.position, -orientation.right * wallCheckDistance, Color.red);
+        
+        wallFront = Physics.Raycast(orientation.position, orientation.forward, out frontWallHit, wallCheckDistance, whatIsWall);
+        Debug.DrawRay(orientation.position, orientation.forward * wallCheckDistance, Color.white);
 
 
         Debug.DrawRay(transform.position, Vector3.down * minJumpHeight, Color.magenta);
@@ -78,10 +82,27 @@ public class WallRun : MonoBehaviour
 
     public bool HitWall()
     {
-        if (lastJumpTime <=0 && (wallLeft || wallRight))
+        if (lastJumpTime <=0 && (wallLeft || wallRight || wallFront))
             return true;
         else
             return false;
+    }
+
+    public void WallHangMovement()
+    {
+
+        Vector3 wallNormal = frontWallHit.normal;
+
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.right);
+
+
+        //if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+        //    wallForward = -wallForward;
+
+        //characterController.Move(wallForward * wallRunForce * Time.deltaTime);
+        ////push to wall
+        //characterController.Move(-wallNormal * 100 * Time.deltaTime);
+        FaceMovement(wallForward, Time.deltaTime);
     }
 
     public void WallRunningMovement()

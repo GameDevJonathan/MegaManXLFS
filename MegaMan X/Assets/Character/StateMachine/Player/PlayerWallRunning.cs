@@ -15,6 +15,7 @@ public class PlayerWallRunning : PlayerBaseState
         if (stateMachine.WallRun.wallLeft)
         {
             stateMachine.Animator.Play("WallRunL");
+            
         }
 
         if (stateMachine.WallRun.wallRight)

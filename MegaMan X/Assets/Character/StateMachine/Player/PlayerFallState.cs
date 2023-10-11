@@ -27,6 +27,20 @@ public class PlayerFallState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
 
+        if (stateMachine.WallRun.AboveGround() && stateMachine.WallRun.HitWall())
+        {
+            Debug.Log(stateMachine.WallRun.HitWall());
+            //Debug.Log(stateMachine.WallRun.AboveGround());
+
+            if (stateMachine.InputReader.MovementValue.y > 0)
+            {
+                Debug.Log("Can Enter Wall Run State");
+                stateMachine.SwitchState(new PlayerWallHang(stateMachine));
+                return;
+
+            }
+        }
+
         fallTime += fallTimeRate * Time.deltaTime;
         //Debug.Log($"FallTime:{fallTime}");
         Vector3 movement = CalculateMovement();

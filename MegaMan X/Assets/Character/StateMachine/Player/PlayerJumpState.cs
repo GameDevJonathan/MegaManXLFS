@@ -49,7 +49,7 @@ public class PlayerJumpState : PlayerBaseState
             if(stateMachine.InputReader.MovementValue.y > 0)
             {
                 Debug.Log("Can Enter Wall Run State");
-                stateMachine.SwitchState(new PlayerWallRunning(stateMachine));
+                stateMachine.SwitchState(new PlayerWallHang(stateMachine));
                 return;
 
             }

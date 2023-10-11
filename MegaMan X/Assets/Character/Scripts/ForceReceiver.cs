@@ -14,9 +14,16 @@ public class ForceReceiver : MonoBehaviour
 
     private Vector3 dampingVelocity;
     private Vector3 impact;
-    private float verticalVelocity = 0f;    
-    [SerializeField] private float fallSpeed = 5f;
+    private float verticalVelocity = 0f;
+    [SerializeField] private float gravity;
+    [SerializeField] private float Normal = 30f;
+    [SerializeField] private float wallSlideSpeed = 1f;
     public Vector3 Movement => impact + Vector3.up * verticalVelocity;
+
+    private void Start()
+    {
+        gravity = Normal;
+    }
 
     private void Update()
     {
@@ -25,16 +32,17 @@ public class ForceReceiver : MonoBehaviour
         {
             if (verticalVelocity < 0f && controller.isGrounded)
             {
-                verticalVelocity = -fallSpeed * Time.deltaTime;
+                verticalVelocity = -gravity * Time.deltaTime;
 
             }
             else
             {
-                verticalVelocity += -fallSpeed * Time.deltaTime;
+                verticalVelocity += -gravity * Time.deltaTime;
             }
+            
         }
-        
-        
+
+
 
         isGrounded = controller.isGrounded;
 
@@ -67,9 +75,36 @@ public class ForceReceiver : MonoBehaviour
             agent.enabled = false;
         }
     }
+    
 
     public void Jump(float jumpForce)
     {
         verticalVelocity += jumpForce;
     }
+
+   
+    /// <summary>    
+    ///  Sets Gravity 
+    ///  0: Normal Gravity 1: Wall Slide
+    /// </summary>
+    
+    
+    public void SetGravity(int setGravity)
+    {
+        switch (setGravity)
+        {
+            case 0:
+                gravity = Normal; 
+                break;
+            case 1:
+                gravity = wallSlideSpeed;
+                break;
+
+        }
+
+    }
+
+
+   
 }
+   

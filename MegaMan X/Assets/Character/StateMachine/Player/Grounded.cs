@@ -40,8 +40,8 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        
 
+        
 
         #region Inputs
 
