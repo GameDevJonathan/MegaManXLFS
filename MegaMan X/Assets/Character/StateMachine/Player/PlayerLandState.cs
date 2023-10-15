@@ -22,14 +22,29 @@ public class PlayerLandState : PlayerBaseState
     {
         //stateMachine.InputReader.isDashing = false;
         //Momentum = new Vector3(0f, 0f, stateMachine.CharacterController.velocity.z*.7f);
-        if (inputMovement != Vector2.zero && falltime >= 1.5f) 
+        
+        //if fall time > max fall time
+        if (falltime >= 1.5f) 
         {
-            Debug.Log("Rolling Land");
-            stateMachine.Animator.CrossFadeInFixedTime(RollingLandHash,0.01f);
-            stateMachine.Animator.applyRootMotion = true;
+            if(inputMovement != Vector2.zero) //roll
+            {
+                Debug.Log("Rolling Land");
+                stateMachine.Animator.CrossFadeInFixedTime(RollingLandHash, 0.01f);
+                stateMachine.Animator.applyRootMotion = true;
 
+            }
+
+            if(inputMovement == Vector2.zero) //todo hard land
+            {
+                //land
+                stateMachine.Animator.CrossFadeInFixedTime(LandHash, CrossFadeDuration);
+            }
+            
         }
-        else if (falltime < 1.5f)
+
+
+        
+        if (falltime < 1.5f)
         {
             stateMachine.Animator.CrossFadeInFixedTime(LandHash, CrossFadeDuration);
 

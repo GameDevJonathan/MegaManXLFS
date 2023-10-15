@@ -15,9 +15,14 @@ public class WallRun : MonoBehaviour
     public float maxWallRunTime;
     public float wallRunTimer;
 
+    [Header("WallJumping")]
     public float wallJumpForce;
+    public float wallJumpUpForce;
     public float wallJumpSideForce;
     public float wallJumpForwardForce;
+    public float wallJumpUpForwardForce;
+    
+    [Header("WallJump delay")]
     [SerializeField,Range(0f,2f)]
     private float lastJumpTime;
 
@@ -91,17 +96,7 @@ public class WallRun : MonoBehaviour
     public void WallHangMovement()
     {
 
-        Vector3 wallNormal = frontWallHit.normal;
-
-        //Vector3 wallForward = Vector3.Cross(-wallNormal, transform.up);
-
-
-        //if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
-        //    wallForward = -wallForward;
-
-        //characterController.Move(wallForward * wallRunForce * Time.deltaTime);
-        ////push to wall
-        ///// confirmation et002678772490
+        Vector3 wallNormal = frontWallHit.normal;        
         characterController.Move(-wallNormal * 100 * Time.deltaTime);
         //FaceMovement(wallForward, Time.deltaTime);
         FaceMovement(-wallNormal, Time.deltaTime);
@@ -134,9 +129,9 @@ public class WallRun : MonoBehaviour
             deltatime * RotationSmoothValue);
     }
 
-    public  void ResetWallJumpTime()
+    public  void ResetWallJumpTime(float time = 1.5f)
     {
-        lastJumpTime = 1.5f;
+        lastJumpTime = time;
     }
 
     public Vector3 WallJump()
@@ -151,6 +146,16 @@ public class WallRun : MonoBehaviour
 
 
         Vector3 ForceTopApply =  wallForward * wallJumpForwardForce + wallNormal * wallJumpSideForce;
+
+        return ForceTopApply;
+    }
+
+    public Vector3 WallJumpUp()
+    {
+        Vector3 wallNormal = frontWallHit.normal;
+
+
+        Vector3 ForceTopApply = wallNormal * wallJumpUpForwardForce + Vector3.up;
 
         return ForceTopApply;
     }

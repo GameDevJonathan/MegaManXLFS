@@ -26,9 +26,19 @@ public class PlayerWallHang : PlayerBaseState
         {
             stateMachine.ForceReceiver.Reset();
             stateMachine.SwitchState(new PlayerFallState(stateMachine));
-        }    
+            return;
+        }
 
-        if ( stateMachine.InputReader.MovementValue.y >0 && stateMachine.CharacterController.isGrounded)
+        if (stateMachine.InputReader.JumpButtonPressed)
+        {
+            stateMachine.ForceReceiver.Reset();
+            stateMachine.WallRun.ResetWallJumpTime(.3f);
+            stateMachine.SwitchState(new WallJumpUpState(stateMachine));
+            return;
+
+        }
+
+        if ( stateMachine.InputReader.MovementValue.y > 0 && stateMachine.CharacterController.isGrounded)
         {
             stateMachine.SwitchState(new Grounded(stateMachine));
             return;
