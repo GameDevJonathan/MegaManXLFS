@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EasyAudioManager;
-using System;
-using UnityEngine.UIElements;
-using System.Net.Sockets;
-using System.Net.Http.Headers;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -23,6 +19,11 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Transform[] Sockets { get; private set; }
     [field: SerializeField] public GameObject[] BusterShot { get; private set; }
     [field: SerializeField] public LightSaber LightSaber { get; private set; }
+
+    [field: Header("Inverse Kinimatics")]
+    [field: SerializeField] public Transform RightHandPlacement { get; private set; }
+    [field: SerializeField] public Transform RightHandHint { get; private set; }
+    [field: SerializeField] public Transform AimTarget { get; private set; }
 
 
 
@@ -76,6 +77,8 @@ public class PlayerStateMachine : StateMachine
 
     }
 
+
+
     public void FireBullet()
     {
         Invoke("ChargedLevel", 0);
@@ -91,7 +94,7 @@ public class PlayerStateMachine : StateMachine
                 LightSaber.transform.localPosition = new Vector3(0.013f, -0.1f, -0.3f);
                 LightSaber.transform.localRotation = Quaternion.identity;
                 break;
-            
+
             case 1:
                 SaberOn();
                 LightSaber.transform.localPosition = Vector3.zero;
@@ -104,10 +107,43 @@ public class PlayerStateMachine : StateMachine
         //LightSaber.TurnOn();
     }
 
+
+
     public void SaberOn()
     {
         LightSaber.TurnOn();
     }
 
-   
+
+    public void OnAnimatorIK(int layerIndex)
+    {
+        SetAnimatorHint(AvatarIKHint.RightElbow, RightHandHint);
+        SetAnimatorIk(AvatarIKGoal.RightHand, RightHandPlacement);
+    }
+
+    public void SetAnimatorIk(AvatarIKGoal avatarIKGoal, Transform target)
+    {
+        if (InputReader.isAiming)
+        {
+            Animator.SetIKPosition(avatarIKGoal, target.position);
+            Animator.SetIKRotation(avatarIKGoal, target.rotation);
+            Animator.SetIKPositionWeight(avatarIKGoal, 1f);
+            Animator.SetIKRotationWeight(avatarIKGoal, 1f);         
+        }
+    }
+
+    public void SetAnimatorHint(AvatarIKHint avatarIKHint, Transform hint)
+    {
+        if (InputReader.isAiming)
+        {
+            Animator.SetIKHintPosition(avatarIKHint, hint.position);
+            Animator.SetIKHintPositionWeight(avatarIKHint, 1f);
+        }
+    }
+
+    public void ResetAnimatorIk(AvatarIKGoal avatarIKGoal, float weight = 0)
+    {
+        Animator.SetIKPositionWeight(avatarIKGoal, weight);
+        Animator.SetIKRotationWeight(avatarIKGoal, weight);
+    }
 }

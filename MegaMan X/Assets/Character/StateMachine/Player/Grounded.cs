@@ -32,7 +32,9 @@ public class Grounded : PlayerBaseState
 
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
-        stateMachine.InputReader.EquipEvent += OnEquip; 
+        stateMachine.InputReader.EquipEvent += OnEquip;
+
+       
 
 
     }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using EasyAudioManager;
 
+
 public class AimingState : PlayerBaseState
 {
     private readonly int AimingHash = Animator.StringToHash("Aiming");
@@ -31,6 +32,8 @@ public class AimingState : PlayerBaseState
     {
 
         #region Aim and Rotation
+
+        //stateMachine.OnAnimatorIK(0);
 
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
@@ -81,6 +84,7 @@ public class AimingState : PlayerBaseState
     {
         stateMachine._thirdPersonCam.SetActive(true);
         stateMachine._AimCam.SetActive(false);
+        //ResetAnimatorIk(AvatarIKGoal.RightHand);
     }
 
     private void ShotLevel(int level, string sfx)
@@ -93,6 +97,24 @@ public class AimingState : PlayerBaseState
             UniversalAudioPlayer.PlayInGameSFX(sfx);
             _lastFireTime = Time.time + _coolDownTime;
         }
+    }
+
+   
+
+    //private void SetAnimatiorIk(AvatarIKGoal avatarIKGoal, Transform target)
+    //{
+        
+        
+    //    stateMachine.Animator.SetIKPosition(avatarIKGoal, target.position);
+    //    stateMachine.Animator.SetIKRotation(avatarIKGoal, target.rotation);
+    //    stateMachine.Animator.SetIKPositionWeight(avatarIKGoal, 1f);
+    //    stateMachine.Animator.SetIKRotationWeight(avatarIKGoal, 1f);
+    //}
+
+    private void ResetAnimatorIk(AvatarIKGoal avatarIKGoal,float weight = 0)
+    {
+        stateMachine.Animator.SetIKPositionWeight(avatarIKGoal, weight);
+        stateMachine.Animator.SetIKRotationWeight(avatarIKGoal, weight);
     }
 
    
