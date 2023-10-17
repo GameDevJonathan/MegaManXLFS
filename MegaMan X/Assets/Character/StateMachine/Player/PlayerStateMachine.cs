@@ -102,48 +102,13 @@ public class PlayerStateMachine : StateMachine
                 break;
 
         }
-
-
         //LightSaber.TurnOn();
     }
-
 
 
     public void SaberOn()
     {
         LightSaber.TurnOn();
     }
-
-
-    public void OnAnimatorIK(int layerIndex)
-    {
-        SetAnimatorHint(AvatarIKHint.RightElbow, RightHandHint);
-        SetAnimatorIk(AvatarIKGoal.RightHand, RightHandPlacement);
-    }
-
-    public void SetAnimatorIk(AvatarIKGoal avatarIKGoal, Transform target)
-    {
-        if (InputReader.isAiming)
-        {
-            Animator.SetIKPosition(avatarIKGoal, target.position);
-            Animator.SetIKRotation(avatarIKGoal, target.rotation);
-            Animator.SetIKPositionWeight(avatarIKGoal, 1f);
-            Animator.SetIKRotationWeight(avatarIKGoal, 1f);         
-        }
-    }
-
-    public void SetAnimatorHint(AvatarIKHint avatarIKHint, Transform hint)
-    {
-        if (InputReader.isAiming)
-        {
-            Animator.SetIKHintPosition(avatarIKHint, hint.position);
-            Animator.SetIKHintPositionWeight(avatarIKHint, 1f);
-        }
-    }
-
-    public void ResetAnimatorIk(AvatarIKGoal avatarIKGoal, float weight = 0)
-    {
-        Animator.SetIKPositionWeight(avatarIKGoal, weight);
-        Animator.SetIKRotationWeight(avatarIKGoal, weight);
-    }
+   
 }
