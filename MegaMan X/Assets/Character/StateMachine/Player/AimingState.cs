@@ -1,5 +1,6 @@
 using UnityEngine;
 using EasyAudioManager;
+using UnityEngine.Animations.Rigging;
 
 
 public class AimingState : PlayerBaseState
@@ -21,7 +22,7 @@ public class AimingState : PlayerBaseState
 
     public override void Enter()
     {
-        
+        stateMachine.rig.weight = 1f;
         stateMachine.Animator.CrossFadeInFixedTime(AimingHash,CrossFadeDuration);
         stateMachine._thirdPersonCam.SetActive(false);
         stateMachine._AimCam.SetActive(true);
@@ -35,6 +36,7 @@ public class AimingState : PlayerBaseState
 
         //stateMachine.OnAnimatorIK(0);
 
+        stateMachine.rig.weight = Mathf.Lerp(stateMachine.rig.weight, stateMachine.rig.weight, Time.deltaTime * 20f);
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 

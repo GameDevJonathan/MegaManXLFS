@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class Grounded : PlayerBaseState
 {
@@ -24,6 +25,7 @@ public class Grounded : PlayerBaseState
 
     public override void Enter()
     {
+        stateMachine.rig.weight = 0f;
 
         if (!shouldFade)
             stateMachine.Animator.Play(FreeLookBlendTreeHash);
@@ -33,10 +35,6 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
         stateMachine.InputReader.EquipEvent += OnEquip;
-
-       
-
-
     }
 
 
@@ -151,11 +149,6 @@ public class Grounded : PlayerBaseState
                 stateMachine.Animator.Play(SheathHash, 1);
                 break;
         }
-        
-        
-        
-
-
     }
 
     public override void Exit()
@@ -163,8 +156,6 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.DashEvent -= OnDash;
         stateMachine.InputReader.EquipEvent -= OnEquip;
-
-
     }
 
 

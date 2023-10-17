@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using EasyAudioManager;
+using UnityEngine.Animations.Rigging;
+using Unity.VisualScripting;
 
 public class PlayerStateMachine : StateMachine
 {
+
     public Transform MainCameraTransform { get; private set; }
     [field: Header("Required Components")]
     [field: SerializeField] public InputReader InputReader { get; private set; }
@@ -21,6 +24,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public LightSaber LightSaber { get; private set; }
 
     [field: Header("Inverse Kinimatics")]
+
+    [field: SerializeField] public Rig rig;
     [field: SerializeField] public Transform RightHandPlacement { get; private set; }
     [field: SerializeField] public Transform RightHandHint { get; private set; }
     [field: SerializeField] public Transform AimTarget { get; private set; }
@@ -47,6 +52,7 @@ public class PlayerStateMachine : StateMachine
     private void Start()
     {
         MainCameraTransform = Camera.main.transform;
+        
         SwitchState(new Grounded(this));
     }
 

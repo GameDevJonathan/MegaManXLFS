@@ -12400,13 +12400,18 @@ PrefabInstance:
     - target: {fileID: 6907361125238452515, guid: cd68520780c99f7458b4847d3ecba7d3,
         type: 3}
       propertyPath: <isAiming>k__BackingField
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6907361125238452515, guid: cd68520780c99f7458b4847d3ecba7d3,
         type: 3}
       propertyPath: <equipingWeapon>k__BackingField
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6907361125238452517, guid: cd68520780c99f7458b4847d3ecba7d3,
+        type: 3}
+      propertyPath: rig
+      value: 
+      objectReference: {fileID: 1115507376}
     - target: {fileID: 6907361125238452517, guid: cd68520780c99f7458b4847d3ecba7d3,
         type: 3}
       propertyPath: <_AimCam>k__BackingField
