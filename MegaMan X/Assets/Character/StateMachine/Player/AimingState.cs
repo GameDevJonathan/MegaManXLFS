@@ -42,6 +42,7 @@ public class AimingState : PlayerBaseState
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
         {
+            
             debugTransform.position = raycastHit.point;
             AimPosition = raycastHit.point;
         }
