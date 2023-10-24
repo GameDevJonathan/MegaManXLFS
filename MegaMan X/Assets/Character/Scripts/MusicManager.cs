@@ -5,10 +5,13 @@ using EasyAudioManager;
 
 public class MusicManager : MonoBehaviour
 {
+
+    public bool PlayMusic = true;
     // Start is called before the first frame update
     void Start()
     {
-        //UniversalAudioPlayer.PlayMusic(0);
+        if(PlayMusic)
+        UniversalAudioPlayer.PlayMusic(0);
     }
 
     

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -13119,6 +13119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef98f94f6f734d0458c3e4c123defe72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayMusic: 1
 --- !u!1001 &270201757
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17039,7 +17040,8 @@ GameObject:
   - component: {fileID: 358988930}
   - component: {fileID: 358988929}
   - component: {fileID: 358988928}
-  m_Layer: 0
+  - component: {fileID: 358988933}
+  m_Layer: 20
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17369,6 +17371,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &358988933
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 358988926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 0.3391743, z: 1.0081787}
+  m_Center: {x: -0.95356417, y: -0.16958715, z: -0.50408936}
 --- !u!43 &359044807
 Mesh:
   m_ObjectHideFlags: 0
@@ -18059,7 +18074,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-688126
+  m_Name: pb_Mesh626454
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23161,7 +23176,8 @@ GameObject:
   - component: {fileID: 502425690}
   - component: {fileID: 502425689}
   - component: {fileID: 502425688}
-  m_Layer: 0
+  - component: {fileID: 502425693}
+  m_Layer: 20
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23491,6 +23507,19 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!65 &502425693
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502425686}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.340004, y: 2.5000005, z: 9.159999}
+  m_Center: {x: 4.2455816, y: 0.49009395, z: 4.4112773}
 --- !u!1 &504683125
 GameObject:
   m_ObjectHideFlags: 0
@@ -38492,7 +38521,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-670132
+  m_Name: pb_Mesh625814
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -57549,7 +57578,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-579776
+  m_Name: pb_Mesh626014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -76447,6 +76476,16 @@ PrefabInstance:
         type: 3}
       propertyPath: wallJumpUpForce
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907361125238452518, guid: cd68520780c99f7458b4847d3ecba7d3,
+        type: 3}
+      propertyPath: whatIsWall.m_Bits
+      value: 1048704
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907361125238452518, guid: cd68520780c99f7458b4847d3ecba7d3,
+        type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 524352
       objectReference: {fileID: 0}
     - target: {fileID: 6907361125238452518, guid: cd68520780c99f7458b4847d3ecba7d3,
         type: 3}
