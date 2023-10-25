@@ -114,7 +114,14 @@ public class Grounded : PlayerBaseState
         stateMachine.Animator.SetFloat(FreeLookSpeedHash, freeLookValue, AnimatorDampTime, deltaTime);
         FaceMovement(movement, deltaTime);
         #endregion
-        
+
+        if (stateMachine.WallRun.AboveGround() && stateMachine.CharacterController.isGrounded == false)
+        {
+            Debug.Log("Not Touching Ground");
+            stateMachine.SwitchState(new PlayerFallState(stateMachine));
+            return;
+        }
+
     }
 
     //public void OnAttack()

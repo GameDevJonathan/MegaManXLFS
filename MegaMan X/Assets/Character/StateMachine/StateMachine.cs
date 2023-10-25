@@ -7,7 +7,7 @@ public class StateMachine : MonoBehaviour
     private State currentState;
     private void Update()
     {
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
         currentState?.Tick(Time.deltaTime);
     }
 

@@ -52,7 +52,7 @@ public class WallRun : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log($" Touching Ground {AboveGround()}");
+        //Debug.Log($"WallRun Script:: Touching Ground {AboveGround()}");
 
 
         CheckForWall();
