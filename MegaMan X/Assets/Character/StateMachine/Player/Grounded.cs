@@ -15,7 +15,8 @@ public class Grounded : PlayerBaseState
     private float freeLookMoveSpeed;
     private bool shouldFade;
     private const float CrossFadeDuration = 0.1f;
-    
+    private bool grounded => stateMachine.WallRun.CheckForGround();
+
 
     public Grounded(PlayerStateMachine stateMachine, bool shouldFade = false) : base(stateMachine)
     {
@@ -40,7 +41,7 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-
+        
         
 
         #region Inputs
@@ -115,7 +116,16 @@ public class Grounded : PlayerBaseState
         FaceMovement(movement, deltaTime);
         #endregion
 
-        if (stateMachine.WallRun.AboveGround() && stateMachine.CharacterController.isGrounded == false)
+        Debug.Log($"Grounded State::{grounded}");
+
+        //if (stateMachine.WallRun.AboveGround() && stateMachine.CharacterController.isGrounded == false)
+        //{
+        //    Debug.Log("Not Touching Ground");
+        //    stateMachine.SwitchState(new PlayerFallState(stateMachine));
+        //    return;
+        //}
+
+        if (!grounded)
         {
             Debug.Log("Not Touching Ground");
             stateMachine.SwitchState(new PlayerFallState(stateMachine));

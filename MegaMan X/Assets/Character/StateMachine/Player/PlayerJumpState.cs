@@ -27,6 +27,9 @@ public class PlayerJumpState : PlayerBaseState
     }
     public override void Tick(float deltaTime)
     {
+        Debug.Log($"Jump State::{stateMachine.WallRun.CheckForGround()}");
+
+
         Vector3 movement = CalculateMovement();
         Move(movement + Momentum, deltaTime);
         

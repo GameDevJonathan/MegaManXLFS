@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class WallRun : MonoBehaviour
@@ -9,6 +5,7 @@ public class WallRun : MonoBehaviour
     [Header("WallRunning")]
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
+    public LayerMask GroundCheck;
 
     public float wallRunForce;
     public float wallRunTime;
@@ -39,6 +36,11 @@ public class WallRun : MonoBehaviour
     public bool wallLeft;
     public bool wallRight;
     public bool wallFront;
+
+    [Header("Ground Check")]
+    public float debugWireSphere_Radius;
+    public Color debugWireSphere_Color;
+    public Transform debugWireSphere_Transform;
     
 
     [Header("References")]
@@ -64,7 +66,6 @@ public class WallRun : MonoBehaviour
 
     public void CheckForWall()
     {
-
         wallRight = Physics.Raycast(orientation.position, orientation.right, out rightWallHit, wallCheckDistance, whatIsWall);
         Debug.DrawRay(orientation.position, orientation.right * wallCheckDistance, Color.blue);
 
@@ -73,7 +74,7 @@ public class WallRun : MonoBehaviour
         Debug.DrawRay(orientation.position, -orientation.right * wallCheckDistance, Color.red);
         
         wallFront = Physics.Raycast(orientation.position, orientation.forward, out frontWallHit, wallCheckDistance, whatIsWall);
-        Debug.DrawRay(orientation.position, orientation.forward * wallCheckDistance, Color.white);
+        Debug.DrawRay(orientation.position, orientation.forward * wallCheckDistance, Color.white); 
 
 
         Debug.DrawRay(transform.position, Vector3.down * minJumpHeight, Color.magenta);
@@ -83,6 +84,11 @@ public class WallRun : MonoBehaviour
     {
 
         return !Physics.Raycast(transform.position, Vector3.down, minJumpHeight, whatIsGround);
+    }
+
+    public bool CheckForGround()
+    {
+        return Physics.CheckSphere(debugWireSphere_Transform.position, debugWireSphere_Radius, GroundCheck);
     }
 
     public bool HitWall()
@@ -158,5 +164,16 @@ public class WallRun : MonoBehaviour
         Vector3 ForceTopApply = wallNormal * wallJumpUpForwardForce + Vector3.up;
 
         return ForceTopApply;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (debugWireSphere_Transform)
+        {
+            Gizmos.color = debugWireSphere_Color;
+            Gizmos.DrawWireSphere(debugWireSphere_Transform.position, debugWireSphere_Radius);
+
+        }
+                
     }
 }

@@ -10,6 +10,7 @@ public class PlayerFallState : PlayerBaseState
     private float fallTime = 0f;
     private float fallTimeRate = 1f;
     
+    
     public PlayerFallState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
 
@@ -26,6 +27,8 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        Debug.Log($"Fall State State::{stateMachine.WallRun.CheckForGround()}");
+
 
         if (stateMachine.WallRun.AboveGround() && stateMachine.WallRun.HitWall())
         {
