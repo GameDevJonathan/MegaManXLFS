@@ -22,6 +22,11 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Transform[] Sockets { get; private set; }
     [field: SerializeField] public GameObject[] BusterShot { get; private set; }
     [field: SerializeField] public LightSaber LightSaber { get; private set; }
+    
+    
+    [field: Header("Special Beam")]
+    [field: SerializeField] public GameObject[] SpecialBeam { get; private set; }
+    [field: SerializeField] public bool SpecialMove;
 
     [field: Header("Inverse Kinimatics")]
 
@@ -53,7 +58,7 @@ public class PlayerStateMachine : StateMachine
     private void Start()
     {
         MainCameraTransform = Camera.main.transform;
-        
+
         SwitchState(new Grounded(this));
     }
 
@@ -117,5 +122,5 @@ public class PlayerStateMachine : StateMachine
     {
         LightSaber.TurnOn();
     }
-   
+
 }

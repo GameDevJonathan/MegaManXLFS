@@ -10,10 +10,13 @@ public class AimingState : PlayerBaseState
     private LayerMask aimColliderMask;
     private Transform debugTransform;
     private float _coolDownTime = .1f;
-    private float _lastFireTime  = -1f;
+    private float _lastFireTime = -1f;
+    private float _aimLock;
+    private float _aimLockTime = 2f;
+
     private Vector3 AimPosition = Vector3.zero;
-    
-    
+
+
     public AimingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         this.aimColliderMask = stateMachine.aimColliderMask;
@@ -22,19 +25,41 @@ public class AimingState : PlayerBaseState
 
     public override void Enter()
     {
-        stateMachine.rig.weight = 1f;
-        stateMachine.Animator.CrossFadeInFixedTime(AimingHash,CrossFadeDuration);
+        
+
+        switch (stateMachine.SpecialMove)
+        {
+            case false:
+                stateMachine.rig.weight = 1f;
+                break;
+            case true:
+                stateMachine.rig.weight = 0f;
+                stateMachine.InputReader.ResetCamera();
+                _aimLock = _aimLockTime;
+                break;
+
+        }
+        stateMachine.Animator.CrossFadeInFixedTime(AimingHash, CrossFadeDuration);
         stateMachine._thirdPersonCam.SetActive(false);
         stateMachine._AimCam.SetActive(true);
-        
+
 
     }
     public override void Tick(float deltaTime)
     {
 
         #region Aim and Rotation
+        if (_aimLock > 0)
+        {
+            _aimLock -= Time.deltaTime;
+        }
+        else
+        {
+            stateMachine.SpecialMove = false;
+            stateMachine.rig.weight = 1f;
+        }
 
-        //stateMachine.OnAnimatorIK(0);
+        if (stateMachine.SpecialMove) return;
 
         stateMachine.rig.weight = Mathf.Lerp(stateMachine.rig.weight, stateMachine.rig.weight, Time.deltaTime * 20f);
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -42,7 +67,7 @@ public class AimingState : PlayerBaseState
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
         {
-            
+
             debugTransform.position = raycastHit.point;
             AimPosition = raycastHit.point;
         }
@@ -64,14 +89,14 @@ public class AimingState : PlayerBaseState
         {
 
             ShotLevel(1, "ChargedShot");
-            stateMachine.InputReader.mediumShot = false;            
+            stateMachine.InputReader.mediumShot = false;
         }
 
         if (stateMachine.InputReader.chargedShot)
         {
             ShotLevel(2, "MaxShot");
             stateMachine.InputReader.chargedShot = false;
-        
+
         }
 
         if (stateMachine.InputReader.isAiming == false)
@@ -80,7 +105,7 @@ public class AimingState : PlayerBaseState
             //stateMachine.InputReader.ResetCamera();
             stateMachine.SwitchState(new Grounded(stateMachine, true));
             return;
-        }        
+        }
     }
 
     public override void Exit()
@@ -102,23 +127,23 @@ public class AimingState : PlayerBaseState
         }
     }
 
-   
+
 
     //private void SetAnimatiorIk(AvatarIKGoal avatarIKGoal, Transform target)
     //{
-        
-        
+
+
     //    stateMachine.Animator.SetIKPosition(avatarIKGoal, target.position);
     //    stateMachine.Animator.SetIKRotation(avatarIKGoal, target.rotation);
     //    stateMachine.Animator.SetIKPositionWeight(avatarIKGoal, 1f);
     //    stateMachine.Animator.SetIKRotationWeight(avatarIKGoal, 1f);
     //}
 
-    private void ResetAnimatorIk(AvatarIKGoal avatarIKGoal,float weight = 0)
+    private void ResetAnimatorIk(AvatarIKGoal avatarIKGoal, float weight = 0)
     {
         stateMachine.Animator.SetIKPositionWeight(avatarIKGoal, weight);
         stateMachine.Animator.SetIKRotationWeight(avatarIKGoal, weight);
     }
 
-   
+
 }

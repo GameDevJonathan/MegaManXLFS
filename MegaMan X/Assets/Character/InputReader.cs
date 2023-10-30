@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
+    [SerializeField] private PlayerStateMachine stateMachine;
+    
+    
     public Vector2 MovementValue { get; private set; }
     public Vector2 CameraValue { get; private set; }
 
@@ -44,10 +47,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action EquipEvent;
     public Transform Player;
     //public event Action AttackEvent;
-
-
-
-
 
     [field: Header("Attacking")]
     [field: SerializeField] public bool isAttacking { get; private set; }
@@ -94,17 +93,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     }
 
     private void Update()
-    {
-        //if (isAiming)
-        //{
-        //    animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f,
-        //        Time.deltaTime * _lerpTime));
-        //}
-        //else
-        //{
-        //    animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f,
-        //        Time.deltaTime * _lerpTime));
-        //}
+    {        
 
         if (charge)
         {
@@ -123,7 +112,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private void LateUpdate()
     {
-
+        if (stateMachine.SpecialMove) return;
         CameraRotation();
     }
 
