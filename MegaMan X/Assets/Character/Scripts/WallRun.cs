@@ -102,7 +102,13 @@ public class WallRun : MonoBehaviour
     public void WallHangMovement()
     {
 
-        Vector3 wallNormal = frontWallHit.normal;        
+        Vector3 wallNormal = frontWallHit.normal;
+
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.forward);
+        
+        if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
+            wallForward = -wallForward;
+
         characterController.Move(-wallNormal * 100 * Time.deltaTime);
         //FaceMovement(wallForward, Time.deltaTime);
         FaceMovement(-wallNormal, Time.deltaTime);
