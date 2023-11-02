@@ -31846,6 +31846,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: -----PlayerRig----
       objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224746, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224746, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: m_SlopeLimit
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224746, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: m_StepOffset
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
 --- !u!1 &3166830706382144404
