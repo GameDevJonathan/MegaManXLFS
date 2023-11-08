@@ -47,6 +47,8 @@ namespace Invector
         {
             targets = new List<Collider>();
             disabledTarget = new List<Collider>();
+
+            Debug.Log($"{collisionMethod}");
             if (collisionMethod == CollisionMethod.OnParticleCollision)
             {
                 part = GetComponent<ParticleSystem>();
@@ -102,16 +104,9 @@ namespace Invector
             }
         }
 
-        protected virtual void OnCollisionEnter(Collision hit)
-        {
-            if (!this.enabled) return;
-            if (collisionMethod != CollisionMethod.OnColliderEnter || continuousDamage) return;
 
-            if (CanApplyDamage(hit.gameObject))
-            {
-                ApplyDamage(hit.collider, hit.contacts[0].point);
-            }
-        }
+        
+
 
         protected virtual void OnTriggerEnter(Collider hit)
         {
@@ -126,6 +121,19 @@ namespace Invector
                 ApplyDamage(hit, transform.position);
             }
         }
+
+        protected virtual void OnCollisionEnter(Collision hit)
+        {
+            //if (!this.enabled) return;
+            if (collisionMethod != CollisionMethod.OnColliderEnter || continuousDamage) return;
+
+            if (CanApplyDamage(hit.gameObject))
+            {
+                ApplyDamage(hit.collider, hit.contacts[0].point);
+            }
+        }
+
+        
 
         protected virtual bool CanApplyDamage(GameObject hitObject)
         {

@@ -35869,8 +35869,7 @@ ParticleSystem:
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 199436734649930510, guid: f760ee0c97ecafa48bc080a99d8f5c50,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3139786369662520255}
@@ -77098,9 +77097,9 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2.22
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.0001
+  m_SlopeLimit: 90
+  m_StepOffset: 0
+  m_SkinWidth: 0.05
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &8432624091962224744
@@ -77177,7 +77176,7 @@ MonoBehaviour:
   - {fileID: 3088715869317675476}
   - {fileID: 3088715869400261018}
   <BusterShot>k__BackingField:
-  - {fileID: 1878987882032996, guid: 7fa473b70378b654a84307886f90d064, type: 3}
+  - {fileID: 3221138590616415227, guid: c185b4010fca29444a8e460f9a31d894, type: 3}
   - {fileID: 1311559214229084, guid: 11120fc2b8af002419bfb521d2962dac, type: 3}
   - {fileID: 1079946990457772, guid: 2e10c38d7d83154429c2fb51c652e1fb, type: 3}
   <LightSaber>k__BackingField: {fileID: 4431287294407034987}

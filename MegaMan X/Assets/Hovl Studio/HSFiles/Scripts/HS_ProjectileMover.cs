@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,8 +42,8 @@ public class HS_ProjectileMover : MonoBehaviour
     {
 		if (speed != 0)
         {
-            rb.velocity = transform.forward * speed;
-            //transform.position += transform.forward * (speed * Time.deltaTime);         
+            //rb.velocity = transform.forward * speed;
+            transform.position += transform.forward * (speed * Time.deltaTime);
         }
 	}
 
@@ -89,5 +90,5 @@ public class HS_ProjectileMover : MonoBehaviour
         }
         //Destroy projectile on collision
         Destroy(gameObject);
-    }
+    }   
 }
