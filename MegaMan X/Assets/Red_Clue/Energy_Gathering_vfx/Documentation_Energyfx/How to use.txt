@@ -1,0 +1,12 @@
+Energy_Gathering_vfx
+
+
+Simple drag and drop from the prefabs folder.
+
+
+Very easy to use and customize. If you face any problem please contact me via Email and i'll be happy to help you.
+ 
+Important
+
+only Work in URP(Universal Render Pipeline)
+If you use any other pipeline there will be pink error!

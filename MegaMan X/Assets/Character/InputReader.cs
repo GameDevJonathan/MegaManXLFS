@@ -33,12 +33,18 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
     [field: SerializeField] public bool equipingWeapon { get; private set; } = false;
 
+
+    [Header("Shader Glow")]
     public string AnimChargeRef = "ChargeLevel";
     public int chargeLevel;
     public float chargeAmount;
     public float chargeRate;
     public float _minRate = 25f;
     public float _maxRate = 100f;
+
+    [Header("Energy Gathering Effect")]
+    [SerializeField] private GameObject _maxChargeEffect;
+    [SerializeField] private GameObject _minChargeEffect;
 
     public event Action JumpEvent;
     public event Action DashEvent;
@@ -310,6 +316,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (chargeAmount > _minRate && chargeAmount < _maxRate)
         {
             chargeLevel = 2;
+            _minChargeEffect?.SetActive(true);
+
             if (_targetValue < _midTarget)
                 _targetValue += Time.deltaTime;
 
@@ -319,6 +327,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (chargeAmount >= _maxRate)
         {
             chargeLevel = 3;
+            _minChargeEffect?.SetActive(false);
+            _maxChargeEffect?.SetActive(true);
+
             if (_targetValue < _maxTarget)
                 _targetValue += Time.deltaTime;
 
@@ -328,6 +339,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         if (chargeAmount == 0)
         {
+            _maxChargeEffect?.SetActive(false);
+            _minChargeEffect?.SetActive(false);
             chargeLevel = 0;
             _targetValue = 0.1f;
             _material.SetFloat(_targetRef, _targetValue);
