@@ -1,14 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
 {
     [SerializeField] private PlayerStateMachine stateMachine;
-    
-    
+
     public Vector2 MovementValue { get; private set; }
     public Vector2 CameraValue { get; private set; }
 
@@ -22,14 +19,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public bool JumpButtonPressed => controls.Player.Jump.WasPressedThisFrame();
     public bool AttackButtonPressed => controls.Player.Attack.WasPressedThisFrame();
 
-    public bool shoot;
-    public bool charge;
-    public bool fire;
-    public bool mediumShot = false;
-    public bool chargedShot = false;
+    [HideInInspector] public bool shoot;
+    [HideInInspector] public bool charge;
+    [HideInInspector] public bool fire;
+    [HideInInspector] public bool mediumShot = false;
+    [HideInInspector] public bool chargedShot = false;
 
     [Header("Aiming")]
-
     [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
     [field: Space]
@@ -37,6 +33,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
     [field: SerializeField] public bool equipingWeapon { get; private set; } = false;
 
+    public string AnimChargeRef = "ChargeLevel";
+    public int chargeLevel;
     public float chargeAmount;
     public float chargeRate;
     public float _minRate = 25f;
@@ -81,19 +79,39 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [SerializeField] private float _cinemachineTargetPitch;
     private const float _threshold = 0.01f;
 
+    //Material
+    [Header("Material Glow")]
+    [SerializeField] private Material _material;
+    [SerializeField] private bool _canFlicker;
+    [SerializeField] public float _targetValue;
+    [SerializeField] private float _minTarget;
+    [SerializeField] private float _midTarget;
+    [SerializeField] private float _maxTarget;
+    [SerializeField] private string _boolRef;
+    [SerializeField] private string _targetRef;
+
     private void Start()
     {
-        //animator = GetComponent<Animator>(); 
+        //animator = GetComponent<Animator>();
         controls = new Controls();
         controls.Player.SetCallbacks(this);
 
         controls.Player.Enable();
 
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+
+        _material.SetFloat(_targetRef, _targetValue);
     }
 
     private void Update()
-    {        
+    {
+        _targetValue = Mathf.Clamp(_targetValue, .1f, 1f);
+
+
+
+        FlickerMaterial(_material, _boolRef, _canFlicker);
+
+        _canFlicker = chargeLevel > 0 ? true : false;
 
         if (charge)
         {
@@ -261,7 +279,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             EquipEvent?.Invoke();
             SaberEquiped = !SaberEquiped;
-            equipingWeapon = true;            
+            equipingWeapon = true;
 
         }
     }
@@ -270,5 +288,75 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
 
         equipingWeapon = false;
+    }
+
+    public void FlickerMaterial(Material mat, string ShaderBoolRef, bool on_off)
+    {
+        Debug.Log($"on/off: {mat.GetInt(ShaderBoolRef)}");
+
+        mat.SetInt(ShaderBoolRef, Convert.ToInt32(on_off));
+
+        if (chargeAmount > _minTarget && chargeAmount < 20)
+        {
+            chargeLevel = 1;
+            Mathf.Clamp(_targetValue, 0, _minTarget);
+
+            if (_targetValue < _minTarget)
+                _targetValue += Time.deltaTime;
+
+            _material.SetFloat(_targetRef, _targetValue);
+        }
+
+        if (chargeAmount > _minRate && chargeAmount < _maxRate)
+        {
+            chargeLevel = 2;
+            if (_targetValue < _midTarget)
+                _targetValue += Time.deltaTime;
+
+            _material.SetFloat(_targetRef, _targetValue);
+        }
+
+        if (chargeAmount >= _maxRate)
+        {
+            chargeLevel = 3;
+            if (_targetValue < _maxTarget)
+                _targetValue += Time.deltaTime;
+
+            _material.SetFloat(_targetRef, _targetValue);
+
+        }
+
+        if (chargeAmount == 0)
+        {
+            chargeLevel = 0;
+            _targetValue = 0.1f;
+            _material.SetFloat(_targetRef, _targetValue);
+
+        }
+
+
+        //CHARGE THROUGH ANIMATIONS
+        //if (chargeLevel < 1 && (chargeAmount > 0 && chargeAmount < _minRate))
+        //{
+        //    chargeLevel = 1;
+        //    animator.SetInteger(AnimChargeRef, chargeLevel);
+
+        //}
+        //else if (chargeLevel < 2 && (chargeAmount >= _minRate && chargeAmount < _maxRate))
+        //{
+        //    chargeLevel = 2;
+        //    animator.SetInteger(AnimChargeRef, chargeLevel);
+        //}
+        //else if (chargeLevel < 3 && chargeAmount >= _maxRate)
+        //{
+        //    chargeLevel = 3;
+        //    animator.SetInteger(AnimChargeRef, chargeLevel);
+        //}
+        //else if (chargeLevel != 0 && chargeAmount == 0)
+        //{
+        //    chargeLevel = 0;
+        //    animator.SetInteger(AnimChargeRef, chargeLevel);
+        //}
+
     }
 }

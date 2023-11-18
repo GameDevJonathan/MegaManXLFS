@@ -147,7 +147,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 45c3b74c38ab3be49a4b086fd61fe5d7, type: 2}
+  - {fileID: 2100000, guid: 29c70600dbcdae2438fdeecc90a7fe91, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77101,7 +77101,7 @@ CharacterController:
   m_StepOffset: 0
   m_SkinWidth: 0.05
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.17, z: 0}
 --- !u!114 &8432624091962224744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77115,7 +77115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateMachine: {fileID: 8432624091962224750}
-  _lerpTime: 15
+  animator: {fileID: 0}
+  _lerpTime: 1
   Modified: 0
   shoot: 0
   charge: 0
@@ -77126,10 +77127,12 @@ MonoBehaviour:
   <isAiming>k__BackingField: 0
   <SaberEquiped>k__BackingField: 0
   <equipingWeapon>k__BackingField: 0
+  AnimChargeRef: ChargeLevel
+  chargeLevel: 0
   chargeAmount: 0
-  chargeRate: 75
+  chargeRate: 50
   _minRate: 25
-  _maxRate: 100
+  _maxRate: 75
   Player: {fileID: 8432624091962224756}
   <isAttacking>k__BackingField: 0
   Sensitivity: 0.5
@@ -77141,6 +77144,14 @@ MonoBehaviour:
   LockCameraPosition: 0
   _cinemachineTargetYaw: 0
   _cinemachineTargetPitch: 0
+  _material: {fileID: 2100000, guid: 29c70600dbcdae2438fdeecc90a7fe91, type: 2}
+  _canFlicker: 0
+  _targetValue: 0.1
+  _minTarget: 0.4
+  _midTarget: 0.75
+  _maxTarget: 1
+  _boolRef: _On_Off
+  _targetRef: _Target
 --- !u!114 &8432624091962224750
 MonoBehaviour:
   m_ObjectHideFlags: 0
