@@ -40,6 +40,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public float chargeAmount;
     public float chargeRate;
     public float _minRate = 25f;
+    public float _midRate = 50f;
     public float _maxRate = 100f;
 
     [Header("Energy Gathering Effect")]
@@ -117,7 +118,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         FlickerMaterial(_material, _boolRef, _canFlicker);
 
-        _canFlicker = chargeLevel > 0 ? true : false;
+        _canFlicker = chargeLevel >=1  ? true : false;
 
         if (charge)
         {
@@ -302,7 +303,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         mat.SetInt(ShaderBoolRef, Convert.ToInt32(on_off));
 
-        if (chargeAmount > _minTarget && chargeAmount < 20)
+        if (chargeAmount >= _minRate && chargeAmount < _midRate)
         {
             chargeLevel = 1;
             Mathf.Clamp(_targetValue, 0, _minTarget);
@@ -313,10 +314,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             _material.SetFloat(_targetRef, _targetValue);
         }
 
-        if (chargeAmount > _minRate && chargeAmount < _maxRate)
+        if (chargeAmount >= _midRate && chargeAmount < _maxRate)
         {
             chargeLevel = 2;
-            _minChargeEffect?.SetActive(true);
+            //_minChargeEffect?.SetActive(true);
 
             if (_targetValue < _midTarget)
                 _targetValue += Time.deltaTime;
@@ -327,8 +328,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         if (chargeAmount >= _maxRate)
         {
             chargeLevel = 3;
-            _minChargeEffect?.SetActive(false);
-            _maxChargeEffect?.SetActive(true);
+            //_minChargeEffect?.SetActive(false);
+            //_maxChargeEffect?.SetActive(true);
 
             if (_targetValue < _maxTarget)
                 _targetValue += Time.deltaTime;
@@ -339,8 +340,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         if (chargeAmount == 0)
         {
-            _maxChargeEffect?.SetActive(false);
-            _minChargeEffect?.SetActive(false);
+            //_maxChargeEffect?.SetActive(false);
+            //_minChargeEffect?.SetActive(false);
             chargeLevel = 0;
             _targetValue = 0.1f;
             _material.SetFloat(_targetRef, _targetValue);
