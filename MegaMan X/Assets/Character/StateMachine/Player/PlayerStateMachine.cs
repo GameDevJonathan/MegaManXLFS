@@ -51,6 +51,7 @@ public class PlayerStateMachine : StateMachine
     [field: Header("Cameras")]
     [field: SerializeField] public GameObject _thirdPersonCam { get; private set; }
     [field: SerializeField] public GameObject _AimCam { get; private set; }
+    [field: SerializeField] public GameObject _AimCamUtil { get; private set; }
     [field: SerializeField] public LayerMask aimColliderMask { get; private set; }
     [field: SerializeField] public Transform debugTransform { get; private set; }
 

@@ -14,7 +14,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     //[SerializeField] Animator animator;
     [SerializeField, Range(0, 20)] private float _lerpTime = 5f;
 
+    [Header("Gameplay bools")]
     public bool Modified;
+    public bool Targeting; 
 
     public bool JumpButtonPressed => controls.Player.Jump.WasPressedThisFrame();
     public bool AttackButtonPressed => controls.Player.Attack.WasPressedThisFrame();
@@ -47,16 +49,20 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [SerializeField] private GameObject _maxChargeEffect;
     [SerializeField] private GameObject _minChargeEffect;
 
+    
+    //Actions
     public event Action JumpEvent;
     public event Action DashEvent;
     public event Action EquipEvent;
+    public event Action TargetEvent;
+    public event Action CancelEvent;
     public Transform Player;
     //public event Action AttackEvent;
 
     [field: Header("Attacking")]
     [field: SerializeField] public bool isAttacking { get; private set; }
     //camera    
-    Transform cam;
+    //Transform cam;
 
     [Header("Cinemachine")]
     [Tooltip("Camera Sensitivity")]
@@ -371,6 +377,21 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         //    chargeLevel = 0;
         //    animator.SetInteger(AnimChargeRef, chargeLevel);
         //}
+
+    }
+
+    public void OnLockOn(InputAction.CallbackContext context)
+    {
+        if (context.performed && !Targeting)
+        {
+            Targeting = true;
+            TargetEvent?.Invoke();
+        }
+        else if (context.performed && Targeting)
+        {
+            Targeting = false;
+            CancelEvent?.Invoke();
+        }
 
     }
 }

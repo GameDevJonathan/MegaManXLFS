@@ -42,9 +42,9 @@ public class AimingState : PlayerBaseState
         stateMachine.Animator.CrossFadeInFixedTime(AimingHash, CrossFadeDuration);
         stateMachine._thirdPersonCam.SetActive(false);
         stateMachine._AimCam.SetActive(true);
-
-
+        stateMachine._AimCamUtil.SetActive(true);
     }
+
     public override void Tick(float deltaTime)
     {
 
@@ -112,6 +112,7 @@ public class AimingState : PlayerBaseState
     {
         stateMachine._thirdPersonCam.SetActive(true);
         stateMachine._AimCam.SetActive(false);
+        stateMachine._AimCamUtil.SetActive(false);
         //ResetAnimatorIk(AvatarIKGoal.RightHand);
     }
 

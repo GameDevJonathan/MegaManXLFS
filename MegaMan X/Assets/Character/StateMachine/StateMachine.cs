@@ -10,7 +10,7 @@ public class StateMachine : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         //Debug.Log(currentState);
         currentState?.Tick(Time.deltaTime);

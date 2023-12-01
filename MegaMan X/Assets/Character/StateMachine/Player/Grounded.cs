@@ -33,6 +33,7 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
         stateMachine.InputReader.EquipEvent += OnEquip;
+        stateMachine.InputReader.TargetEvent += OnTarget;
     }
 
 
@@ -139,8 +140,7 @@ public class Grounded : PlayerBaseState
 
 
     public void OnJump()
-    {
-        
+    {        
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
         return;
     }
@@ -170,9 +170,14 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.JumpEvent -= OnJump;
         stateMachine.InputReader.DashEvent -= OnDash;
         stateMachine.InputReader.EquipEvent -= OnEquip;
+        stateMachine.InputReader.TargetEvent -= OnTarget;
     }
 
-
+    public void OnTarget()
+    {
+        stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+        return;
+    }
 
     private Vector3 CalculateMovement()
     {
