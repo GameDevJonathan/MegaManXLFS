@@ -28,6 +28,7 @@ public class PlayerTargetingState : PlayerBaseState
 
     public void OnCancel()
     {
+        stateMachine.Targeter.Cancel();
         stateMachine.SwitchState(new Grounded(stateMachine));
     }
 }

@@ -16,6 +16,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public ForceReceiver ForceReceiver { get; private set; }
     [field: SerializeField] public WallRun WallRun { get; private set; }
     [field: SerializeField] public Attacks[] Attacks { get; private set; }
+    [field: SerializeField] public Targeter Targeter { get; private set; }
 
     [field: Header("Weapons")]
     [field: SerializeField] public Transform FirePoint { get; private set; }

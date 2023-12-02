@@ -175,8 +175,10 @@ public class Grounded : PlayerBaseState
 
     public void OnTarget()
     {
+        if (!stateMachine.Targeter.SelectTarget()) return;
+        
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-        return;
+        
     }
 
     private Vector3 CalculateMovement()
