@@ -39,9 +39,7 @@ public class AimingState : PlayerBaseState
                 break;
 
         }
-        stateMachine.Animator.CrossFadeInFixedTime(AimingHash, CrossFadeDuration);
-        stateMachine._thirdPersonCam.SetActive(false);
-        stateMachine._AimCam.SetActive(true);
+        stateMachine.Animator.CrossFadeInFixedTime(AimingHash, CrossFadeDuration);        
         stateMachine._AimCamUtil.SetActive(true);
     }
 
@@ -100,20 +98,15 @@ public class AimingState : PlayerBaseState
         }
 
         if (stateMachine.InputReader.isAiming == false)
-        {
-            //stateMachine.InputReader.CinemachineCameraTarget.transform.rotation = stateMachine.transform.rotation;
-            //stateMachine.InputReader.ResetCamera();
+        {            
             stateMachine.SwitchState(new Grounded(stateMachine, true));
             return;
         }
     }
 
     public override void Exit()
-    {
-        stateMachine._thirdPersonCam.SetActive(true);
-        stateMachine._AimCam.SetActive(false);
-        stateMachine._AimCamUtil.SetActive(false);
-        //ResetAnimatorIk(AvatarIKGoal.RightHand);
+    {        
+        stateMachine._AimCamUtil.SetActive(false);        
     }
 
     private void ShotLevel(int level, string sfx)

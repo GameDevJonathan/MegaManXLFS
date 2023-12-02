@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
+    private readonly int TargetingHash = Animator.StringToHash("TargetingBlend");
+    private const float CrossFadeDuration = 0.1f;
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine) { }
 
 
 
     public override void Enter()
     {
+        stateMachine.Animator.CrossFadeInFixedTime(TargetingHash, CrossFadeDuration);
+
+
+
         Debug.Log("PlayerTargeting State:: Entered Targeting State");
         stateMachine.InputReader.CancelEvent += OnCancel;
     }
@@ -17,6 +23,13 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        if(stateMachine.Targeter.CurrentTarget == null)
+        {
+            stateMachine.SwitchState(new Grounded(stateMachine));
+            return;
+        }
+
+        FaceTarget();
 
     }
 
