@@ -29,7 +29,12 @@ public class PlayerTargetingState : PlayerBaseState
             return;
         }
 
+        Vector3 movement = TargetedMovement();
+
+        Move(movement * stateMachine.LockOnMovementSpeed, deltaTime);
         FaceTarget();
+        stateMachine.Animator.SetFloat("ForwardSpeed", stateMachine.InputReader.MovementValue.y);
+        stateMachine.Animator.SetFloat("StrafingSpeed", stateMachine.InputReader.MovementValue.x);
 
     }
 
@@ -43,5 +48,17 @@ public class PlayerTargetingState : PlayerBaseState
     {
         stateMachine.Targeter.Cancel();
         stateMachine.SwitchState(new Grounded(stateMachine));
+    }
+
+    private Vector3 TargetedMovement()
+    {
+        Vector3 movement = new Vector3();
+
+        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
+
+
+
+        return movement;
     }
 }

@@ -9234,7 +9234,7 @@ PrefabInstance:
     - target: {fileID: 1946163334574861593, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
       propertyPath: m_ChildCameras.Array.size
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1946163334574861593, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
@@ -9635,6 +9635,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: -----PlayerRig----
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224750, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: <LockOnMovementSpeed>k__BackingField
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}

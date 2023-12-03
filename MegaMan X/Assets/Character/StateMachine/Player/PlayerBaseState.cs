@@ -36,7 +36,10 @@ public abstract class PlayerBaseState : State
         Vector3 lookPos = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.transform.position;
         lookPos.y = 0f;
 
-        stateMachine.transform.rotation = Quaternion.LookRotation(lookPos);
+        stateMachine.transform.rotation = 
+            Quaternion.Lerp(stateMachine.transform.rotation,
+            Quaternion.LookRotation(lookPos),
+            Time.deltaTime * stateMachine.RotationSmoothValue);
 
     }
 

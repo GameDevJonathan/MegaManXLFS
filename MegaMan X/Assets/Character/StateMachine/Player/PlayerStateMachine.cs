@@ -42,6 +42,7 @@ public class PlayerStateMachine : StateMachine
     [field: Space]
     [field: Header("Movement Values")]
     [field: SerializeField] public float FreeLookMovementSpeed { get; private set; }
+    [field: SerializeField] public float LockOnMovementSpeed { get; private set; }
     [field: SerializeField] public float AirMovementSpeed { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public float RotationSmoothValue { get; private set; }

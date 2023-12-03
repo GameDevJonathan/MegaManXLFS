@@ -78,6 +78,9 @@ public class AimingState : PlayerBaseState
             stateMachine.transform.forward, faceDirection, deltaTime * 20f);
         #endregion
 
+        
+        
+        
         if (stateMachine.InputReader.AttackButtonPressed)
         {
             ShotLevel(0, "BusterShot");
