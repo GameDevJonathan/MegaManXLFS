@@ -55,6 +55,8 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public GameObject _AimCam { get; private set; }
     [field: SerializeField] public GameObject _AimCamUtil { get; private set; }
     [field: SerializeField] public LayerMask aimColliderMask { get; private set; }
+    [field: SerializeField] public LayerMask lockOnTargetColliderMask { get; private set; }
+    [field: SerializeField] public bool DebugRayCastHit { get; private set; }
     [field: SerializeField] public Transform debugTransform { get; private set; }
 
 

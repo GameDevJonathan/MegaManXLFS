@@ -6,7 +6,12 @@ public class PlayerTargetingState : PlayerBaseState
 {
     private readonly int TargetingHash = Animator.StringToHash("TargetingBlend");
     private const float CrossFadeDuration = 0.1f;
-    public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+    private LayerMask LockOnTargetMask;
+    private RaycastHit LockOnTargetHit;
+    public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    {
+        this.LockOnTargetMask = stateMachine.lockOnTargetColliderMask;
+    }
 
 
 
@@ -23,7 +28,7 @@ public class PlayerTargetingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        if(stateMachine.Targeter.CurrentTarget == null)
+        if (stateMachine.Targeter.CurrentTarget == null)
         {
             stateMachine.SwitchState(new Grounded(stateMachine));
             return;
@@ -35,6 +40,11 @@ public class PlayerTargetingState : PlayerBaseState
         FaceTarget();
         stateMachine.Animator.SetFloat("ForwardSpeed", stateMachine.InputReader.MovementValue.y);
         stateMachine.Animator.SetFloat("StrafingSpeed", stateMachine.InputReader.MovementValue.x);
+        stateMachine.Animator.SetFloat("StrafeMovement", stateMachine.InputReader.MovementValue.magnitude);
+
+        if (stateMachine.Targeter.CurrentTarget != null)
+            RayCastDebug();
+
 
     }
 
@@ -57,8 +67,28 @@ public class PlayerTargetingState : PlayerBaseState
         movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
         movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
 
-
-
         return movement;
+    }
+
+    private void RayCastDebug()
+    {
+        Vector3 distance = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.FirePoint.position;
+        
+        distance = distance.normalized;
+
+        Physics.Raycast(stateMachine.FirePoint.position,
+        (stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.FirePoint.position).normalized, out RaycastHit targetHit,
+        distance.magnitude, LockOnTargetMask);
+
+        Vector3 faceTarget = stateMachine.Targeter.CurrentTarget.transform.position - stateMachine.FirePoint.position;
+
+        stateMachine.FirePoint.rotation =
+            Quaternion.LookRotation(faceTarget);
+
+
+
+
+        Debug.DrawRay(stateMachine.FirePoint.transform.position,
+            distance * distance.magnitude,Color.yellow);
     }
 }

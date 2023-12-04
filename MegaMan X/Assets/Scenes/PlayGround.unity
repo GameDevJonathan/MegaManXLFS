@@ -420,7 +420,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33484
+  m_Name: pb_Mesh30932
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9178,7 +9178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0017912992
+      value: -0.0017913006
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.y
@@ -9186,7 +9186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.025252717
+      value: -0.025252735
       objectReference: {fileID: 0}
     - target: {fileID: 1023104359, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_Follow
@@ -9202,7 +9202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1247915642, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5059
+      value: -0.5058991
       objectReference: {fileID: 0}
     - target: {fileID: 1247915642, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9639,7 +9639,12 @@ PrefabInstance:
     - target: {fileID: 8432624091962224750, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
       propertyPath: <LockOnMovementSpeed>k__BackingField
-      value: 4
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224750, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: <lockOnTargetColliderMask>k__BackingField.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
