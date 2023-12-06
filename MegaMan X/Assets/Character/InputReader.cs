@@ -16,7 +16,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     [Header("Gameplay bools")]
     public bool Modified;
-    public bool Targeting; 
 
     public bool JumpButtonPressed => controls.Player.Jump.WasPressedThisFrame();
     public bool AttackButtonPressed => controls.Player.Attack.WasPressedThisFrame();
@@ -27,9 +26,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [HideInInspector] public bool mediumShot = false;
     [HideInInspector] public bool chargedShot = false;
 
-    [Header("Aiming")]
+    [Header("Aiming/TargetSelection")]
     [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
+    [field: SerializeField] public Vector2 SelectionValue { get; private set; }
+    public bool Targeting;
+    
     [field: Space]
     [field: Header("Weapons")]
     [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
@@ -305,7 +307,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void FlickerMaterial(Material mat, string ShaderBoolRef, bool on_off)
     {
-        Debug.Log($"on/off: {mat.GetInt(ShaderBoolRef)}");
+        //Debug.Log($"on/off: {mat.GetInt(ShaderBoolRef)}");
 
         mat.SetInt(ShaderBoolRef, Convert.ToInt32(on_off));
 
@@ -393,5 +395,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             CancelEvent?.Invoke();
         }
 
+    }
+
+    public void OnTargetSelection(InputAction.CallbackContext context)
+    {
+        SelectionValue = context.ReadValue<Vector2>();
     }
 }

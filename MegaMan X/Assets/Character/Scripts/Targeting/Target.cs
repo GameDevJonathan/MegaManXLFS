@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public event Action<Target> OnDestroyed;
+
+    public void OnDestroy()
     {
-        
+        OnDestroyed?.Invoke(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

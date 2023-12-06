@@ -58,6 +58,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public LayerMask lockOnTargetColliderMask { get; private set; }
     [field: SerializeField] public bool DebugRayCastHit { get; private set; }
     [field: SerializeField] public Transform debugTransform { get; private set; }
+    [field: SerializeField] public Transform LockOnSphere { get; private set; }
 
 
     private void Start()
