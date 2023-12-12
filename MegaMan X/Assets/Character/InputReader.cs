@@ -58,6 +58,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action EquipEvent;
     public event Action TargetEvent;
     public event Action CancelEvent;
+    public event Action MeleeEvent;
     public Transform Player;
     //public event Action AttackEvent;
 
@@ -400,5 +401,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnTargetSelection(InputAction.CallbackContext context)
     {
         SelectionValue = context.ReadValue<Vector2>();
+    }
+
+    public void OnMelee(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            MeleeEvent?.Invoke();
+        }
     }
 }

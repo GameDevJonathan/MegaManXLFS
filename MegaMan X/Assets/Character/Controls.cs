@@ -116,6 +116,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Melee"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad12a785-a2f8-47a3-a858-74d8c9177c48"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -385,17 +394,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""22d0fc15-2ebf-46ca-bf51-182fc9fe2265"",
-                    ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Mouse and Keyboard"",
-                    ""action"": ""Equip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""e1623b46-02ec-4837-bb98-2a20b9013bac"",
                     ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": """",
@@ -435,6 +433,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TargetSelection"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""276d8268-7ef6-4204-a7a5-a03259738692"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ca885418-7800-42c1-85a6-29eaf10bd2d6"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -483,6 +503,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Equip = m_Player.FindAction("Equip", throwIfNotFound: true);
         m_Player_LockOn = m_Player.FindAction("LockOn", throwIfNotFound: true);
         m_Player_TargetSelection = m_Player.FindAction("TargetSelection", throwIfNotFound: true);
+        m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -554,6 +575,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Equip;
     private readonly InputAction m_Player_LockOn;
     private readonly InputAction m_Player_TargetSelection;
+    private readonly InputAction m_Player_Melee;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -568,6 +590,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Equip => m_Wrapper.m_Player_Equip;
         public InputAction @LockOn => m_Wrapper.m_Player_LockOn;
         public InputAction @TargetSelection => m_Wrapper.m_Player_TargetSelection;
+        public InputAction @Melee => m_Wrapper.m_Player_Melee;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -607,6 +630,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @TargetSelection.started += instance.OnTargetSelection;
             @TargetSelection.performed += instance.OnTargetSelection;
             @TargetSelection.canceled += instance.OnTargetSelection;
+            @Melee.started += instance.OnMelee;
+            @Melee.performed += instance.OnMelee;
+            @Melee.canceled += instance.OnMelee;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -641,6 +667,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @TargetSelection.started -= instance.OnTargetSelection;
             @TargetSelection.performed -= instance.OnTargetSelection;
             @TargetSelection.canceled -= instance.OnTargetSelection;
+            @Melee.started -= instance.OnMelee;
+            @Melee.performed -= instance.OnMelee;
+            @Melee.canceled -= instance.OnMelee;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -688,5 +717,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnEquip(InputAction.CallbackContext context);
         void OnLockOn(InputAction.CallbackContext context);
         void OnTargetSelection(InputAction.CallbackContext context);
+        void OnMelee(InputAction.CallbackContext context);
     }
 }

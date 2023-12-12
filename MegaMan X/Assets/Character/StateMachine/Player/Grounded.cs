@@ -34,6 +34,7 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.DashEvent += OnDash;
         stateMachine.InputReader.EquipEvent += OnEquip;
         stateMachine.InputReader.TargetEvent += OnTarget;
+        stateMachine.InputReader.MeleeEvent += OnMelee;
     }
 
 
@@ -139,6 +140,14 @@ public class Grounded : PlayerBaseState
     //}
 
 
+    
+    public void OnMelee()
+    {
+        stateMachine.SwitchState(new AttackingState(stateMachine,0));
+        return;
+    }
+    
+    
     public void OnJump()
     {        
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
@@ -171,6 +180,7 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.DashEvent -= OnDash;
         stateMachine.InputReader.EquipEvent -= OnEquip;
         stateMachine.InputReader.TargetEvent -= OnTarget;
+        stateMachine.InputReader.MeleeEvent -= OnMelee;
     }
 
     public void OnTarget()

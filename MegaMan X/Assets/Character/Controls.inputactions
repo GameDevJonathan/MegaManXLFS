@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Melee",
+                    "type": "Button",
+                    "id": "ad12a785-a2f8-47a3-a858-74d8c9177c48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -363,17 +372,6 @@
                 },
                 {
                     "name": "",
-                    "id": "22d0fc15-2ebf-46ca-bf51-182fc9fe2265",
-                    "path": "<Mouse>/middleButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse and Keyboard",
-                    "action": "Equip",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "e1623b46-02ec-4837-bb98-2a20b9013bac",
                     "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
@@ -413,6 +411,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "TargetSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "276d8268-7ef6-4204-a7a5-a03259738692",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca885418-7800-42c1-85a6-29eaf10bd2d6",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
