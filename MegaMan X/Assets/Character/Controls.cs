@@ -125,6 +125,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Special Beam"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7804d3b-33a6-46c4-b0c3-1d08bf6b2220"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -457,6 +466,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""KeyBoardBeam"",
+                    ""id"": ""427cc0ba-2bc4-4656-a7dd-ee256d35ed87"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special Beam"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""27ab25ac-25aa-48fa-944d-68d192d2f9f3"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Special Beam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""4ffb7187-4e5b-4382-927d-7e1e3fe693c4"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mouse and Keyboard"",
+                    ""action"": ""Special Beam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""ControlerBeam"",
+                    ""id"": ""c7c7e1e4-7401-4ac0-8527-2368b82051a9"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special Beam"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""2182a0f8-e8a8-400d-8d26-dd393e8fadea"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Special Beam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""a818720e-904c-4b01-9d6e-8c7c5ff5f5d9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Special Beam"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -504,6 +579,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_LockOn = m_Player.FindAction("LockOn", throwIfNotFound: true);
         m_Player_TargetSelection = m_Player.FindAction("TargetSelection", throwIfNotFound: true);
         m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
+        m_Player_SpecialBeam = m_Player.FindAction("Special Beam", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -576,6 +652,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LockOn;
     private readonly InputAction m_Player_TargetSelection;
     private readonly InputAction m_Player_Melee;
+    private readonly InputAction m_Player_SpecialBeam;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -591,6 +668,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @LockOn => m_Wrapper.m_Player_LockOn;
         public InputAction @TargetSelection => m_Wrapper.m_Player_TargetSelection;
         public InputAction @Melee => m_Wrapper.m_Player_Melee;
+        public InputAction @SpecialBeam => m_Wrapper.m_Player_SpecialBeam;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -633,6 +711,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Melee.started += instance.OnMelee;
             @Melee.performed += instance.OnMelee;
             @Melee.canceled += instance.OnMelee;
+            @SpecialBeam.started += instance.OnSpecialBeam;
+            @SpecialBeam.performed += instance.OnSpecialBeam;
+            @SpecialBeam.canceled += instance.OnSpecialBeam;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -670,6 +751,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Melee.started -= instance.OnMelee;
             @Melee.performed -= instance.OnMelee;
             @Melee.canceled -= instance.OnMelee;
+            @SpecialBeam.started -= instance.OnSpecialBeam;
+            @SpecialBeam.performed -= instance.OnSpecialBeam;
+            @SpecialBeam.canceled -= instance.OnSpecialBeam;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -718,5 +802,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLockOn(InputAction.CallbackContext context);
         void OnTargetSelection(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
+        void OnSpecialBeam(InputAction.CallbackContext context);
     }
 }

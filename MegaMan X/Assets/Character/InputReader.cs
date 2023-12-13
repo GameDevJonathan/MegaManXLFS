@@ -410,4 +410,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             MeleeEvent?.Invoke();
         }
     }
+
+    public void OnSpecialBeam(InputAction.CallbackContext context)
+    {
+        Debug.Log("Context...:" + context.performed);
+    }
 }

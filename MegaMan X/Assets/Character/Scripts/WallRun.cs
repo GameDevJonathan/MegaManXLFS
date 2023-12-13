@@ -104,7 +104,7 @@ public class WallRun : MonoBehaviour
 
         Vector3 wallNormal = frontWallHit.normal;
 
-        Vector3 wallForward = Vector3.Cross(wallNormal, transform.forward);
+        Vector3 wallForward = Vector3.Cross(wallNormal, transform.up);
         
         if ((orientation.forward - wallForward).magnitude > (orientation.forward - -wallForward).magnitude)
             wallForward = -wallForward;
