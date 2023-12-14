@@ -152,6 +152,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        //MovementValue = context.ReadValue<Vector2>();
         MovementValue = context.ReadValue<Vector2>();
 
     }
@@ -413,6 +414,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnSpecialBeam(InputAction.CallbackContext context)
     {
-        Debug.Log("Context...:" + context.performed);
+        Debug.Log("Context...:" + context);
     }
 }

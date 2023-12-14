@@ -43,7 +43,7 @@ public class DashState : PlayerBaseState
             if (stateMachine.InputReader.JumpButtonPressed 
                 && stateMachine.CharacterController.isGrounded 
                 && !dashJump
-                && normalizedTime < .8f)
+                && normalizedTime < .95f)
             {
                 dashJump = true;
                 stateMachine.SwitchState(new PlayerJumpState(stateMachine));
