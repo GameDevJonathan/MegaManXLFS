@@ -146,7 +146,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private void LateUpdate()
     {
-        if (stateMachine.SpecialMove) return;
+        if (stateMachine.SpecialMove || Targeting) return;
         CameraRotation();
     }
 
@@ -387,11 +387,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnLockOn(InputAction.CallbackContext context)
     {
         if (context.performed && !Targeting)
-        {
-            Targeting = true;
+        {            
             TargetEvent?.Invoke();
-        }
-        else if (context.performed && Targeting)
+        }else if (context.performed && Targeting)
         {
             Targeting = false;
             CancelEvent?.Invoke();

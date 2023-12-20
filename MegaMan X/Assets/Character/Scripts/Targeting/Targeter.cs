@@ -40,7 +40,7 @@ public class Targeter : MonoBehaviour
     {
         if (!other.TryGetComponent<Target>(out Target target)) { return; }
         targets.Remove(target);
-        
+
         RemoveTarget(target);
     }
 
@@ -58,7 +58,7 @@ public class Targeter : MonoBehaviour
 
     public bool SelectTarget()
     {
-        
+
 
         if (targets.Count == 0) { return false; }
 
@@ -83,8 +83,24 @@ public class Targeter : MonoBehaviour
             }
         }
         if (closestTarget == null) { return false; }
+
         CurrentTarget = closestTarget;
-        targetGroup.AddMember(CurrentTarget.transform, 1f, 2f);
+
+        if (CurrentTarget)
+        {
+            switch (CurrentTarget.type)
+            {
+                case Target.Type.small:
+                    targetGroup.AddMember(CurrentTarget.transform, 1f, 2f);
+                    break;
+                case Target.Type.large:
+                    targetGroup.AddMember(CurrentTarget.transform, .25f, 2f);
+                    break;
+            }
+
+        }
+
+
         return true;
     }
 
@@ -99,15 +115,15 @@ public class Targeter : MonoBehaviour
         for (int i = 0; i < targets.Count; i++)
         {
             if (targets[i].transform.position == CurrentTarget.transform.position)
-            {               
-                index = i;                
+            {
+                index = i;
             }
         }
 
 
         if (stateMachine.InputReader.SelectionValue.x >= .9f)
         {
-            
+
             if (index == 0 && didCycle == false)
             {
                 Debug.Log("Running this block index >= targets.count");
@@ -153,14 +169,6 @@ public class Targeter : MonoBehaviour
             didCycle = false;
 
     }
-
-
-
-
-
-
-
-
 
     public void Cancel()
     {

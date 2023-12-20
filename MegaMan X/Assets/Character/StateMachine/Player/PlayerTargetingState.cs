@@ -1,6 +1,6 @@
 using EasyAudioManager;
 using UnityEngine;
-
+using UnityEngine.Animations.Rigging;
 
 public class PlayerTargetingState : PlayerBaseState
 {
@@ -9,6 +9,7 @@ public class PlayerTargetingState : PlayerBaseState
     private LayerMask LockOnTargetMask;
     private RaycastHit LockOnTargetHit;
     private Transform debugTransform;
+    private MultiAimConstraint[] multiAimConstraints;
 
     //shot values
     private float _lastFireTime = -1f;
@@ -19,6 +20,7 @@ public class PlayerTargetingState : PlayerBaseState
     {
         this.LockOnTargetMask = stateMachine.lockOnTargetColliderMask;
         debugTransform = stateMachine.LockOnSphere;
+        this.multiAimConstraints = stateMachine.aimConstraints;
     }
 
 
@@ -30,6 +32,11 @@ public class PlayerTargetingState : PlayerBaseState
 
 
         //Debug.Log("PlayerTargeting State:: Entered Targeting State");
+        //foreach(MultiAimConstraint constraint in multiAimConstraints)
+        //{
+
+        //}
+        stateMachine.rig.weight = .06f;
         stateMachine.InputReader.CancelEvent += OnCancel;
     }
 
@@ -60,6 +67,20 @@ public class PlayerTargetingState : PlayerBaseState
             ShotLevel(0, "BusterShot");
         }
 
+        if (stateMachine.InputReader.mediumShot)
+        {
+
+            ShotLevel(1, "ChargedShot");
+            stateMachine.InputReader.mediumShot = false;
+        }
+
+        if (stateMachine.InputReader.chargedShot)
+        {
+            ShotLevel(2, "MaxShot");
+            stateMachine.InputReader.chargedShot = false;
+
+        }
+
 
     }
 
@@ -67,6 +88,8 @@ public class PlayerTargetingState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.Animator.SetFloat("StrafeMovement", 0);
+        stateMachine.rig.weight = 0f;
+        stateMachine.InputReader.Targeting = false;
         debugTransform.gameObject.SetActive(false);
         stateMachine.InputReader.CancelEvent -= OnCancel;
     }
@@ -77,12 +100,12 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Animator.SetFloat("StrafingSpeed", stateMachine.InputReader.MovementValue.x);
         stateMachine.Animator.SetFloat("StrafeMovement", stateMachine.InputReader.MovementValue.magnitude);
     }
-    
+
     public void OnCancel()
     {
         debugTransform.gameObject.SetActive(false);
         stateMachine.Targeter.Cancel();
-        stateMachine.InputReader.ResetCamera();
+        //stateMachine.InputReader.ResetCamera();
         stateMachine.SwitchState(new Grounded(stateMachine));
     }
 
@@ -111,24 +134,38 @@ public class PlayerTargetingState : PlayerBaseState
         Debug.DrawRay(stateMachine.FirePoint.transform.position,
             stateMachine.FirePoint.transform.forward * dist, Color.yellow);
 
-        distance = distance.normalized;        
+        distance = distance.normalized;
 
         if (Physics.Raycast(stateMachine.FirePoint.position, distance, out LockOnTargetHit,
             dist, LockOnTargetMask))
         {
             //Debug.Log("Hit");
-
             debugTransform.gameObject.SetActive(true);
-            debugTransform.position = LockOnTargetHit.point;           
+            debugTransform.position = LockOnTargetHit.point;
         }
     }
 
     private void ShotLevel(int level, string sfx)
     {
         if (Time.time > _lastFireTime)
-        {            
+        {
+            var shot =
             MonoBehaviour.Instantiate(stateMachine.BusterShot[level], stateMachine.FirePoint.transform.position,
                 stateMachine.FirePoint.rotation);
+
+            switch (level)
+            {
+                case 0:
+                    shot.name = "Normal";
+                    break;
+                case 1:
+                    shot.name = "Medium";
+                    break;
+                case 2:
+                    shot.name = "Charged";
+                    break;
+            }
+            
             UniversalAudioPlayer.PlayInGameSFX(sfx);
             _lastFireTime = Time.time + _coolDownTime;
         }

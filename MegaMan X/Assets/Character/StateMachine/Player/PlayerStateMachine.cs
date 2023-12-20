@@ -35,6 +35,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Transform RightHandPlacement { get; private set; }
     [field: SerializeField] public Transform RightHandHint { get; private set; }
     [field: SerializeField] public Transform AimTarget { get; private set; }
+    [field: SerializeField] public MultiAimConstraint[] aimConstraints { get; private set; }
 
 
 

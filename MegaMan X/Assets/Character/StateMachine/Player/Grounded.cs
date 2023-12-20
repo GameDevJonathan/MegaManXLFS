@@ -100,6 +100,14 @@ public class Grounded : PlayerBaseState
         //    return;
         //}
 
+        Debug.Log($"Grounded State::{grounded}");
+        if (!grounded)
+        {
+            Debug.Log("Not Touching Ground");
+            stateMachine.SwitchState(new PlayerFallState(stateMachine));
+            return;
+        }
+
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
             stateMachine.Animator.SetFloat(FreeLookSpeedHash, 0, AnimatorDampTime, deltaTime);
@@ -115,7 +123,7 @@ public class Grounded : PlayerBaseState
         FaceMovement(movement, deltaTime);
         #endregion
 
-        Debug.Log($"Grounded State::{grounded}");
+        
 
         //if (stateMachine.WallRun.AboveGround() && stateMachine.CharacterController.isGrounded == false)
         //{
@@ -124,12 +132,7 @@ public class Grounded : PlayerBaseState
         //    return;
         //}
 
-        if (!grounded)
-        {
-            Debug.Log("Not Touching Ground");
-            stateMachine.SwitchState(new PlayerFallState(stateMachine));
-            return;
-        }
+        
 
     }
 
@@ -186,8 +189,9 @@ public class Grounded : PlayerBaseState
     public void OnTarget()
     {
         if (!stateMachine.Targeter.SelectTarget()) return;
-        
+        stateMachine.InputReader.Targeting = true;
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+        return;
         
     }
 
