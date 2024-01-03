@@ -35,8 +35,8 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.EquipEvent += OnEquip;
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.MeleeEvent += OnMelee;
-    }
-
+        stateMachine.InputReader.SpecialBeamEvent += InputReader_SpecialBeamEvent;
+    }    
 
     public override void Tick(float deltaTime)
     {
@@ -100,7 +100,7 @@ public class Grounded : PlayerBaseState
         //    return;
         //}
 
-        Debug.Log($"Grounded State::{grounded}");
+        //Debug.Log($"Grounded State::{grounded}");
         if (!grounded)
         {
             Debug.Log("Not Touching Ground");
@@ -163,6 +163,11 @@ public class Grounded : PlayerBaseState
         return;
     }
 
+    private void InputReader_SpecialBeamEvent()
+    {
+        stateMachine.SwitchState(new PlayerHyperBeam(stateMachine));
+    }
+
     private void OnEquip()
     {
         switch (stateMachine.InputReader.SaberEquiped)
@@ -184,6 +189,8 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.EquipEvent -= OnEquip;
         stateMachine.InputReader.TargetEvent -= OnTarget;
         stateMachine.InputReader.MeleeEvent -= OnMelee;
+        stateMachine.InputReader.SpecialBeamEvent -= InputReader_SpecialBeamEvent;
+
     }
 
     public void OnTarget()

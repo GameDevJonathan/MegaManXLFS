@@ -10,11 +10,14 @@ public class DashState : PlayerBaseState
     private float previousFrameTime;
     private bool alreadyAppliedForce;
     private bool dashJump = false;
+    
+    private bool grounded => stateMachine.WallRun.CheckForGround();
+
 
 
     public DashState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-
+        
     }
 
     public override void Enter()
@@ -41,7 +44,7 @@ public class DashState : PlayerBaseState
             }
 
             if (stateMachine.InputReader.JumpButtonPressed 
-                && stateMachine.CharacterController.isGrounded 
+                && (grounded ||stateMachine.CharacterController.isGrounded )
                 && !dashJump
                 && normalizedTime < .95f)
             {

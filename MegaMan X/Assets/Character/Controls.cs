@@ -134,6 +134,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""3437edc6-e829-42a1-a4ac-5fb939597556"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""077c8562-9604-4594-a7a3-dddf7b2a49c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -404,7 +422,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e1623b46-02ec-4837-bb98-2a20b9013bac"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -532,6 +550,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Special Beam"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e274e5ec-139a-4968-ae92-838be80f7bae"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e5f0e72-a1b4-4879-a91c-328e0fd7e2ec"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -580,6 +620,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_TargetSelection = m_Player.FindAction("TargetSelection", throwIfNotFound: true);
         m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
         m_Player_SpecialBeam = m_Player.FindAction("Special Beam", throwIfNotFound: true);
+        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
+        m_Player_ResetCamera = m_Player.FindAction("ResetCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -653,6 +695,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_TargetSelection;
     private readonly InputAction m_Player_Melee;
     private readonly InputAction m_Player_SpecialBeam;
+    private readonly InputAction m_Player_Dodge;
+    private readonly InputAction m_Player_ResetCamera;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -669,6 +713,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @TargetSelection => m_Wrapper.m_Player_TargetSelection;
         public InputAction @Melee => m_Wrapper.m_Player_Melee;
         public InputAction @SpecialBeam => m_Wrapper.m_Player_SpecialBeam;
+        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
+        public InputAction @ResetCamera => m_Wrapper.m_Player_ResetCamera;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -714,6 +760,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SpecialBeam.started += instance.OnSpecialBeam;
             @SpecialBeam.performed += instance.OnSpecialBeam;
             @SpecialBeam.canceled += instance.OnSpecialBeam;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
+            @ResetCamera.started += instance.OnResetCamera;
+            @ResetCamera.performed += instance.OnResetCamera;
+            @ResetCamera.canceled += instance.OnResetCamera;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -754,6 +806,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @SpecialBeam.started -= instance.OnSpecialBeam;
             @SpecialBeam.performed -= instance.OnSpecialBeam;
             @SpecialBeam.canceled -= instance.OnSpecialBeam;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
+            @ResetCamera.started -= instance.OnResetCamera;
+            @ResetCamera.performed -= instance.OnResetCamera;
+            @ResetCamera.canceled -= instance.OnResetCamera;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -803,5 +861,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnTargetSelection(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
         void OnSpecialBeam(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
+        void OnResetCamera(InputAction.CallbackContext context);
     }
 }

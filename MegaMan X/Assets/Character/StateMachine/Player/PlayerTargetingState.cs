@@ -9,7 +9,10 @@ public class PlayerTargetingState : PlayerBaseState
     private LayerMask LockOnTargetMask;
     private RaycastHit LockOnTargetHit;
     private Transform debugTransform;
-    private MultiAimConstraint[] multiAimConstraints;
+    Vector2 delta;
+    private float angle;
+    
+    
 
     //shot values
     private float _lastFireTime = -1f;
@@ -19,25 +22,20 @@ public class PlayerTargetingState : PlayerBaseState
     public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         this.LockOnTargetMask = stateMachine.lockOnTargetColliderMask;
-        debugTransform = stateMachine.LockOnSphere;
-        this.multiAimConstraints = stateMachine.aimConstraints;
+        debugTransform = stateMachine.debugTransform;        
     }
 
 
 
     public override void Enter()
     {
+        
         stateMachine.Animator.CrossFadeInFixedTime(TargetingHash, CrossFadeDuration);
-
-
-
-        //Debug.Log("PlayerTargeting State:: Entered Targeting State");
-        //foreach(MultiAimConstraint constraint in multiAimConstraints)
-        //{
-
-        //}
-        stateMachine.rig.weight = .06f;
+        stateMachine._TargetCamUtil.SetActive(true);
+        //Debug.Log("PlayerTargeting State:: Entered Targeting State");        
+        stateMachine.rig.weight = .6f;
         stateMachine.InputReader.CancelEvent += OnCancel;
+        stateMachine.InputReader.DodgeEvent += OnDodge;
     }
 
 
@@ -55,12 +53,26 @@ public class PlayerTargetingState : PlayerBaseState
 
         Move(movement * stateMachine.LockOnMovementSpeed, deltaTime);
 
+        
+        delta = Vector2.zero - stateMachine.InputReader.MovementValue;
+        angle = Mathf.Atan2(delta.y, delta.x) * Mathf.Rad2Deg;
+        angle += 180;
+
         FaceTarget();
 
         AnimatorValues();
 
         if (stateMachine.Targeter.CurrentTarget != null)
+        {
             RayCastDebug();
+            if (stateMachine.Targeter.CurrentTarget.type == Target.Type.large)
+                stateMachine._TargetCamUtil.gameObject.transform.localScale = Vector3.one * 2.5f;
+            else
+                stateMachine._TargetCamUtil.gameObject.transform.localScale = Vector3.one;
+
+        }
+
+        #region Shooting Mechanics
 
         if (stateMachine.InputReader.AttackButtonPressed)
         {
@@ -80,18 +92,18 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.InputReader.chargedShot = false;
 
         }
-
-
+        #endregion
     }
-
 
     public override void Exit()
     {
         stateMachine.Animator.SetFloat("StrafeMovement", 0);
-        stateMachine.rig.weight = 0f;
-        stateMachine.InputReader.Targeting = false;
+        stateMachine._TargetCamUtil.SetActive(false);
         debugTransform.gameObject.SetActive(false);
+        stateMachine.rig.weight = 0f;
+        stateMachine.InputReader.Targeting = false;        
         stateMachine.InputReader.CancelEvent -= OnCancel;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
     }
 
     private void AnimatorValues()
@@ -107,6 +119,14 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.Targeter.Cancel();
         //stateMachine.InputReader.ResetCamera();
         stateMachine.SwitchState(new Grounded(stateMachine));
+    }
+
+    public void OnDodge()
+    {
+        Debug.Log($"Joystick angle: {angle}");
+        Vector2 move = stateMachine.InputReader.MovementValue;
+        stateMachine.SwitchState(new PlayerDodgingState(stateMachine,move,angle));
+        return;
     }
 
     private Vector3 TargetedMovement()
@@ -140,6 +160,8 @@ public class PlayerTargetingState : PlayerBaseState
             dist, LockOnTargetMask))
         {
             //Debug.Log("Hit");
+            stateMachine._TargetCamUtil.transform.position = LockOnTargetHit.point;
+            stateMachine._TargetCamUtil.transform.LookAt(stateMachine.transform.position);
             debugTransform.gameObject.SetActive(true);
             debugTransform.position = LockOnTargetHit.point;
         }

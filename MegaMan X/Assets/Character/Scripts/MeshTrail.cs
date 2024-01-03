@@ -14,6 +14,8 @@ public class MeshTrail : MonoBehaviour
     public float meshRefreshRate = 0.1f;
     public Transform positionToSpawn;
     public float meshDestroyDelay = 3f;
+    public int maxClones = 4;
+
 
 
     [Header("Shader Related")]
@@ -42,24 +44,28 @@ public class MeshTrail : MonoBehaviour
                 skinnedRenders = GetComponentsInChildren<SkinnedMeshRenderer>();
 
 
-            for(int i=0; i < skinnedRenders.Length; i++)
+
+            for (int i = 0; i < skinnedRenders.Length; i++)
             {
                 //Debug.Log($"skinned mesh renderers:: {skinnedRenders[i]}");
                 GameObject gObj = new GameObject();
-                gObj.transform.SetPositionAndRotation(positionToSpawn.position,positionToSpawn.rotation);
+                gObj.transform.SetPositionAndRotation(positionToSpawn.position, positionToSpawn.rotation);
 
-                
-                MeshRenderer mr =  gObj.AddComponent<MeshRenderer>();
-                MeshFilter mf =  gObj.AddComponent<MeshFilter>();
+
+                MeshRenderer mr = gObj.AddComponent<MeshRenderer>();
+                MeshFilter mf = gObj.AddComponent<MeshFilter>();
 
                 Mesh mesh = new Mesh();
                 skinnedRenders[i].BakeMesh(mesh);
-                
+
                 mf.mesh = mesh;
                 //mr.material = skinnedRenders[i].material;
-                mr.material = mat;                
+                mr.material = mat;
                 Destroy(gObj, meshDestroyDelay);
             }
+
+
+
             yield return new WaitForSeconds(meshRefreshRate);
         }
 

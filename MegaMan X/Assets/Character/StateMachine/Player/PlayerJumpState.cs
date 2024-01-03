@@ -7,10 +7,11 @@ public class PlayerJumpState : PlayerBaseState
     private readonly int JumpHash = Animator.StringToHash("JumpStart");
     private readonly int WallJumpHash = Animator.StringToHash("WallJump");
     private const float CrossFadeDuration = 0.1f;
-    private Vector3 Momentum;    
+    private Vector3 Momentum;
+    private GameObject[] _thrusters;
     public PlayerJumpState(PlayerStateMachine stateMachine ) : base(stateMachine)
     {
-        
+        this._thrusters = stateMachine._thrusters;
     }
 
     public override void Enter()
@@ -20,6 +21,10 @@ public class PlayerJumpState : PlayerBaseState
         Momentum = stateMachine.CharacterController.velocity;
         Momentum.y = 0f;
         stateMachine.Animator.CrossFadeInFixedTime(JumpHash,CrossFadeDuration);
+        foreach(var thruster in _thrusters)
+        {
+           thruster.GetComponentInChildren<ParticleSystem>().Play();
+        }
         
        
 

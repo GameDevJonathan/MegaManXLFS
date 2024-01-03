@@ -22,10 +22,10 @@ public class Targeter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Target List Length: {targets.Count}");
+        //Debug.Log($"Target List Length: {targets.Count}");
 
-        if (CurrentTarget)
-            Debug.Log($"CurrentTargetName: {CurrentTarget.transform.root.name}");
+        //if (CurrentTarget)
+        //    Debug.Log($"CurrentTargetName: {CurrentTarget.transform.root.name}");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -109,8 +109,8 @@ public class Targeter : MonoBehaviour
         if (targets.Count == 0) { return; }
         if (CurrentTarget == null) { return; }
 
-        Debug.Log("Target Count: " + targets.Count);
-        Debug.Log("Current Target: " + CurrentTarget.name);
+        //Debug.Log("Target Count: " + targets.Count);
+        //Debug.Log("Current Target: " + CurrentTarget.name);
 
         for (int i = 0; i < targets.Count; i++)
         {

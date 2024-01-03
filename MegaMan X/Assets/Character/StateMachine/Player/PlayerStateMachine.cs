@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using EasyAudioManager;
 using UnityEngine.Animations.Rigging;
-using Unity.VisualScripting;
+using UnityEngine.Search;
+using Invector;
 
 public class PlayerStateMachine : StateMachine
 {
@@ -22,9 +23,10 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Transform FirePoint { get; private set; }
     [field: SerializeField] public Transform[] Sockets { get; private set; }
     [field: SerializeField] public GameObject[] BusterShot { get; private set; }
+
     [field: SerializeField] public LightSaber LightSaber { get; private set; }
-    
-    
+
+
     [field: Header("Special Beam")]
     [field: SerializeField] public GameObject[] SpecialBeam { get; private set; }
     [field: SerializeField] public bool SpecialMove;
@@ -35,7 +37,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Transform RightHandPlacement { get; private set; }
     [field: SerializeField] public Transform RightHandHint { get; private set; }
     [field: SerializeField] public Transform AimTarget { get; private set; }
-    [field: SerializeField] public MultiAimConstraint[] aimConstraints { get; private set; }
+
 
 
 
@@ -55,11 +57,15 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public GameObject _thirdPersonCam { get; private set; }
     [field: SerializeField] public GameObject _AimCam { get; private set; }
     [field: SerializeField] public GameObject _AimCamUtil { get; private set; }
+    [field: SerializeField] public GameObject _TargetCamUtil { get; private set; }
     [field: SerializeField] public LayerMask aimColliderMask { get; private set; }
     [field: SerializeField] public LayerMask lockOnTargetColliderMask { get; private set; }
     [field: SerializeField] public bool DebugRayCastHit { get; private set; }
     [field: SerializeField] public Transform debugTransform { get; private set; }
     [field: SerializeField] public Transform LockOnSphere { get; private set; }
+
+    [field: Header("VFX")]
+    [field: SerializeField] public GameObject[] _thrusters { get; private set;}
 
 
     private void Start()
@@ -129,5 +135,26 @@ public class PlayerStateMachine : StateMachine
     {
         LightSaber.TurnOn();
     }
+
+    public void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+
+        if (body == null || body.isKinematic)
+        {
+            return;
+        }
+
+        Debug.Log(body);
+
+        body.TryGetComponent<HighWayInteraction>(out HighWayInteraction highWayInteraction);
+
+        if (highWayInteraction != null && highWayInteraction.Enemy == false)
+            body.useGravity = true;
+
+
+
+    }
+
 
 }

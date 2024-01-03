@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
@@ -31,7 +32,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [field: SerializeField] public bool isAiming { get; private set; }
     [field: SerializeField] public Vector2 SelectionValue { get; private set; }
     public bool Targeting;
-    
+
     [field: Space]
     [field: Header("Weapons")]
     [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
@@ -51,7 +52,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [SerializeField] private GameObject _maxChargeEffect;
     [SerializeField] private GameObject _minChargeEffect;
 
-    
+
     //Actions
     public event Action JumpEvent;
     public event Action DashEvent;
@@ -59,6 +60,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action TargetEvent;
     public event Action CancelEvent;
     public event Action MeleeEvent;
+    public event Action DodgeEvent;
+    public event Action SpecialBeamEvent;
     public Transform Player;
     //public event Action AttackEvent;
 
@@ -89,6 +92,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
+
+    [Tooltip("Flag for setting and resting camera")]
+    public bool _resetCamera = false;
+    private float dampening;
+    [SerializeField] private float dampTime = 0.1f;
 
     // cinemachine
     [SerializeField] private float _cinemachineTargetYaw;
@@ -123,11 +131,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         _targetValue = Mathf.Clamp(_targetValue, .1f, 1f);
 
+        Debug.Log(stateMachine.transform.forward);
 
+        
+
+        //if (_resetCamera && CinemachineCameraTarget.transform.forward != stateMachine.transform.forward)
+        //{
+        //    SoftReset();
+        //}
+
+        //Debug.Log($"camera Target rotation y: {CinemachineCameraTarget.transform.rotation.y}");
+        //Debug.Log($"Megaman X rotation y: {stateMachine.transform.rotation.y}");
+
+        
 
         FlickerMaterial(_material, _boolRef, _canFlicker);
 
-        _canFlicker = chargeLevel >=1  ? true : false;
+        _canFlicker = chargeLevel >= 1 ? true : false;
 
         if (charge)
         {
@@ -148,6 +168,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (stateMachine.SpecialMove || Targeting) return;
         CameraRotation();
+
+
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -287,6 +309,15 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         _cinemachineTargetPitch = 0;
     }
 
+    public void SoftReset()
+    {
+
+        //float rot = CinemachineCameraTarget.transform.rotation.y;
+        //rot = Mathf.Lerp(CinemachineCameraTarget.transform.rotation.y,
+        //    stateMachine.transform.rotation.y, t);
+        //CinemachineCameraTarget.transform.rotation.y += rot;
+    }
+
     public void OnEquip(InputAction.CallbackContext context)
     {
 
@@ -387,9 +418,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnLockOn(InputAction.CallbackContext context)
     {
         if (context.performed && !Targeting)
-        {            
+        {
             TargetEvent?.Invoke();
-        }else if (context.performed && Targeting)
+        }
+        else if (context.performed && Targeting)
         {
             Targeting = false;
             CancelEvent?.Invoke();
@@ -413,5 +445,24 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnSpecialBeam(InputAction.CallbackContext context)
     {
         Debug.Log("Context...:" + context);
+        if(context.performed)
+        {
+            SpecialBeamEvent?.Invoke();
+        }
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            DodgeEvent?.Invoke();
+        }
+
+    }
+
+    public void OnResetCamera(InputAction.CallbackContext context)
+    {
+        if (_resetCamera) return;
+        _resetCamera = true;
     }
 }

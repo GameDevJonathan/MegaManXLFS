@@ -5,7 +5,7 @@ using UnityEngine.Animations.Rigging;
 
 public class AimingState : PlayerBaseState
 {
-    private readonly int AimingHash = Animator.StringToHash("Aiming");
+    private readonly int AimingHash = Animator.StringToHash("AimingBlend");
     private const float CrossFadeDuration = 0.1f;
     private LayerMask aimColliderMask;
     private Transform debugTransform;
@@ -25,7 +25,7 @@ public class AimingState : PlayerBaseState
 
     public override void Enter()
     {
-        
+
 
         switch (stateMachine.SpecialMove)
         {
@@ -39,7 +39,7 @@ public class AimingState : PlayerBaseState
                 break;
 
         }
-        stateMachine.Animator.CrossFadeInFixedTime(AimingHash, CrossFadeDuration);        
+        stateMachine.Animator.CrossFadeInFixedTime(AimingHash, CrossFadeDuration);
         stateMachine._AimCamUtil.SetActive(true);
     }
 
@@ -59,13 +59,18 @@ public class AimingState : PlayerBaseState
 
         if (stateMachine.SpecialMove) return;
 
+        Vector3 move = CalculateMovement();
+
+        Move(move * 3f, deltaTime);
+        AnimatorValues();
+
         stateMachine.rig.weight = Mathf.Lerp(stateMachine.rig.weight, stateMachine.rig.weight, Time.deltaTime * 20f);
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderMask))
         {
-
+            debugTransform.gameObject.SetActive(true);
             debugTransform.position = raycastHit.point;
             AimPosition = raycastHit.point;
         }
@@ -78,9 +83,9 @@ public class AimingState : PlayerBaseState
             stateMachine.transform.forward, faceDirection, deltaTime * 20f);
         #endregion
 
-        
-        
-        
+
+
+
         if (stateMachine.InputReader.AttackButtonPressed)
         {
             ShotLevel(0, "BusterShot");
@@ -101,15 +106,18 @@ public class AimingState : PlayerBaseState
         }
 
         if (stateMachine.InputReader.isAiming == false)
-        {            
+        {
             stateMachine.SwitchState(new Grounded(stateMachine, true));
             return;
         }
     }
 
     public override void Exit()
-    {        
-        stateMachine._AimCamUtil.SetActive(false);        
+    {
+        stateMachine._AimCamUtil.SetActive(false);
+        debugTransform.gameObject.SetActive(false);
+        stateMachine.Animator.SetBool("isAiming", stateMachine.InputReader.isAiming);
+
     }
 
     private void ShotLevel(int level, string sfx)
@@ -126,20 +134,35 @@ public class AimingState : PlayerBaseState
 
 
 
-    //private void SetAnimatiorIk(AvatarIKGoal avatarIKGoal, Transform target)
-    //{
-
-
-    //    stateMachine.Animator.SetIKPosition(avatarIKGoal, target.position);
-    //    stateMachine.Animator.SetIKRotation(avatarIKGoal, target.rotation);
-    //    stateMachine.Animator.SetIKPositionWeight(avatarIKGoal, 1f);
-    //    stateMachine.Animator.SetIKRotationWeight(avatarIKGoal, 1f);
-    //}
 
     private void ResetAnimatorIk(AvatarIKGoal avatarIKGoal, float weight = 0)
     {
         stateMachine.Animator.SetIKPositionWeight(avatarIKGoal, weight);
         stateMachine.Animator.SetIKRotationWeight(avatarIKGoal, weight);
+    }
+
+    private Vector3 CalculateMovement()
+    {
+        Vector3 forward = stateMachine.MainCameraTransform.forward;
+        Vector3 right = stateMachine.MainCameraTransform.right;
+        forward.y = 0;
+        right.y = 0;
+
+        forward.Normalize();
+        right.Normalize();
+
+
+
+        return forward * stateMachine.InputReader.MovementValue.y +
+               right * stateMachine.InputReader.MovementValue.x;
+    }
+
+    private void AnimatorValues()
+    {
+        stateMachine.Animator.SetFloat("ForwardSpeed", stateMachine.InputReader.MovementValue.y);
+        stateMachine.Animator.SetFloat("StrafingSpeed", stateMachine.InputReader.MovementValue.x);
+        stateMachine.Animator.SetBool("isAiming", stateMachine.InputReader.isAiming);
+        //stateMachine.Animator.SetFloat("StrafeMovement", stateMachine.InputReader.MovementValue.magnitude);
     }
 
 
