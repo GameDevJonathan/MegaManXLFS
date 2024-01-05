@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour, Controls.IPlayerActions
@@ -12,8 +12,13 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private Controls controls;
 
-    //[SerializeField] Animator animator;
-    [SerializeField, Range(0, 20)] private float _lerpTime = 5f;
+    #region CameraReset
+    [SerializeField, Range(0, 20)] private float _lerpSpeed = 5f;
+    [SerializeField, Range(0, 1)] private float _lerpTime = 1f;
+    [SerializeField] private float _Time = 0f;
+    [SerializeField] private float _InitialCameraYaw = 0f;
+    private Coroutine _resetCamera;
+    #endregion
 
     [Header("Gameplay bools")]
     public bool Modified;
@@ -93,11 +98,6 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
 
-    [Tooltip("Flag for setting and resting camera")]
-    public bool _resetCamera = false;
-    private float dampening;
-    [SerializeField] private float dampTime = 0.1f;
-
     // cinemachine
     [SerializeField] private float _cinemachineTargetYaw;
     [SerializeField] private float _cinemachineTargetPitch;
@@ -123,6 +123,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         controls.Player.Enable();
 
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+        _InitialCameraYaw = _cinemachineTargetYaw;
 
         _material.SetFloat(_targetRef, _targetValue);
     }
@@ -133,17 +134,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         Debug.Log(stateMachine.transform.forward);
 
-        
+        if(controls.Player.ResetCamera.WasPressedThisFrame() && _cinemachineTargetYaw != _InitialCameraYaw)
+        {
+            if(_resetCamera == null)
+            {
+                _resetCamera = StartCoroutine(SoftReset());
+            }
+        }
 
-        //if (_resetCamera && CinemachineCameraTarget.transform.forward != stateMachine.transform.forward)
-        //{
-        //    SoftReset();
-        //}
+
+
+
+
 
         //Debug.Log($"camera Target rotation y: {CinemachineCameraTarget.transform.rotation.y}");
         //Debug.Log($"Megaman X rotation y: {stateMachine.transform.rotation.y}");
 
-        
+
 
         FlickerMaterial(_material, _boolRef, _canFlicker);
 
@@ -287,7 +294,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
                 _cinemachineTargetYaw += CameraValue.x * Sensitivity;
                 _cinemachineTargetPitch -= CameraValue.y * Sensitivity;
             }
-            else
+            else if(!isAiming && _resetCamera == null)
             {
                 _cinemachineTargetYaw += CameraValue.x;
                 _cinemachineTargetPitch -= CameraValue.y;
@@ -309,13 +316,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         _cinemachineTargetPitch = 0;
     }
 
-    public void SoftReset()
+    IEnumerator SoftReset()
     {
-
-        //float rot = CinemachineCameraTarget.transform.rotation.y;
-        //rot = Mathf.Lerp(CinemachineCameraTarget.transform.rotation.y,
-        //    stateMachine.transform.rotation.y, t);
-        //CinemachineCameraTarget.transform.rotation.y += rot;
+        while (_Time < 1)
+        {
+            if (_cinemachineTargetYaw == _InitialCameraYaw)
+            {
+                _Time = 1;
+                _resetCamera = null;
+                break;
+            }
+            
+            _cinemachineTargetYaw = Mathf.Lerp(_cinemachineTargetYaw, _InitialCameraYaw, _Time);
+            _Time += Time.deltaTime * _lerpSpeed;
+            yield return null;
+        }
+        _Time = 0;
+        _resetCamera = null;
     }
 
     public void OnEquip(InputAction.CallbackContext context)
@@ -445,7 +462,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public void OnSpecialBeam(InputAction.CallbackContext context)
     {
         Debug.Log("Context...:" + context);
-        if(context.performed)
+        if (context.performed)
         {
             SpecialBeamEvent?.Invoke();
         }
@@ -462,7 +479,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnResetCamera(InputAction.CallbackContext context)
     {
-        if (_resetCamera) return;
-        _resetCamera = true;
+        //if (_resetCamera) return;
+        //_resetCamera = true;
     }
 }
