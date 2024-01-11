@@ -18,8 +18,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [SerializeField] private float _Time = 0f;
     [SerializeField] private float _InitialCameraYaw = 0f;
     private Coroutine _resetCamera;
+    [SerializeField] private bool _softReset = false;
     #endregion
 
+    #region Gameplay bools
     [Header("Gameplay bools")]
     public bool Modified;
 
@@ -31,19 +33,24 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [HideInInspector] public bool fire;
     [HideInInspector] public bool mediumShot = false;
     [HideInInspector] public bool chargedShot = false;
+    #endregion
 
+    #region Aiming
     [Header("Aiming/TargetSelection")]
     [field: SerializeField] public bool isDashing;
     [field: SerializeField] public bool isAiming { get; private set; }
     [field: SerializeField] public Vector2 SelectionValue { get; private set; }
     public bool Targeting;
+    #endregion
 
+    #region Weapons
     [field: Space]
     [field: Header("Weapons")]
     [field: SerializeField] public bool SaberEquiped { get; private set; } = false;
     [field: SerializeField] public bool equipingWeapon { get; private set; } = false;
+    #endregion
 
-
+    #region Shader
     [Header("Shader Glow")]
     public string AnimChargeRef = "ChargeLevel";
     public int chargeLevel;
@@ -52,12 +59,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public float _minRate = 25f;
     public float _midRate = 50f;
     public float _maxRate = 100f;
+    #endregion
 
     [Header("Energy Gathering Effect")]
     [SerializeField] private GameObject _maxChargeEffect;
     [SerializeField] private GameObject _minChargeEffect;
-
-
+    #region action events
     //Actions
     public event Action JumpEvent;
     public event Action DashEvent;
@@ -67,6 +74,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     public event Action MeleeEvent;
     public event Action DodgeEvent;
     public event Action SpecialBeamEvent;
+    #endregion
     public Transform Player;
     //public event Action AttackEvent;
 
@@ -75,6 +83,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     //camera    
     //Transform cam;
 
+    #region Cinemachine
     [Header("Cinemachine")]
     [Tooltip("Camera Sensitivity")]
     public float Sensitivity = 1;
@@ -98,10 +107,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
 
+
     // cinemachine
     [SerializeField] private float _cinemachineTargetYaw;
     [SerializeField] private float _cinemachineTargetPitch;
     private const float _threshold = 0.01f;
+    #endregion
 
     //Material
     [Header("Material Glow")]
@@ -128,29 +139,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         _material.SetFloat(_targetRef, _targetValue);
     }
 
+   
+
     private void Update()
     {
         _targetValue = Mathf.Clamp(_targetValue, .1f, 1f);
 
-        Debug.Log(stateMachine.transform.forward);
-
-        if(controls.Player.ResetCamera.WasPressedThisFrame() && _cinemachineTargetYaw != _InitialCameraYaw)
+        if (controls.Player.ResetCamera.WasPressedThisFrame() && _softReset == false)
         {
-            if(_resetCamera == null)
-            {
-                _resetCamera = StartCoroutine(SoftReset());
-            }
+            _softReset = true;
+            StartCoroutine(SoftReset());
         }
-
-
-
-
-
-
-        //Debug.Log($"camera Target rotation y: {CinemachineCameraTarget.transform.rotation.y}");
-        //Debug.Log($"Megaman X rotation y: {stateMachine.transform.rotation.y}");
-
-
 
         FlickerMaterial(_material, _boolRef, _canFlicker);
 
@@ -173,114 +172,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     private void LateUpdate()
     {
+        
+
         if (stateMachine.SpecialMove || Targeting) return;
         CameraRotation();
-
-
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        //MovementValue = context.ReadValue<Vector2>();
-        MovementValue = context.ReadValue<Vector2>();
-
-    }
-
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (!context.performed) { return; }
-        JumpEvent?.Invoke();
-    }
-
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-
-            shoot = true;
-            fire = false;
-            Debug.Log("Firing");
-            mediumShot = false;
-            chargedShot = false;
-        }
-        else
-        if (context.performed)
-        {
-            shoot = false;
-            charge = true;
-            if (chargeAmount > _minRate)
-                Debug.Log("Charging");
-
-
-        }
-        else
-        if (context.canceled)
-        {
-            charge = false;
-            fire = true;
-            if (chargeAmount >= _minRate && chargeAmount < _maxRate)
-            {
-                Debug.Log("Meduim Shot");
-                mediumShot = true;
-
-
-            }
-            else if (chargeAmount >= _maxRate)
-            {
-                Debug.Log("Max Charge Shot");
-
-                chargedShot = true;
-            }
-            chargeAmount = 0;
-        }
-    }
-
-    public void OnAIm(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            isAiming = true;
-
-            CinemachineCameraTarget.transform.rotation = Player.transform.rotation;
-
-        }
-        else if (context.canceled)
-        {
-            isAiming = false;
-        }
-
-    }
-
-    public void OnDash(InputAction.CallbackContext context)
-    {
-        if (!context.performed) { return; }
-        DashEvent?.Invoke();
-    }
-
-    public void OnModifier(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Modified = true;
-        }
-        else if (context.canceled)
-        {
-            Modified = false;
-        }
-
-        Debug.Log("Modified: " + Modified);
-    }
-
-    public void OnCamera(InputAction.CallbackContext context)
-    {
-        CameraValue = context.ReadValue<Vector2>();
-    }
-
-    private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-    {
-        if (lfAngle < -360f) lfAngle += 360f;
-        if (lfAngle > 360f) lfAngle -= 360f;
-        return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
     private void CameraRotation()
@@ -294,7 +189,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
                 _cinemachineTargetYaw += CameraValue.x * Sensitivity;
                 _cinemachineTargetPitch -= CameraValue.y * Sensitivity;
             }
-            else if(!isAiming && _resetCamera == null)
+            else if (!isAiming && _softReset == false)
             {
                 _cinemachineTargetYaw += CameraValue.x;
                 _cinemachineTargetPitch -= CameraValue.y;
@@ -310,43 +205,11 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
             _cinemachineTargetYaw, 0.0f);
     }
 
-    public void ResetCamera()
+    private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
     {
-        _cinemachineTargetYaw = 180;
-        _cinemachineTargetPitch = 0;
-    }
-
-    IEnumerator SoftReset()
-    {
-        while (_Time < 1)
-        {
-            if (_cinemachineTargetYaw == _InitialCameraYaw)
-            {
-                _Time = 1;
-                _resetCamera = null;
-                break;
-            }
-            
-            _cinemachineTargetYaw = Mathf.Lerp(_cinemachineTargetYaw, _InitialCameraYaw, _Time);
-            _Time += Time.deltaTime * _lerpSpeed;
-            yield return null;
-        }
-        _Time = 0;
-        _resetCamera = null;
-    }
-
-    public void OnEquip(InputAction.CallbackContext context)
-    {
-
-        if (equipingWeapon) return;
-        if (isAiming) return;
-        if (context.performed)
-        {
-            EquipEvent?.Invoke();
-            SaberEquiped = !SaberEquiped;
-            equipingWeapon = true;
-
-        }
+        if (lfAngle < -360f) lfAngle += 360f;
+        if (lfAngle > 360f) lfAngle -= 360f;
+        return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
     public void EquipingWeapon()
@@ -432,6 +295,99 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     }
 
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+
+            shoot = true;
+            fire = false;
+            Debug.Log("Firing");
+            mediumShot = false;
+            chargedShot = false;
+        }
+        else
+        if (context.performed)
+        {
+            shoot = false;
+            charge = true;
+            if (chargeAmount > _minRate)
+                Debug.Log("Charging");
+
+
+        }
+        else
+        if (context.canceled)
+        {
+            charge = false;
+            fire = true;
+            if (chargeAmount >= _minRate && chargeAmount < _maxRate)
+            {
+                Debug.Log("Meduim Shot");
+                mediumShot = true;
+
+
+            }
+            else if (chargeAmount >= _maxRate)
+            {
+                Debug.Log("Max Charge Shot");
+
+                chargedShot = true;
+            }
+            chargeAmount = 0;
+        }
+    }
+
+    public void OnAIm(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isAiming = true;
+
+            CinemachineCameraTarget.transform.rotation = Player.transform.rotation;
+
+        }
+        else if (context.canceled)
+        {
+            isAiming = false;
+        }
+
+    }
+
+    public void OnCamera(InputAction.CallbackContext context)
+    {
+        CameraValue = context.ReadValue<Vector2>();
+    }
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (!context.performed) { return; }
+        DashEvent?.Invoke();
+    }
+
+    public void OnDodge(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            DodgeEvent?.Invoke();
+        }
+
+    }
+
+    public void OnEquip(InputAction.CallbackContext context)
+    {
+
+        if (equipingWeapon) return;
+        if (isAiming) return;
+        if (context.performed)
+        {
+            EquipEvent?.Invoke();
+            SaberEquiped = !SaberEquiped;
+            equipingWeapon = true;
+
+        }
+    }
+
     public void OnLockOn(InputAction.CallbackContext context)
     {
         if (context.performed && !Targeting)
@@ -446,9 +402,10 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     }
 
-    public void OnTargetSelection(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
-        SelectionValue = context.ReadValue<Vector2>();
+        if (!context.performed) { return; }
+        JumpEvent?.Invoke();
     }
 
     public void OnMelee(InputAction.CallbackContext context)
@@ -457,6 +414,27 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         {
             MeleeEvent?.Invoke();
         }
+    }
+
+    public void OnModifier(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Modified = true;
+        }
+        else if (context.canceled)
+        {
+            Modified = false;
+        }
+
+        Debug.Log("Modified: " + Modified);
+    }
+
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        //MovementValue = context.ReadValue<Vector2>();
+        MovementValue = context.ReadValue<Vector2>();
+
     }
 
     public void OnSpecialBeam(InputAction.CallbackContext context)
@@ -468,18 +446,33 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         }
     }
 
-    public void OnDodge(InputAction.CallbackContext context)
+    public void OnTargetSelection(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            DodgeEvent?.Invoke();
-        }
-
+        SelectionValue = context.ReadValue<Vector2>();
     }
+
+    public void ResetCamera()
+    {
+        _cinemachineTargetYaw = _InitialCameraYaw;
+        _cinemachineTargetPitch = 0;
+    }
+
+    IEnumerator SoftReset()
+    {
+        while (_cinemachineTargetYaw != _InitialCameraYaw)
+        {
+            yield return null;
+            Debug.Log($"Appoximately: {Mathf.Approximately(_cinemachineTargetYaw, _InitialCameraYaw)}");
+            _cinemachineTargetYaw = Mathf.Lerp(_cinemachineTargetYaw, _InitialCameraYaw, _Time);
+            _Time += Time.deltaTime * _lerpSpeed;
+        }
+        _softReset = false;
+        _Time = 0;
+    }
+
 
     public void OnResetCamera(InputAction.CallbackContext context)
     {
-        //if (_resetCamera) return;
-        //_resetCamera = true;
+
     }
 }
