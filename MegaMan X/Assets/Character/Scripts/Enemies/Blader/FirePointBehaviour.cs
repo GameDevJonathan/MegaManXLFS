@@ -14,6 +14,7 @@ public class FirePointBehaviour : MonoBehaviour
     void Start()
     {
         _muzzle = this.gameObject.transform;
+        _shootTime = _shootCooldown;
 
     }
 

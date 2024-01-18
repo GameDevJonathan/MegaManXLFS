@@ -21,6 +21,7 @@ public class MeshTrail : MonoBehaviour
     [Header("Shader Related")]
     public Material mat;
     public bool isTrailActive;
+    [SerializeField]
     private SkinnedMeshRenderer[] skinnedRenders;
 
 
@@ -36,9 +37,12 @@ public class MeshTrail : MonoBehaviour
 
     IEnumerator ActiveTrail(float timeActive)
     {
-        while (timeActive > 0)
+        int count = 3;
+        //while (timeActive > 0)
+        while (count > 0)
         {
-            timeActive -= meshRefreshRate;
+            //timeActive -= meshRefreshRate;
+            Debug.Log(count);
 
             if (skinnedRenders == null)
                 skinnedRenders = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -48,9 +52,9 @@ public class MeshTrail : MonoBehaviour
             for (int i = 0; i < skinnedRenders.Length; i++)
             {
                 //Debug.Log($"skinned mesh renderers:: {skinnedRenders[i]}");
+
                 GameObject gObj = new GameObject();
                 gObj.transform.SetPositionAndRotation(positionToSpawn.position, positionToSpawn.rotation);
-
 
                 MeshRenderer mr = gObj.AddComponent<MeshRenderer>();
                 MeshFilter mf = gObj.AddComponent<MeshFilter>();
@@ -67,6 +71,7 @@ public class MeshTrail : MonoBehaviour
 
 
             yield return new WaitForSeconds(meshRefreshRate);
+            count--;
         }
 
         isTrailActive = false;

@@ -6174,6 +6174,76 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: meshRefreshRate
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: meshDestroyDelay
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1144454923}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[1]
+      value: 
+      objectReference: {fileID: 969274871}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[2]
+      value: 
+      objectReference: {fileID: 1007785690}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[3]
+      value: 
+      objectReference: {fileID: 561493102}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[4]
+      value: 
+      objectReference: {fileID: 1481947977}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[5]
+      value: 
+      objectReference: {fileID: 1324967196}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[6]
+      value: 
+      objectReference: {fileID: 374437209}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[7]
+      value: 
+      objectReference: {fileID: 820590193}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[8]
+      value: 
+      objectReference: {fileID: 1927056640}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[9]
+      value: 
+      objectReference: {fileID: 1646742247}
+    - target: {fileID: 8432624091962224739, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: skinnedRenders.Array.data[10]
+      value: 
+      objectReference: {fileID: 1322585941}
     - target: {fileID: 8432624091962224744, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
       propertyPath: _lerpSpeed
@@ -12723,6 +12793,12 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!137 &374437209 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6685544309675188432, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &384003805
 GameObject:
   m_ObjectHideFlags: 0
@@ -19689,6 +19765,12 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!137 &561493102 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6149589705533989794, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &569047309
 Mesh:
   m_ObjectHideFlags: 0
@@ -28375,6 +28457,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!137 &820590193 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6017520271560976198, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &821248631
 GameObject:
   m_ObjectHideFlags: 0
@@ -31711,6 +31799,12 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!137 &969274871 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4598983521172064196, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &970309033
 GameObject:
   m_ObjectHideFlags: 0
@@ -32974,6 +33068,12 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!137 &1007785690 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3116911067453061294, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1015400472
 Mesh:
   m_ObjectHideFlags: 0
@@ -37112,6 +37212,12 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!137 &1144454923 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8443351617946994789, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1145849557
 GameObject:
   m_ObjectHideFlags: 0
@@ -41501,6 +41607,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!137 &1322585941 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2018601801431211500, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1323413399
 Mesh:
   m_ObjectHideFlags: 0
@@ -41665,6 +41777,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!137 &1324967196 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6806771328090013392, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1329984083
 Mesh:
   m_ObjectHideFlags: 0
@@ -44965,6 +45083,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5256501529353619361, guid: 0cfad64b760f29348a066da25164ad60,
     type: 3}
   m_PrefabInstance: {fileID: 1479986147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1481947977 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8629589640391131603, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1482588746
 GameObject:
@@ -48607,6 +48731,12 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!137 &1646742247 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6094210449189617147, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1649584984
 GameObject:
   m_ObjectHideFlags: 0
@@ -56779,6 +56909,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!137 &1927056640 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6971643669247616614, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+    type: 3}
+  m_PrefabInstance: {fileID: 173755916}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1934550606
 GameObject:
   m_ObjectHideFlags: 0

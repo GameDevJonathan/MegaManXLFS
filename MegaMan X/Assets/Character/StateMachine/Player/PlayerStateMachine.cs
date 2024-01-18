@@ -138,6 +138,8 @@ public class PlayerStateMachine : StateMachine
 
     public void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        
+
         Rigidbody body = hit.collider.attachedRigidbody;
 
         if (body == null || body.isKinematic)
