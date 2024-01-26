@@ -74,6 +74,7 @@ public class WallRun : MonoBehaviour
         Debug.DrawRay(orientation.position, -orientation.right * wallCheckDistance, Color.red);
         
         wallFront = Physics.Raycast(orientation.position, orientation.forward, out frontWallHit, wallCheckDistance, whatIsWall);
+        if(frontWallHit.transform) Debug.Log(frontWallHit.transform.name);
         Debug.DrawRay(orientation.position, orientation.forward * wallCheckDistance, Color.white); 
 
 
