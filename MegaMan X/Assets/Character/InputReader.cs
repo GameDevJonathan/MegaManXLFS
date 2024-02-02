@@ -475,4 +475,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
 
     }
+
+    public void OnParkour(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Debug.Log($"Parkour Context: ${context}");
+        }
+
+        if (context.canceled)
+        {
+            Debug.Log($"Parkour Context: ${context}");
+        }
+    }
 }

@@ -36,17 +36,28 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.MeleeEvent += OnMelee;
         stateMachine.InputReader.SpecialBeamEvent += InputReader_SpecialBeamEvent;
-    }    
+    }
 
     public override void Tick(float deltaTime)
     {
-        
-        
+        var hitData = stateMachine.EnviromentScaner.ObstacleCheck();
+
+        if (hitData.forwardHitFound)
+        {
+            foreach (var action in stateMachine.ParkourActions)
+            {
+                if (action.CheckIfPossible(hitData, stateMachine.transform))
+                {
+                    Debug.Log("Obstacle Found" + hitData.forwardHit.transform.name);
+                    stateMachine.SwitchState(new PlayerParkourState(stateMachine, action.AnimName, action.RotateToObstacle,
+                        action.TargetRotation, action.EnableTargetMatching, action.MatchPos, action));
+                    return;
+                }
+            }
+        }
+
 
         #region Inputs
-
-
-
         if (!stateMachine.InputReader.equipingWeapon)
         {
             if (stateMachine.InputReader.isAiming)
@@ -85,20 +96,13 @@ public class Grounded : PlayerBaseState
             }
 
         }
-        
         #endregion
-
-
 
         #region Movement
         Vector3 movement = CalculateMovement();
         Move(movement * freeLookMoveSpeed, deltaTime);
 
-        //if (stateMachine.InputReader.AttackButtonPressed)
-        //{
-        //    stateMachine.SwitchState(new AttackingState(stateMachine));
-        //    return;
-        //}
+
 
         //Debug.Log($"Grounded State::{grounded}");
         if (!grounded)
@@ -123,19 +127,12 @@ public class Grounded : PlayerBaseState
         FaceMovement(movement, deltaTime);
         #endregion
 
-        
 
-        //if (stateMachine.WallRun.AboveGround() && stateMachine.CharacterController.isGrounded == false)
-        //{
-        //    Debug.Log("Not Touching Ground");
-        //    stateMachine.SwitchState(new PlayerFallState(stateMachine));
-        //    return;
-        //}
 
-        
+
+
 
     }
-
     //public void OnAttack()
     //{
     //    stateMachine.SwitchState(new AttackingState(stateMachine,0));
@@ -143,16 +140,16 @@ public class Grounded : PlayerBaseState
     //}
 
 
-    
+
     public void OnMelee()
     {
-        stateMachine.SwitchState(new AttackingState(stateMachine,0));
+        stateMachine.SwitchState(new AttackingState(stateMachine, 0));
         return;
     }
-    
-    
+
+
     public void OnJump()
-    {        
+    {
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
         return;
     }
@@ -199,7 +196,7 @@ public class Grounded : PlayerBaseState
         stateMachine.InputReader.Targeting = true;
         stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
         return;
-        
+
     }
 
     private Vector3 CalculateMovement()

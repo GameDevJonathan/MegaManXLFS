@@ -152,6 +152,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Parkour"",
+                    ""type"": ""Button"",
+                    ""id"": ""168c9ff1-ee04-43ff-a38e-2ce0e33bf593"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -425,7 +434,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Equip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -572,6 +581,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""ResetCamera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""74f2d59e-dc75-468d-a61a-96251163b220"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Parkour"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -622,6 +642,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_SpecialBeam = m_Player.FindAction("Special Beam", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_ResetCamera = m_Player.FindAction("ResetCamera", throwIfNotFound: true);
+        m_Player_Parkour = m_Player.FindAction("Parkour", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -697,6 +718,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SpecialBeam;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_ResetCamera;
+    private readonly InputAction m_Player_Parkour;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -715,6 +737,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @SpecialBeam => m_Wrapper.m_Player_SpecialBeam;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @ResetCamera => m_Wrapper.m_Player_ResetCamera;
+        public InputAction @Parkour => m_Wrapper.m_Player_Parkour;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -766,6 +789,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ResetCamera.started += instance.OnResetCamera;
             @ResetCamera.performed += instance.OnResetCamera;
             @ResetCamera.canceled += instance.OnResetCamera;
+            @Parkour.started += instance.OnParkour;
+            @Parkour.performed += instance.OnParkour;
+            @Parkour.canceled += instance.OnParkour;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -812,6 +838,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ResetCamera.started -= instance.OnResetCamera;
             @ResetCamera.performed -= instance.OnResetCamera;
             @ResetCamera.canceled -= instance.OnResetCamera;
+            @Parkour.started -= instance.OnParkour;
+            @Parkour.performed -= instance.OnParkour;
+            @Parkour.canceled -= instance.OnParkour;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -863,5 +892,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnSpecialBeam(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnResetCamera(InputAction.CallbackContext context);
+        void OnParkour(InputAction.CallbackContext context);
     }
 }

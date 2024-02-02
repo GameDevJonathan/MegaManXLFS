@@ -235,8 +235,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023104357}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.005253203, y: -0.993179, z: 0.10544466, w: 0.04948913}
-  m_LocalPosition: {x: 1.6648798, y: -1.0787055, z: 17.038836}
+  m_LocalRotation: {x: -0.005847663, y: 0.9918423, z: -0.11735481, w: -0.049422428}
+  m_LocalPosition: {x: 1.6580734, y: -0.7778714, z: 16.970785}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -309,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 1247915641}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000022649765, y: 0.00000071525574, z: 12.8549595}
+  m_LocalPosition: {x: -0.00000023841858, y: 0.0000009536743, z: 12.854968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76135,7 +76135,7 @@ Transform:
   m_GameObject: {fileID: 3140827166338436460}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: 0.6473535, y: -2.435469, z: 6.854034}
+  m_LocalPosition: {x: 0.64828503, y: -2.435581, z: 6.8633423}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76209,7 +76209,7 @@ Transform:
   m_GameObject: {fileID: 3140827166475716200}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: -0.018251896, y: -2.0011897, z: 6.3278418}
+  m_LocalPosition: {x: -0.018325746, y: -2.0011823, z: 6.3271303}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77484,7 +77484,7 @@ MonoBehaviour:
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
-    m_Style: 1
+    m_Style: 0
     m_Time: 0.5
     m_CustomCurve:
       serializedVersion: 2
@@ -77578,6 +77578,8 @@ MonoBehaviour:
     m_ParentHash: -287678252
   - m_Hash: -1546316278
     m_ParentHash: -287678252
+  - m_Hash: -898375694
+    m_ParentHash: 756556552
 --- !u!1 &7147883132427054213
 GameObject:
   m_ObjectHideFlags: 0
@@ -78232,9 +78234,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8432624091962224756}
   - component: {fileID: 8432624091962224745}
+  - component: {fileID: 8432624091962224750}
   - component: {fileID: 8432624091962224746}
   - component: {fileID: 8432624091962224744}
-  - component: {fileID: 8432624091962224750}
   - component: {fileID: 8432624091962224751}
   - component: {fileID: 8432624091962224749}
   - component: {fileID: 8432624091962224748}
@@ -78243,6 +78245,7 @@ GameObject:
   - component: {fileID: 3088715868673973414}
   - component: {fileID: 3088715868673973431}
   - component: {fileID: 2024792342}
+  - component: {fileID: 4689896085313859973}
   m_Layer: 8
   m_Name: MegaManX
   m_TagString: Player
@@ -78295,6 +78298,88 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8432624091962224750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101038464563899086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d57ef310137afd2428b16df9ed145995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <InputReader>k__BackingField: {fileID: 0}
+  <Animator>k__BackingField: {fileID: 0}
+  <CharacterController>k__BackingField: {fileID: 0}
+  <ForceReceiver>k__BackingField: {fileID: 0}
+  <WallRun>k__BackingField: {fileID: 0}
+  <Attacks>k__BackingField:
+  - <AnimationName>k__BackingField: Attack1
+    <TransitionDuration>k__BackingField: 0.1
+    <ComboStateIndex>k__BackingField: -1
+    <ComboAttackTime>k__BackingField: 0.5
+  - <AnimationName>k__BackingField: Attack2
+    <TransitionDuration>k__BackingField: 0.1
+    <ComboStateIndex>k__BackingField: 2
+    <ComboAttackTime>k__BackingField: 0.6
+  - <AnimationName>k__BackingField: Attack3
+    <TransitionDuration>k__BackingField: 0.2
+    <ComboStateIndex>k__BackingField: -1
+    <ComboAttackTime>k__BackingField: 1
+  <ParkourActions>k__BackingField:
+  - {fileID: 11400000, guid: cb49ca7c54e583a4fa1b6b20cbff7707, type: 2}
+  - {fileID: 11400000, guid: 18d083f0005531f488ab95d6a9d5a9d7, type: 2}
+  - {fileID: 11400000, guid: 56975f718539f5b4eb9ddd32b6534cb4, type: 2}
+  - {fileID: 11400000, guid: 4b49fd43f7da6c343959daf7c8221b48, type: 2}
+  <Targeter>k__BackingField: {fileID: 0}
+  <EnviromentScaner>k__BackingField: {fileID: 0}
+  <FirePoint>k__BackingField: {fileID: 3140827165546619144}
+  <Sockets>k__BackingField:
+  - {fileID: 3088715869317675476}
+  - {fileID: 3088715869400261018}
+  <BusterShot>k__BackingField:
+  - {fileID: 3221138590616415227, guid: c185b4010fca29444a8e460f9a31d894, type: 3}
+  - {fileID: 1311559214229084, guid: 87d77b78efd8ec1429eb85d253e503b8, type: 3}
+  - {fileID: 1079946990457772, guid: db78a9e393bbf7f4383dece22bd1b56b, type: 3}
+  <LightSaber>k__BackingField: {fileID: 4431287294407034987}
+  startTransform:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enStartPosition: 2
+  <SpecialBeam>k__BackingField:
+  - {fileID: 3139786369662520255}
+  - {fileID: 3140827165758662980}
+  SpecialMove: 0
+  rig: {fileID: 3088715869583068155}
+  <RightHandPlacement>k__BackingField: {fileID: 3088715867903289109}
+  <RightHandHint>k__BackingField: {fileID: 3088715868760018125}
+  <AimTarget>k__BackingField: {fileID: 3140827165527767515}
+  <FreeLookMovementSpeed>k__BackingField: 5
+  <LockOnMovementSpeed>k__BackingField: 2.5
+  <AirMovementSpeed>k__BackingField: 3
+  <JumpForce>k__BackingField: 15
+  <RotationSmoothValue>k__BackingField: 11
+  <DashForceTime>k__BackingField: 0.1
+  <DashForce>k__BackingField: 35
+  <_thirdPersonCam>k__BackingField: {fileID: 3140827166338436460}
+  <_AimCam>k__BackingField: {fileID: 3140827166475716200}
+  <_AimCamUtil>k__BackingField: {fileID: 5888256685114841891}
+  <_TargetCamUtil>k__BackingField: {fileID: 1139456789455222127}
+  <aimColliderMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1573377
+  <lockOnTargetColliderMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 512
+  <DebugRayCastHit>k__BackingField: 1
+  <debugTransform>k__BackingField: {fileID: 3140827165527767515}
+  <LockOnSphere>k__BackingField: {fileID: 9060108393273801772}
+  <_thrusters>k__BackingField:
+  - {fileID: 2851485547862577753}
+  - {fileID: 234015983480602539}
 --- !u!143 &8432624091962224746
 CharacterController:
   m_ObjectHideFlags: 0
@@ -78379,77 +78464,6 @@ MonoBehaviour:
   _maxTarget: 1
   _boolRef: _On_Off
   _targetRef: _Target
---- !u!114 &8432624091962224750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9101038464563899086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57ef310137afd2428b16df9ed145995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <InputReader>k__BackingField: {fileID: 8432624091962224744}
-  <Animator>k__BackingField: {fileID: 8432624091962224745}
-  <CharacterController>k__BackingField: {fileID: 8432624091962224746}
-  <ForceReceiver>k__BackingField: {fileID: 8432624091962224751}
-  <WallRun>k__BackingField: {fileID: 8432624091962224749}
-  <Attacks>k__BackingField:
-  - <AnimationName>k__BackingField: Attack1
-    <TransitionDuration>k__BackingField: 0.1
-    <ComboStateIndex>k__BackingField: -1
-    <ComboAttackTime>k__BackingField: 0.5
-  - <AnimationName>k__BackingField: Attack2
-    <TransitionDuration>k__BackingField: 0.1
-    <ComboStateIndex>k__BackingField: 2
-    <ComboAttackTime>k__BackingField: 0.6
-  - <AnimationName>k__BackingField: Attack3
-    <TransitionDuration>k__BackingField: 0.2
-    <ComboStateIndex>k__BackingField: -1
-    <ComboAttackTime>k__BackingField: 1
-  <Targeter>k__BackingField: {fileID: 1919470409590539058}
-  <FirePoint>k__BackingField: {fileID: 3140827165546619144}
-  <Sockets>k__BackingField:
-  - {fileID: 3088715869317675476}
-  - {fileID: 3088715869400261018}
-  <BusterShot>k__BackingField:
-  - {fileID: 3221138590616415227, guid: c185b4010fca29444a8e460f9a31d894, type: 3}
-  - {fileID: 1311559214229084, guid: 87d77b78efd8ec1429eb85d253e503b8, type: 3}
-  - {fileID: 1079946990457772, guid: db78a9e393bbf7f4383dece22bd1b56b, type: 3}
-  <LightSaber>k__BackingField: {fileID: 4431287294407034987}
-  <SpecialBeam>k__BackingField:
-  - {fileID: 3139786369662520255}
-  - {fileID: 3140827165758662980}
-  SpecialMove: 0
-  rig: {fileID: 3088715869583068155}
-  <RightHandPlacement>k__BackingField: {fileID: 3088715867903289109}
-  <RightHandHint>k__BackingField: {fileID: 3088715868760018125}
-  <AimTarget>k__BackingField: {fileID: 3140827165527767515}
-  <FreeLookMovementSpeed>k__BackingField: 5
-  <LockOnMovementSpeed>k__BackingField: 2.5
-  <AirMovementSpeed>k__BackingField: 3
-  <JumpForce>k__BackingField: 15
-  <RotationSmoothValue>k__BackingField: 11
-  <DashForceTime>k__BackingField: 0.1
-  <DashForce>k__BackingField: 35
-  <_thirdPersonCam>k__BackingField: {fileID: 3140827166338436460}
-  <_AimCam>k__BackingField: {fileID: 3140827166475716200}
-  <_AimCamUtil>k__BackingField: {fileID: 5888256685114841891}
-  <_TargetCamUtil>k__BackingField: {fileID: 1139456789455222127}
-  <aimColliderMask>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 1573377
-  <lockOnTargetColliderMask>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 512
-  <DebugRayCastHit>k__BackingField: 1
-  <debugTransform>k__BackingField: {fileID: 3140827165527767515}
-  <LockOnSphere>k__BackingField: {fileID: 9060108393273801772}
-  <_thrusters>k__BackingField:
-  - {fileID: 2851485547862577753}
-  - {fileID: 234015983480602539}
 --- !u!114 &8432624091962224751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78503,7 +78517,7 @@ MonoBehaviour:
   lastJumpTime: 0
   inputReader: {fileID: 8432624091962224744}
   RotationSmoothValue: 11
-  wallCheckDistance: 0.9
+  wallCheckDistance: 0.76
   minJumpHeight: 0.5
   wallLeft: 0
   wallRight: 0
@@ -78678,6 +78692,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBox: {fileID: 811501541}
+--- !u!114 &4689896085313859973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101038464563899086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfeef1f09b503454586f1446ddf0c4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardRayOffset: {x: 0, y: 0.25, z: 0}
+  forwardRayLength: 1
+  heightRayLength: 5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1001 &3140827166527926871
 PrefabInstance:
   m_ObjectHideFlags: 0

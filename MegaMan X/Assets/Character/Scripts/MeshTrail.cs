@@ -42,7 +42,7 @@ public class MeshTrail : MonoBehaviour
         while (count > 0)
         {
             //timeActive -= meshRefreshRate;
-            Debug.Log(count);
+            //Debug.Log(count);
 
             if (skinnedRenders == null)
                 skinnedRenders = GetComponentsInChildren<SkinnedMeshRenderer>();

@@ -222,8 +222,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.0435696, y: 0.17615509, z: 0.062072814}
-  m_Center: {x: 2.9904685, y: -0.010357261, z: -0.03381452}
+  m_Size: {x: 6.0435696, y: 1.2453209, z: 0.062072814}
+  m_Center: {x: 2.9904685, y: -0.5449402, z: -0.03381452}
 --- !u!1 &7578863894269232779
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 7101603054120190953}
   - component: {fileID: 1568748599434824551}
   - component: {fileID: 3352462071528586959}
+  - component: {fileID: 1576612336852862584}
   m_Layer: 0
   m_Name: Toll_Booth_Light
   m_TagString: Untagged
@@ -310,3 +311,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1576612336852862584
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7578863894269232779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8769356, y: 2.576539, z: 1.9423912}
+  m_Center: {x: 0.004768431, y: 1.2750428, z: 0.01494956}
