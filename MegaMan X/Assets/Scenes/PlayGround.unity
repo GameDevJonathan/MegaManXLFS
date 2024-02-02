@@ -2477,6 +2477,11 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: -0.58
       objectReference: {fileID: 0}
+    - target: {fileID: 5697090123070317758, guid: 3d711a81bc452fb4c8c8ef901e2029d8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 7101603054120190953, guid: 3d711a81bc452fb4c8c8ef901e2029d8,
         type: 3}
       propertyPath: m_LocalPosition.x
