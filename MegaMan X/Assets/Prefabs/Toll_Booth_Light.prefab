@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 2240632218508353448}
   - component: {fileID: 5724532196792660310}
   - component: {fileID: 2468030661081148976}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Toll_Booth_01B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,8 +222,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.0435696, y: 1.2453209, z: 0.062072814}
-  m_Center: {x: 2.9904685, y: -0.5449402, z: -0.03381452}
+  m_Size: {x: 6.0435696, y: 1.25, z: 0.062072814}
+  m_Center: {x: 2.9904685, y: -0.58, z: -0.03381452}
 --- !u!1 &7578863894269232779
 GameObject:
   m_ObjectHideFlags: 0
