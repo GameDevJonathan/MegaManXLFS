@@ -42,10 +42,12 @@ public class Grounded : PlayerBaseState
     {
         var hitData = stateMachine.EnviromentScaner.ObstacleCheck();
 
-        if (hitData.forwardHitFound)
+        if (hitData.forwardHitFound & stateMachine.InputReader.MovementValue.magnitude > 0.1f)
         {
+            Debug.Log("Grounded state:: hitforward found");
             foreach (var action in stateMachine.ParkourActions)
             {
+                Debug.Log(action.CheckIfPossible(hitData, stateMachine.transform));
                 if (action.CheckIfPossible(hitData, stateMachine.transform))
                 {
                     Debug.Log("Obstacle Found" + hitData.forwardHit.transform.name);

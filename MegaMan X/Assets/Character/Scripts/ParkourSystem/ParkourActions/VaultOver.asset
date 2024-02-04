@@ -16,9 +16,9 @@ MonoBehaviour:
   ObstacleTag: Fence
   minHeight: 0.1
   maxHeight: 1.25
-  rotateToObstacle: 0
+  rotateToObstacle: 1
   enableTargetMatching: 1
   matchBodyPart: 5
-  matchStartTime: 0
-  matchEndTime: 0
-  <TargetRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+  matchStartTime: 0.37
+  matchEndTime: 0.6
+  <TargetRotation>k__BackingField: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}

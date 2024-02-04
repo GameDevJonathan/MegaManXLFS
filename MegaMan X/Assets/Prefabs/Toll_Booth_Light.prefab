@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 2468030661081148976}
   m_Layer: 21
   m_Name: Toll_Booth_01B
-  m_TagString: Untagged
+  m_TagString: Fence
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

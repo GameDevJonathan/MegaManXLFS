@@ -32,6 +32,7 @@ TagManager:
   - AIAction
   - Target
   - Projectile
+  - Fence
   layers:
   - Default
   - TransparentFX

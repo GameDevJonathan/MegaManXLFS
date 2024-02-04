@@ -44,7 +44,7 @@ public class DashState : PlayerBaseState
             }
 
             if (stateMachine.InputReader.JumpButtonPressed 
-                && (grounded ||stateMachine.CharacterController.isGrounded )
+                && (grounded)
                 && !dashJump
                 && normalizedTime < .95f)
             {
@@ -68,7 +68,7 @@ public class DashState : PlayerBaseState
     {
         stateMachine.ForceReceiver.Reset();
         stateMachine.ForceReceiver.useGravity = true;
-        stateMachine.InputReader.isDashing = dashJump ? true : false;
+        stateMachine.InputReader.isDashing = (dashJump) ? true : false;
     }
 
     public void TryApplyForce()

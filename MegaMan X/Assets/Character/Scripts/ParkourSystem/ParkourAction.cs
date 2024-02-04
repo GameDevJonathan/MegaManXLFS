@@ -26,7 +26,9 @@ public class ParkourAction : ScriptableObject
             return false;
 
         //height tag
-        float height = hitdata.heightHit.point.y - player.position.y;
+        //float height = hitdata.heightHit.point.y - player.transform.position.y;
+        float height = hitdata.heightHit.collider.bounds.size.y;
+        Debug.Log(height);
         if(height < minHeight || height > maxHeight)
         {
             return false;

@@ -235,8 +235,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023104357}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.005847663, y: 0.9918423, z: -0.11735481, w: -0.049422428}
-  m_LocalPosition: {x: 1.6580734, y: -0.7778714, z: 16.970785}
+  m_LocalRotation: {x: 0.0052532055, y: -0.993179, z: 0.10544463, w: 0.04948913}
+  m_LocalPosition: {x: 1.6648791, y: -1.0787065, z: 17.038834}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -309,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 1247915641}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: 0.0000009536743, z: 12.854968}
+  m_LocalPosition: {x: 0.00000166893, y: 0.00000047683716, z: 12.854958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76135,7 +76135,7 @@ Transform:
   m_GameObject: {fileID: 3140827166338436460}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: 0.64828503, y: -2.435581, z: 6.8633423}
+  m_LocalPosition: {x: 0.6473537, y: -2.4354684, z: 6.854032}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76209,7 +76209,7 @@ Transform:
   m_GameObject: {fileID: 3140827166475716200}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: -0.018325746, y: -2.0011823, z: 6.3271303}
+  m_LocalPosition: {x: -0.018251002, y: -2.0011895, z: 6.327845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77479,8 +77479,8 @@ MonoBehaviour:
     m_VirtualCamera: {fileID: 1023104359}
     m_ActivateAfter: 0
     m_MinDuration: 0
-  - m_FullHash: 1983519550
-    m_VirtualCamera: {fileID: 1023104359}
+  - m_FullHash: -1145230937
+    m_VirtualCamera: {fileID: 3140827166338436451}
     m_ActivateAfter: 0
     m_MinDuration: 0
   m_DefaultBlend:
@@ -77579,6 +77579,8 @@ MonoBehaviour:
   - m_Hash: -1546316278
     m_ParentHash: -287678252
   - m_Hash: -898375694
+    m_ParentHash: 756556552
+  - m_Hash: -1145230937
     m_ParentHash: 756556552
 --- !u!1 &7147883132427054213
 GameObject:
@@ -78329,10 +78331,7 @@ MonoBehaviour:
     <ComboStateIndex>k__BackingField: -1
     <ComboAttackTime>k__BackingField: 1
   <ParkourActions>k__BackingField:
-  - {fileID: 11400000, guid: cb49ca7c54e583a4fa1b6b20cbff7707, type: 2}
-  - {fileID: 11400000, guid: 18d083f0005531f488ab95d6a9d5a9d7, type: 2}
   - {fileID: 11400000, guid: 56975f718539f5b4eb9ddd32b6534cb4, type: 2}
-  - {fileID: 11400000, guid: 4b49fd43f7da6c343959daf7c8221b48, type: 2}
   <Targeter>k__BackingField: {fileID: 0}
   <EnviromentScaner>k__BackingField: {fileID: 0}
   <FirePoint>k__BackingField: {fileID: 3140827165546619144}
@@ -78348,7 +78347,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  enStartPosition: 2
+  enStartPosition: 1
   <SpecialBeam>k__BackingField:
   - {fileID: 3139786369662520255}
   - {fileID: 3140827165758662980}
@@ -78709,7 +78708,7 @@ MonoBehaviour:
   heightRayLength: 5
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2097152
 --- !u!1001 &3140827166527926871
 PrefabInstance:
   m_ObjectHideFlags: 0
