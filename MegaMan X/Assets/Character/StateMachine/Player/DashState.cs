@@ -23,7 +23,7 @@ public class DashState : PlayerBaseState
     public override void Enter()
     {
         stateMachine.Animator.CrossFadeInFixedTime(DashStart, crossFadeTime);
-        //stateMachine.InputReader.isDashing = true;
+        stateMachine.InputReader.isDashing = true;
         UniversalAudioPlayer.PlayInGameSFX("Dash");
         //UniversalAudioPlayer.PlayVO(0);
         stateMachine.ForceReceiver.useGravity = false;
@@ -68,7 +68,7 @@ public class DashState : PlayerBaseState
     {
         stateMachine.ForceReceiver.Reset();
         stateMachine.ForceReceiver.useGravity = true;
-        //stateMachine.InputReader.isDashing = (dashJump) ? true : false;
+        stateMachine.InputReader.isDashing = (dashJump) ? true : false;
     }
 
     public void TryApplyForce()

@@ -76,6 +76,7 @@ public class PlayerLandState : PlayerBaseState
 
     public override void Exit()
     {
+        falltime = 0f;
         stateMachine.MeshTrail.isTrailActive = false;
 
     }

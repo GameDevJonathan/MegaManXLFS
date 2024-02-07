@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnviromentScaner : MonoBehaviour
 {
 
-    [SerializeField] Vector3 forwardRayOffset = new Vector3(0, .25f, 0);
+    [SerializeField] Vector3 forwardRayOffset = new Vector3(0, .5f, 0);
     [SerializeField] float forwardRayLength = 0.2f;
     [SerializeField] float heightRayLength = 5f;
     [SerializeField] LayerMask obstacleLayer;

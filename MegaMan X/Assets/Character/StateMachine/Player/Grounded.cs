@@ -13,7 +13,7 @@ public class Grounded : PlayerBaseState
     private bool shouldFade;
     private const float CrossFadeDuration = 0.1f;
     private bool grounded => stateMachine.WallRun.CheckForGround();
-    private ObstacleHitData hitData => stateMachine.EnviromentScaner.ObstacleCheck();
+    
 
 
     public Grounded(PlayerStateMachine stateMachine, bool shouldFade = false) : base(stateMachine)
@@ -42,8 +42,9 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        //Debug.Log("grounded state:: hitdata " + hitData);
-
+        var hitData = stateMachine.EnviromentScaner.ObstacleCheck();
+        Debug.Log("grounded state:: hitdata variable: " + hitData);
+        
 
         if (grounded)
         {

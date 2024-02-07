@@ -99,10 +99,12 @@ public class PlayerStateMachine : StateMachine
 
                 case enStartPositions.Highway:
                     transform.parent.position = startTransform[(int)enStartPositions.Highway].position;
+                    
                     break;
 
                 case enStartPositions.Stairs:
                     transform.parent.position = startTransform[(int)enStartPositions.Stairs].position;
+                    
                     break;
             }
         }
