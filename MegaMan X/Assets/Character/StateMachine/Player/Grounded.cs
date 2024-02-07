@@ -13,6 +13,7 @@ public class Grounded : PlayerBaseState
     private bool shouldFade;
     private const float CrossFadeDuration = 0.1f;
     private bool grounded => stateMachine.WallRun.CheckForGround();
+    private ObstacleHitData hitData => stateMachine.EnviromentScaner.ObstacleCheck();
 
 
     public Grounded(PlayerStateMachine stateMachine, bool shouldFade = false) : base(stateMachine)
@@ -23,6 +24,7 @@ public class Grounded : PlayerBaseState
 
     public override void Enter()
     {
+        Debug.Log("Entered Grounded State");
         stateMachine.rig.weight = 0f;
 
         if (!shouldFade)
@@ -40,23 +42,34 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        var hitData = stateMachine.EnviromentScaner.ObstacleCheck();
+        //Debug.Log("grounded state:: hitdata " + hitData);
 
-        if (hitData.forwardHitFound & stateMachine.InputReader.MovementValue.magnitude > 0.1f)
+
+        if (grounded)
         {
-            Debug.Log("Grounded state:: hitforward found");
-            foreach (var action in stateMachine.ParkourActions)
+            //Debug.Log("Grounded State :: I am grounded");
+            if (hitData.forwardHitFound)
             {
-                Debug.Log(action.CheckIfPossible(hitData, stateMachine.transform));
-                if (action.CheckIfPossible(hitData, stateMachine.transform))
+                Debug.Log("Grounded state :: hitforward found");
+                if (stateMachine.InputReader.MovementValue.magnitude > 0.1f)
                 {
-                    Debug.Log("Obstacle Found" + hitData.forwardHit.transform.name);
-                    stateMachine.SwitchState(new PlayerParkourState(stateMachine, action.AnimName, action.RotateToObstacle,
-                        action.TargetRotation, action.EnableTargetMatching, action.MatchPos, action));
-                    return;
+                    foreach (var action in stateMachine.ParkourActions)
+                    {
+                        Debug.Log(action.CheckIfPossible(hitData, stateMachine.transform));
+                        if (action.CheckIfPossible(hitData, stateMachine.transform))
+                        {
+                            Debug.Log("Obstacle Found" + hitData.forwardHit.transform.name);
+                            stateMachine.SwitchState(new PlayerParkourState(stateMachine, action.AnimName, action.RotateToObstacle,
+                                action.TargetRotation, action.EnableTargetMatching, action.MatchPos, action));
+                            return;
+                        }
+                    }
+
                 }
+
             }
         }
+
 
 
         #region Inputs

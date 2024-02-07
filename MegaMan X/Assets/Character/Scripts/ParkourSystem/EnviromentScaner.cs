@@ -15,6 +15,7 @@ public class EnviromentScaner : MonoBehaviour
     {
         var hitdata = new ObstacleHitData();
         var forwardOrigin = transform.position + forwardRayOffset;
+        
         hitdata.forwardHitFound = Physics.Raycast(forwardOrigin, transform.forward, out hitdata.forwardHit,
              forwardRayLength, obstacleLayer);
 
@@ -35,6 +36,7 @@ public class EnviromentScaner : MonoBehaviour
             Debug.Log("Enviorment Scanner:: Debug line " + hitdata.forwardHit.transform.name);
             Debug.Log("Enviorment Scanner:: Debug line " + hitdata.heightHit.point.y);
         }
+        //Debug.Log(typeof(ObstacleHitData));
 
         return hitdata;
     }

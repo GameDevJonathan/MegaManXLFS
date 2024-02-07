@@ -33,15 +33,23 @@ public class MeshTrail : MonoBehaviour
             isTrailActive = true;
             StartCoroutine(ActiveTrail(activeTime));
         }
+
+        if(!stateMachine.InputReader.isDashing && isTrailActive)
+        {
+            isTrailActive = false;
+            StopCoroutine(ActiveTrail());
+        }
+
+
     }
 
-    IEnumerator ActiveTrail(float timeActive)
+    IEnumerator ActiveTrail(float timeActive = 0)
     {
         int count = 3;
-        //while (timeActive > 0)
-        while (count > 0)
+        while (timeActive > 0)
+        //while (count > 0)
         {
-            //timeActive -= meshRefreshRate;
+            timeActive -= meshRefreshRate;
             //Debug.Log(count);
 
             if (skinnedRenders == null)

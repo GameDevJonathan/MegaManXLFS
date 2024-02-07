@@ -25,8 +25,9 @@ public class HighWayInteraction : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        
+        //Debug.Log(other);
 
+        if (other == null) return;
 
         if (other.gameObject.tag == "Enemy" && Enemy)
         {
@@ -38,5 +39,21 @@ public class HighWayInteraction : MonoBehaviour
         {
             _rb.useGravity = false;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //Debug.Log("Trigger method:: " + other);
+        if (other.tag != "Player") return;
+        other.TryGetComponent<PlayerStateMachine>(out PlayerStateMachine player);
+        player.transform.root.parent = transform.root.parent;        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        //Debug.Log("Trigger method:: " + other);
+        if (other.tag != "Player") return;
+        other.TryGetComponent<PlayerStateMachine>(out PlayerStateMachine player);
+        player.transform.root.parent = null;
     }
 }

@@ -18,6 +18,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public List<ParkourAction> ParkourActions { get; private set; }
     [field: SerializeField] public Targeter Targeter { get; private set; }
     [field: SerializeField] public EnviromentScaner EnviromentScaner { get; private set; }
+    [field: SerializeField] public MeshTrail MeshTrail { get; private set; }
     #endregion
 
     #region Weapons, Start Positions and IK
@@ -30,7 +31,7 @@ public class PlayerStateMachine : StateMachine
 
     [field: Header("Transforms For Start Positions")]
     [field: SerializeField] Transform[] startTransform;
-    [SerializeField] enum enStartPositions { Stairs = 0, Highway, TollBooth }
+    [SerializeField] enum enStartPositions { Stairs = 0, Highway, TollBooth, JumpPoint }
     [SerializeField] enStartPositions enStartPosition = enStartPositions.TollBooth;
 
 
@@ -172,7 +173,7 @@ public class PlayerStateMachine : StateMachine
 
         Rigidbody body = hit.collider.attachedRigidbody;
 
-        if (body == null || body.isKinematic)
+        if (body == null)
         {
             return;
         }
@@ -197,9 +198,10 @@ public class PlayerStateMachine : StateMachine
         WallRun = GetComponent<WallRun>();
         Targeter = GetComponentInChildren<Targeter>();
         EnviromentScaner = GetComponent<EnviromentScaner>();
+        MeshTrail = GetComponent<MeshTrail>();
     }
 
-   
+
 
 
 }

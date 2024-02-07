@@ -235,8 +235,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023104357}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0052532055, y: -0.993179, z: 0.10544463, w: 0.04948913}
-  m_LocalPosition: {x: 1.6648791, y: -1.0787065, z: 17.038834}
+  m_LocalRotation: {x: 0.006546523, y: -0.99007744, z: 0.13141502, w: 0.049334638}
+  m_LocalPosition: {x: 1.6491241, y: -0.42442107, z: 16.88108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -309,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 1247915641}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000166893, y: 0.00000047683716, z: 12.854958}
+  m_LocalPosition: {x: 0.0000026226044, y: -0.00000071525574, z: 12.854964}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76135,7 +76135,7 @@ Transform:
   m_GameObject: {fileID: 3140827166338436460}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: 0.6473537, y: -2.4354684, z: 6.854032}
+  m_LocalPosition: {x: 0.6493815, y: -2.4354243, z: 6.8743424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76209,7 +76209,7 @@ Transform:
   m_GameObject: {fileID: 3140827166475716200}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: -0.018251002, y: -2.0011895, z: 6.327845}
+  m_LocalPosition: {x: -0.01840806, y: -2.0011919, z: 6.3262806}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78240,6 +78240,7 @@ GameObject:
   - component: {fileID: 8432624091962224746}
   - component: {fileID: 8432624091962224744}
   - component: {fileID: 8432624091962224751}
+  - component: {fileID: 4689896085313859973}
   - component: {fileID: 8432624091962224749}
   - component: {fileID: 8432624091962224748}
   - component: {fileID: 8432624091962224739}
@@ -78247,7 +78248,6 @@ GameObject:
   - component: {fileID: 3088715868673973414}
   - component: {fileID: 3088715868673973431}
   - component: {fileID: 2024792342}
-  - component: {fileID: 4689896085313859973}
   m_Layer: 8
   m_Name: MegaManX
   m_TagString: Player
@@ -78483,6 +78483,24 @@ MonoBehaviour:
   gravity: 0
   Normal: 30
   wallSlideSpeed: 1
+--- !u!114 &4689896085313859973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9101038464563899086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfeef1f09b503454586f1446ddf0c4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardRayOffset: {x: 0, y: 0.25, z: 0}
+  forwardRayLength: 1
+  heightRayLength: 5
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 2097152
 --- !u!114 &8432624091962224749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78691,24 +78709,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitBox: {fileID: 811501541}
---- !u!114 &4689896085313859973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9101038464563899086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfeef1f09b503454586f1446ddf0c4b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardRayOffset: {x: 0, y: 0.25, z: 0}
-  forwardRayLength: 1
-  heightRayLength: 5
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 2097152
 --- !u!1001 &3140827166527926871
 PrefabInstance:
   m_ObjectHideFlags: 0

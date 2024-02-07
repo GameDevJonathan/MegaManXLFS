@@ -27,7 +27,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        Debug.Log($"Fall State State::{stateMachine.WallRun.CheckForGround()}");
+        //Debug.Log($"Fall State State::{stateMachine.WallRun.CheckForGround()}");
 
 
         if (stateMachine.WallRun.AboveGround() && stateMachine.WallRun.HitWall())
@@ -62,7 +62,7 @@ public class PlayerFallState : PlayerBaseState
 
     public override void Exit()
     {
-
+        stateMachine.MeshTrail.isTrailActive = false;
     }
 
 
