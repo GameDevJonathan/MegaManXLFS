@@ -33,6 +33,7 @@ TagManager:
   - Target
   - Projectile
   - Fence
+  - Wall
   layers:
   - Default
   - TransparentFX

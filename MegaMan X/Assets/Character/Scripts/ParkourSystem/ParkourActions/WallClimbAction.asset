@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9b90ac363146c4296d080f9127ebac, type: 3}
   m_Name: WallClimbAction
   m_EditorClassIdentifier: 
-  animName: 
-  ObstacleTag: 
+  animName: WallClimb
+  ObstacleTag: Wall
   minHeight: 0
-  maxHeight: 0
-  rotateToObstacle: 0
+  maxHeight: 2.65
+  rotateToObstacle: 1
   enableTargetMatching: 1
-  matchBodyPart: 0
-  matchStartTime: 0
-  matchEndTime: 0
-  <TargetRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+  matchBodyPart: 5
+  matchStartTime: 0.26
+  matchEndTime: 0.32
+  <TargetRotation>k__BackingField: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
