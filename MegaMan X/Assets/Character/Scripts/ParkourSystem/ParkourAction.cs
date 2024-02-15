@@ -21,16 +21,15 @@ public class ParkourAction : ScriptableObject
 
     public bool CheckIfPossible(ObstacleHitData hitdata, Transform player)
     {
-        Debug.Log("Check is possible::: hitdata: " + hitdata);
-        Debug.Log("Check is possible::: transform: " + player);
-        //check tag
         if (!string.IsNullOrEmpty(ObstacleTag) && hitdata.forwardHit.transform.tag != ObstacleTag)
             return false;
+        Debug.Log("We passed the obstacle tag check");
 
         //height tag
         //float height = hitdata.heightHit.point.y - player.transform.position.y;
         float height = hitdata.heightHit.collider.bounds.size.y;
-        Debug.Log(height);
+        Debug.Log("hitdata obstacle collider height: " + hitdata.heightHit.collider.bounds);
+        Debug.Log("hitdata obstacle height: " + height);
         if(height < minHeight || height > maxHeight)
         {
             return false;

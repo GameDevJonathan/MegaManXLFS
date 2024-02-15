@@ -235,8 +235,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023104357}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.006546523, y: -0.99007744, z: 0.13141502, w: 0.049334638}
-  m_LocalPosition: {x: 1.6491241, y: -0.42442107, z: 16.88108}
+  m_LocalRotation: {x: 0.0065465327, y: -0.9900775, z: 0.13141501, w: 0.049334705}
+  m_LocalPosition: {x: 1.6491246, y: -0.42442107, z: 16.88108}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -309,7 +309,7 @@ Transform:
   m_GameObject: {fileID: 1247915641}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0000026226044, y: -0.00000071525574, z: 12.854964}
+  m_LocalPosition: {x: 0.00000166893, y: -0.00000166893, z: 12.854966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76135,7 +76135,7 @@ Transform:
   m_GameObject: {fileID: 3140827166338436460}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: 0.6493815, y: -2.4354243, z: 6.8743424}
+  m_LocalPosition: {x: 0.6493842, y: -2.4354239, z: 6.8743577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -76209,7 +76209,7 @@ Transform:
   m_GameObject: {fileID: 3140827166475716200}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000598179, y: 0.99868894, z: 0.011984794, w: -0.049763627}
-  m_LocalPosition: {x: -0.01840806, y: -2.0011919, z: 6.3262806}
+  m_LocalPosition: {x: -0.018407583, y: -2.0011919, z: 6.32628}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -78332,8 +78332,10 @@ MonoBehaviour:
     <ComboAttackTime>k__BackingField: 1
   <ParkourActions>k__BackingField:
   - {fileID: 11400000, guid: 56975f718539f5b4eb9ddd32b6534cb4, type: 2}
+  - {fileID: 11400000, guid: 4b49fd43f7da6c343959daf7c8221b48, type: 2}
   <Targeter>k__BackingField: {fileID: 0}
   <EnviromentScaner>k__BackingField: {fileID: 0}
+  <MeshTrail>k__BackingField: {fileID: 0}
   <FirePoint>k__BackingField: {fileID: 3140827165546619144}
   <Sockets>k__BackingField:
   - {fileID: 3088715869317675476}
@@ -78344,6 +78346,7 @@ MonoBehaviour:
   - {fileID: 1079946990457772, guid: db78a9e393bbf7f4383dece22bd1b56b, type: 3}
   <LightSaber>k__BackingField: {fileID: 4431287294407034987}
   startTransform:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -78495,8 +78498,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfeef1f09b503454586f1446ddf0c4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardRayOffset: {x: 0, y: 0.25, z: 0}
-  forwardRayLength: 1
+  forwardRayOffset: {x: 0, y: 1, z: 0}
+  forwardRayLength: 1.5
   heightRayLength: 5
   obstacleLayer:
     serializedVersion: 2
@@ -78521,7 +78524,7 @@ MonoBehaviour:
     m_Bits: 1048576
   GroundCheck:
     serializedVersion: 2
-    m_Bits: 1048577
+    m_Bits: 3670017
   wallRunForce: 15
   wallRunTime: 0
   maxWallRunTime: 0

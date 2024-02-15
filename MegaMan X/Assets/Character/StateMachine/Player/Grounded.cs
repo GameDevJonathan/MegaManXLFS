@@ -24,7 +24,7 @@ public class Grounded : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("Entered Grounded State");
+        
         stateMachine.rig.weight = 0f;
 
         if (!shouldFade)
@@ -42,23 +42,18 @@ public class Grounded : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
-        var hitData = stateMachine.EnviromentScaner.ObstacleCheck();
-        Debug.Log("grounded state:: hitdata variable: " + hitData);
-        
+        var hitData = stateMachine.EnviromentScaner.ObstacleCheck();        
 
         if (grounded)
         {
             //Debug.Log("Grounded State :: I am grounded");
             if (hitData.forwardHitFound)
             {
-                Debug.Log("Grounded state :: hitforward found");
+                
                 if (stateMachine.InputReader.MovementValue.magnitude > 0.1f)
                 {
                     foreach (var action in stateMachine.ParkourActions)
                     {
-                        Debug.Log("Variable check: " + hitData);
-                        Debug.Log("Variable check: " + stateMachine.transform);
-                        
                         if(action.CheckIfPossible(hitData,stateMachine.transform))
                         Debug.Log(action.CheckIfPossible(hitData, stateMachine.transform));
                         if (action.CheckIfPossible(hitData, stateMachine.transform))

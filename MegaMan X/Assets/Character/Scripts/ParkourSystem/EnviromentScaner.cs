@@ -36,7 +36,7 @@ public class EnviromentScaner : MonoBehaviour
             Debug.Log("Enviorment Scanner:: hitdata transform name " + hitdata.forwardHit.transform.name);
             Debug.Log("Enviorment Scanner:: hitdata hit height " + hitdata.heightHit.point.y);
         }
-        //Debug.Log(typeof(ObstacleHitData));
+        
 
         return hitdata;
     }

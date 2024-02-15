@@ -11,18 +11,20 @@ public class PlayerTargetingState : PlayerBaseState
     private Transform debugTransform;
     Vector2 delta;
     private float angle;
-    
-    
+    private bool dodging = false;
+
+
 
     //shot values
     private float _lastFireTime = -1f;
     private float _coolDownTime = .1f;
 
 
-    public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine)
+    public PlayerTargetingState(PlayerStateMachine stateMachine, bool dodging = false) : base(stateMachine)
     {
         this.LockOnTargetMask = stateMachine.lockOnTargetColliderMask;
-        debugTransform = stateMachine.debugTransform;        
+        debugTransform = stateMachine.debugTransform;
+        this.dodging = dodging;
     }
 
 
@@ -101,7 +103,7 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine._TargetCamUtil.SetActive(false);
         debugTransform.gameObject.SetActive(false);
         stateMachine.rig.weight = 0f;
-        stateMachine.InputReader.Targeting = false;        
+        stateMachine.InputReader.Targeting = (dodging) ? true : false;        
         stateMachine.InputReader.CancelEvent -= OnCancel;
         stateMachine.InputReader.DodgeEvent -= OnDodge;
     }
@@ -118,6 +120,7 @@ public class PlayerTargetingState : PlayerBaseState
         debugTransform.gameObject.SetActive(false);
         stateMachine.Targeter.Cancel();
         //stateMachine.InputReader.ResetCamera();
+        dodging = false;
         stateMachine.SwitchState(new Grounded(stateMachine));
     }
 
@@ -125,7 +128,9 @@ public class PlayerTargetingState : PlayerBaseState
     {
         Debug.Log($"Joystick angle: {angle}");
         Vector2 move = stateMachine.InputReader.MovementValue;
-        stateMachine.SwitchState(new PlayerDodgingState(stateMachine,move,angle));
+        Debug.Log($"Dodging: {dodging}");
+        dodging = true;
+        stateMachine.SwitchState(new PlayerDodgingState(stateMachine,move,angle, dodging));
         return;
     }
 

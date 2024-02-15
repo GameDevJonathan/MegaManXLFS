@@ -11,11 +11,14 @@ public class PlayerDodgingState : PlayerBaseState
     private readonly int DodgeLeftHash = Animator.StringToHash("DodgeLeft");
     private readonly int DodgeBackHash = Animator.StringToHash("DodgeBack");
     private const float CrossFadeDuration = 0.1f;
+    bool stillTargeting;
 
-    public PlayerDodgingState(PlayerStateMachine stateMachine, Vector2 dodgeInput, float angle) : base(stateMachine)
+    public PlayerDodgingState(PlayerStateMachine stateMachine, Vector2 dodgeInput, float angle, bool stillTargeting = false) : base(stateMachine)
     {
         this.angle = angle;
         this.dodgeInput = dodgeInput;
+        this.stillTargeting = stillTargeting;
+
 
     }
 
@@ -79,7 +82,7 @@ public class PlayerDodgingState : PlayerBaseState
     {
         if (GetNormalizedTime(stateMachine.Animator, "Dodge") > 1)
         {
-            stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+            stateMachine.SwitchState(new PlayerTargetingState(stateMachine, stillTargeting));
             return;
         }
     }
