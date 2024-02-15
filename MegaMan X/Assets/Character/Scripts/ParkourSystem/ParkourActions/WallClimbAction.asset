@@ -15,10 +15,10 @@ MonoBehaviour:
   animName: WallClimb
   ObstacleTag: Wall
   minHeight: 0
-  maxHeight: 2.65
+  maxHeight: 3.1
   rotateToObstacle: 1
   enableTargetMatching: 1
   matchBodyPart: 5
   matchStartTime: 0.26
   matchEndTime: 0.32
-  <TargetRotation>k__BackingField: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  <TargetRotation>k__BackingField: {x: 0, y: -0.7071067, z: -0, w: 0.7071068}

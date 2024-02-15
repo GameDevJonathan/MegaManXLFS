@@ -21,6 +21,8 @@ public class ParkourAction : ScriptableObject
 
     public bool CheckIfPossible(ObstacleHitData hitdata, Transform player)
     {
+        Debug.Log("Check is possible::: hitdata: " + hitdata);
+        Debug.Log("Check is possible::: transform: " + player);
         //check tag
         if (!string.IsNullOrEmpty(ObstacleTag) && hitdata.forwardHit.transform.tag != ObstacleTag)
             return false;

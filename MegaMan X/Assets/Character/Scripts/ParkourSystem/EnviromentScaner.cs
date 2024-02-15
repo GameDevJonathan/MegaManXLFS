@@ -33,8 +33,8 @@ public class EnviromentScaner : MonoBehaviour
 
         if (hitdata.forwardHitFound)
         {
-            Debug.Log("Enviorment Scanner:: Debug line " + hitdata.forwardHit.transform.name);
-            Debug.Log("Enviorment Scanner:: Debug line " + hitdata.heightHit.point.y);
+            Debug.Log("Enviorment Scanner:: hitdata transform name " + hitdata.forwardHit.transform.name);
+            Debug.Log("Enviorment Scanner:: hitdata hit height " + hitdata.heightHit.point.y);
         }
         //Debug.Log(typeof(ObstacleHitData));
 

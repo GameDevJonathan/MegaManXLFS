@@ -56,6 +56,10 @@ public class Grounded : PlayerBaseState
                 {
                     foreach (var action in stateMachine.ParkourActions)
                     {
+                        Debug.Log("Variable check: " + hitData);
+                        Debug.Log("Variable check: " + stateMachine.transform);
+                        
+                        if(action.CheckIfPossible(hitData,stateMachine.transform))
                         Debug.Log(action.CheckIfPossible(hitData, stateMachine.transform));
                         if (action.CheckIfPossible(hitData, stateMachine.transform))
                         {
