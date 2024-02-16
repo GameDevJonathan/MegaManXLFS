@@ -4359,6 +4359,79 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 1.5, y: 1.5, z: 1.5}
+--- !u!1001 &1109669333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.034765
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 27.878801
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000000037748947
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1.7112913e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7225103668876816687, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c9fd9ce3d63d07247a04875ad567f995, type: 2}
+    - target: {fileID: 919132149155446097, guid: d385ce2bb930cb641906b2c746f85dae,
+        type: 3}
+      propertyPath: m_Name
+      value: Zero.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d385ce2bb930cb641906b2c746f85dae, type: 3}
 --- !u!1 &1178798100
 GameObject:
   m_ObjectHideFlags: 0
@@ -6781,11 +6854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.049489193
+      value: -0.049489185
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0052532116
+      value: -0.00525321
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.y
@@ -6793,7 +6866,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.105444595
+      value: -0.10544459
       objectReference: {fileID: 0}
     - target: {fileID: 1247915642, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7835,3 +7908,4 @@ SceneRoots:
   - {fileID: 714143249}
   - {fileID: 148502640}
   - {fileID: 1979573709}
+  - {fileID: 1109669333}
