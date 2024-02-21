@@ -319,6 +319,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighwaySection
       objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2249,7 +2254,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!4 &338420903
 Transform:
@@ -3056,6 +3061,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 2980595663508071583, guid: 712fe85b04581134785d09d135c46870,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 7112375365048784364, guid: 712fe85b04581134785d09d135c46870,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3453,6 +3463,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HighwaySection
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4322,7 +4337,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &650256568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12457,6 +12472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighwaySection (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13264,6 +13284,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighwaySection_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13563,6 +13588,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21460,20 +21490,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0065465476
+      value: 0.0065465327
       objectReference: {fileID: 0}
     - target: {fileID: 1023104358, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.131415
+      value: 0.13141501
       objectReference: {fileID: 0}
     - target: {fileID: 1247915642, guid: f7c19439c933d8d48bf6d07ecd94aedb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000166893
+      value: -0.0000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 1946163334574861593, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
       propertyPath: m_ChildCameras.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3140827167375727754, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
@@ -21529,6 +21559,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: -----PlayerRig----
+      objectReference: {fileID: 0}
+    - target: {fileID: 3140827167375727755, guid: f7c19439c933d8d48bf6d07ecd94aedb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8432624091962224750, guid: f7c19439c933d8d48bf6d07ecd94aedb,
         type: 3}
@@ -23552,6 +23587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Highways06_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2c9a9da45fb864962be64eb98d88c292, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2c9a9da45fb864962be64eb98d88c292, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6724632
@@ -23759,6 +23798,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HighwaySection (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24191,6 +24235,74 @@ Transform:
   - {fileID: 812440266}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1403437098
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -537.92
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -21.857
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.56
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 16a7b32c70c695341bb8dcb4b35710e0,
+        type: 3}
+      propertyPath: m_Name
+      value: zerocc4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 16a7b32c70c695341bb8dcb4b35710e0, type: 3}
 --- !u!1 &1410867720
 GameObject:
   m_ObjectHideFlags: 0
@@ -24434,6 +24546,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Highways06_03_transformed (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843789999950766039, guid: f88f9c8ed2b1d9640a31c0870e0dda77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -28848,6 +28965,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -31874,6 +31996,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighwaySection
       objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -32208,6 +32335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HighwaySection_1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844431815498882671, guid: 5c46d4e69d5dd4e4fbf8d0bbe421c401,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36882,6 +37014,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 2980595663508071583, guid: 712fe85b04581134785d09d135c46870,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 7112375365048784364, guid: 712fe85b04581134785d09d135c46870,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37832,7 +37969,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 126
   m_IsActive: 1
 --- !u!65 &4934398940206651564
 BoxCollider:
@@ -38376,6 +38513,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Highways06_03_transformed
       objectReference: {fileID: 0}
+    - target: {fileID: 5843789999950766039, guid: f88f9c8ed2b1d9640a31c0870e0dda77,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -38685,6 +38827,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4179846872429160522, guid: b22e0b81a131142479f65a40c97074b5,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 4934398939696771140, guid: b22e0b81a131142479f65a40c97074b5,
         type: 3}
       propertyPath: m_Enabled
@@ -38869,3 +39016,4 @@ SceneRoots:
   - {fileID: 683013789}
   - {fileID: 4858661856625184}
   - {fileID: 1754745779}
+  - {fileID: 1403437098}
