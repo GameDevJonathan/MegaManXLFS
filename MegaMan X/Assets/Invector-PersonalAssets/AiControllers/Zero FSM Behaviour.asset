@@ -23,11 +23,11 @@ MonoBehaviour:
   isSelected: 0
   nodeRect:
     serializedVersion: 2
-    x: 450
-    y: 200
+    x: 305
+    y: 265
     width: 150
     height: 30
-  positionRect: {x: 450, y: 200}
+  positionRect: {x: 305, y: 265}
   rectWidth: 150
   editingName: 0
   nodeColor: {r: 0, g: 1, b: 1, a: 1}
@@ -53,18 +53,163 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc604039227434d8b4e63ebc5e74a5, type: 3}
   m_Name: Zero FSM Behaviour
   m_EditorClassIdentifier: 
-  selectedNode: {fileID: 0}
+  selectedNode: {fileID: 6617190770934678591}
   wantConnection: 0
   connectionNode: {fileID: 0}
-  showProperties: 0
+  showProperties: 1
   states:
   - {fileID: 8347871722774419064}
   - {fileID: -2155632297162250296}
-  panOffset: {x: 0, y: 0}
+  - {fileID: 7478782538069001100}
+  - {fileID: 6617190770934678591}
+  panOffset: {x: -140, y: 65}
   overNode: 0
   actions: []
-  decisions: []
+  decisions:
+  - {fileID: 0}
   icon: {fileID: 0}
+--- !u!114 &1238448114157446828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca162665382f2246a0178586140ab0c, type: 3}
+  m_Name: Can See Target
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  editingName: 0
+  trueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  falseRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  selectedTrue: 0
+  selectedFalse: 0
+--- !u!114 &6617190770934678591
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b73a6f13cf18194e889cafd0287a9ec, type: 3}
+  m_Name: Chase
+  m_EditorClassIdentifier: 
+  description: Chase State
+  selectedDecisionIndex: 0
+  canRemove: 1
+  canTranstTo: 1
+  canSetAsDefault: 1
+  canEditName: 1
+  canEditColor: 1
+  isOpen: 0
+  isSelected: 1
+  nodeRect:
+    serializedVersion: 2
+    x: 515
+    y: 275
+    width: 150
+    height: 30
+  positionRect: {x: 515, y: 275}
+  rectWidth: 150
+  editingName: 1
+  nodeColor: {r: 0, g: 0.050224517, b: 0.4245283, a: 1}
+  resizeLeft: 0
+  resizeRight: 0
+  inDrag: 0
+  resetCurrentDestination: 1
+  transitions: []
+  actions: []
+  useActions: 1
+  useDecisions: 1
+  parentGraph: {fileID: 11400000}
+  defaultTransition: {fileID: 0}
+--- !u!114 &7478782538069001100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b73a6f13cf18194e889cafd0287a9ec, type: 3}
+  m_Name: Idle
+  m_EditorClassIdentifier: 
+  description: Idle State
+  selectedDecisionIndex: 0
+  canRemove: 1
+  canTranstTo: 1
+  canSetAsDefault: 1
+  canEditName: 1
+  canEditColor: 1
+  isOpen: 0
+  isSelected: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 525
+    y: 165
+    width: 150
+    height: 30
+  positionRect: {x: 525, y: 165}
+  rectWidth: 150
+  editingName: 1
+  nodeColor: {r: 1, g: 1, b: 1, a: 1}
+  resizeLeft: 0
+  resizeRight: 0
+  inDrag: 0
+  resetCurrentDestination: 1
+  transitions:
+  - decisions:
+    - trueValue: 1
+      decision: {fileID: 1238448114157446828}
+      isValid: 0
+      validated: 0
+    trueState: {fileID: 6617190770934678591}
+    falseState: {fileID: 0}
+    muteTrue: 0
+    muteFalse: 0
+    transitionType: 0
+    transitionDelay: 0
+    parentState: {fileID: 7478782538069001100}
+    trueRect:
+      serializedVersion: 2
+      x: 600
+      y: 180
+      width: 0
+      height: 0
+    falseRect:
+      serializedVersion: 2
+      x: 600
+      y: 180
+      width: 0
+      height: 0
+    selectedTrue: 0
+    selectedFalse: 0
+    trueSideRight: 0
+    falseSideRight: 0
+    decisionEditor: {fileID: 0}
+    isOpen: 0
+    scroolView: {x: 0, y: 0, z: 0}
+    sameTargetCount: 0
+  actions: []
+  useActions: 1
+  useDecisions: 1
+  parentGraph: {fileID: 11400000}
+  defaultTransition: {fileID: 0}
 --- !u!114 &8347871722774419064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,11 +233,11 @@ MonoBehaviour:
   isSelected: 0
   nodeRect:
     serializedVersion: 2
-    x: 450
-    y: 100
+    x: 305
+    y: 165
     width: 150
     height: 30
-  positionRect: {x: 450, y: 100}
+  positionRect: {x: 305, y: 165}
   rectWidth: 150
   editingName: 0
   nodeColor: {r: 0, g: 1, b: 0, a: 1}
@@ -105,4 +250,4 @@ MonoBehaviour:
   useActions: 0
   useDecisions: 0
   parentGraph: {fileID: 11400000}
-  defaultTransition: {fileID: 0}
+  defaultTransition: {fileID: 7478782538069001100}

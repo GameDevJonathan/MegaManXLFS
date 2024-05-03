@@ -729,7 +729,7 @@ MonoBehaviour:
   openCloseEvents: 0
   openCloseWindow: 1
   selectedToolbar: 0
-  _fsmBehaviour: {fileID: 11400000, guid: 82728ccc37619fc4c967cbd4651902dd, type: 2}
+  _fsmBehaviour: {fileID: 11400000, guid: 27b0f76830d4c1e4eaf154e507a48b0e, type: 2}
   _stop: 0
   _debugMode: 0
   onStartFSM:
@@ -4363,7 +4363,7 @@ MonoBehaviour:
   useStrongAttack: 1
   distanceToAttack: 1
   attackID: 1
-  movesetID: 1
+  movesetID: 2
   staminaCost: 15
   staminaRecoveryDelay: 1
   defenseRate: 85

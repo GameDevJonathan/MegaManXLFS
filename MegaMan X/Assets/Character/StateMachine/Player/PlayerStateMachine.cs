@@ -31,8 +31,9 @@ public class PlayerStateMachine : StateMachine
 
     [field: Header("Transforms For Start Positions")]
     [field: SerializeField] Transform[] startTransform;
-    [SerializeField] enum enStartPositions { Stairs = 0, Highway, TollBooth, JumpPoint }
+    [SerializeField] enum enStartPositions { Stairs = 0, Highway, TollBooth, JumpPoint, BossFight}
     [SerializeField] enStartPositions enStartPosition = enStartPositions.TollBooth;
+    [SerializeField] int startPosition = 0;
 
 
     [field: Header("Special Beam")]
@@ -91,22 +92,38 @@ public class PlayerStateMachine : StateMachine
 
         if (startTransform[0] != null)
         {
-            switch (enStartPosition)
-            {
-                case enStartPositions.TollBooth:
-                    transform.parent.position = startTransform[(int)enStartPositions.TollBooth].position;
-                    break;
+            startPosition = (int)enStartPosition;
+            transform.parent.position = startTransform[startPosition].position;
+            
+            //switch (enStartPosition)
+            //{
+            //    case enStartPositions.TollBooth:
+            //        transform.parent.position = startTransform[(int)enStartPositions.TollBooth].position;
+            //        break;
 
-                case enStartPositions.Highway:
-                    transform.parent.position = startTransform[(int)enStartPositions.Highway].position;
+            //    case enStartPositions.Highway:
+            //        transform.parent.position = startTransform[(int)enStartPositions.Highway].position;
                     
-                    break;
+            //        break;
 
-                case enStartPositions.Stairs:
-                    transform.parent.position = startTransform[(int)enStartPositions.Stairs].position;
+            //    case enStartPositions.Stairs:
+            //        transform.parent.position = startTransform[(int)enStartPositions.Stairs].position;
                     
-                    break;
-            }
+            //        break; 
+                
+            //    case enStartPositions.JumpPoint:
+            //        transform.parent.position = startTransform[(int)enStartPositions.JumpPoint].position;
+                    
+            //        break;
+
+
+            //    case enStartPositions.BossFight:
+            //        transform.parent.position = startTransform[(int)enStartPositions.BossFight].position;
+
+            //        break;
+
+
+            //}
         }
     }
 

@@ -25,7 +25,11 @@ public class Grounded : PlayerBaseState
     public override void Enter()
     {
         
-        stateMachine.rig.weight = 0f;
+        if (stateMachine.rig != null)
+        {
+            stateMachine.rig.weight = 0f;
+        }
+       
 
         if (!shouldFade)
             stateMachine.Animator.Play(FreeLookBlendTreeHash);
@@ -49,7 +53,6 @@ public class Grounded : PlayerBaseState
             //Debug.Log("Grounded State :: I am grounded");
             if (hitData.forwardHitFound)
             {
-                
                 if (stateMachine.InputReader.MovementValue.magnitude > 0.1f)
                 {
                     foreach (var action in stateMachine.ParkourActions)
