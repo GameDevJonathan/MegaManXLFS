@@ -17,6 +17,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     [SerializeField, Range(0, 1)] private float _lerpTime = 1f;
     [SerializeField] private float _Time = 0f;
     [SerializeField] private float _InitialCameraYaw = 0f;
+    [SerializeField] private float _InitialCameraPitch = 0f;
     private Coroutine _resetCamera;
     [SerializeField] private bool _softReset = false;
     #endregion
@@ -90,6 +91,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
+    public GameObject CinemachineInitPos;
 
     [Tooltip("How far in degrees can you move the camera up")]
     public float TopClamp = 70.0f;
@@ -134,7 +136,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
         controls.Player.Enable();
 
         _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-        _InitialCameraYaw = _cinemachineTargetYaw;
+        //_InitialCameraYaw = _cinemachineTargetYaw;
 
         _material.SetFloat(_targetRef, _targetValue);
     }
@@ -144,6 +146,9 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     private void Update()
     {
         _targetValue = Mathf.Clamp(_targetValue, .1f, 1f);
+
+        _InitialCameraYaw = CinemachineInitPos.transform.rotation.eulerAngles.y;
+        _InitialCameraPitch = CinemachineInitPos.transform.rotation.eulerAngles.x;
 
         if (controls.Player.ResetCamera.WasPressedThisFrame() && _softReset == false)
         {
@@ -459,11 +464,12 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     IEnumerator SoftReset()
     {
-        while (_cinemachineTargetYaw != _InitialCameraYaw)
+        while ((_cinemachineTargetYaw != _InitialCameraYaw) && (_cinemachineTargetPitch != _InitialCameraPitch))
         {
             yield return null;
             Debug.Log($"Appoximately: {Mathf.Approximately(_cinemachineTargetYaw, _InitialCameraYaw)}");
             _cinemachineTargetYaw = Mathf.Lerp(_cinemachineTargetYaw, _InitialCameraYaw, _Time);
+            _cinemachineTargetPitch = Mathf.Lerp(_cinemachineTargetPitch, _InitialCameraPitch, _Time);
             _Time += Time.deltaTime * _lerpSpeed;
         }
         _softReset = false;
