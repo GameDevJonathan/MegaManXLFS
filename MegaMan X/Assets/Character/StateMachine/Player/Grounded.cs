@@ -36,6 +36,9 @@ public class Grounded : PlayerBaseState
         else
             stateMachine.Animator.CrossFadeInFixedTime(FreeLookBlendTreeHash, CrossFadeDuration);
 
+        
+        stateMachine.InputReader.Targeting = false;
+
         stateMachine.InputReader.JumpEvent += OnJump;
         stateMachine.InputReader.DashEvent += OnDash;
         stateMachine.InputReader.EquipEvent += OnEquip;
