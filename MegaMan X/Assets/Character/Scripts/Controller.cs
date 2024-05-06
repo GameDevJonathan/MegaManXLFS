@@ -206,8 +206,8 @@ public class Controller : MonoBehaviour
         {
             float deltaTimeMultiplier = Time.deltaTime;
 
-            _cinemachineTargetYaw -= CameraValue.x * deltaTimeMultiplier * CameraRotationSpeed;
-            _cinemachineTargetPitch -= CameraValue.y * deltaTimeMultiplier * CameraRotationSpeed;
+            _cinemachineTargetYaw -= CameraValue.x * (deltaTimeMultiplier * CameraRotationSpeed);
+            _cinemachineTargetPitch -= CameraValue.y * (deltaTimeMultiplier * CameraRotationSpeed);
         }
 
         // clamp our rotations so our values are limited 360 degrees

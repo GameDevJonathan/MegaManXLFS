@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8840648123674668440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5ac94e5e12f6248b8bbf505de7edad, type: 3}
+  m_Name: Find Target
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  executionType: 3
+  editingName: 0
+  checkForObstacles: 1
 --- !u!114 &-2155632297162250296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19,15 +35,15 @@ MonoBehaviour:
   canSetAsDefault: 0
   canEditName: 0
   canEditColor: 0
-  isOpen: 0
+  isOpen: 1
   isSelected: 0
   nodeRect:
     serializedVersion: 2
-    x: 305
-    y: 265
+    x: 125
+    y: 100
     width: 150
-    height: 30
-  positionRect: {x: 305, y: 265}
+    height: 62
+  positionRect: {x: 125, y: 100}
   rectWidth: 150
   editingName: 0
   nodeColor: {r: 0, g: 1, b: 1, a: 1}
@@ -35,12 +51,84 @@ MonoBehaviour:
   resizeRight: 0
   inDrag: 0
   resetCurrentDestination: 0
-  transitions: []
+  transitions:
+  - decisions:
+    - trueValue: 1
+      decision: {fileID: 1238448114157446828}
+      isValid: 0
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: 1189771365066042295}
+      isValid: 0
+      validated: 0
+    - trueValue: 1
+      decision: {fileID: 8477135711447065602}
+      isValid: 0
+      validated: 0
+    - trueValue: 1
+      decision: {fileID: -802270562616884173}
+      isValid: 0
+      validated: 0
+    trueState: {fileID: 7706404350453358325}
+    falseState: {fileID: 0}
+    muteTrue: 0
+    muteFalse: 0
+    transitionType: 0
+    transitionDelay: 0
+    parentState: {fileID: -2155632297162250296}
+    trueRect:
+      serializedVersion: 2
+      x: 275
+      y: 130
+      width: 10
+      height: 10
+    falseRect:
+      serializedVersion: 2
+      x: 275
+      y: 140
+      width: 10
+      height: 10
+    selectedTrue: 0
+    selectedFalse: 0
+    trueSideRight: 1
+    falseSideRight: 1
+    decisionEditor: {fileID: 0}
+    isOpen: 0
+    scroolView: {x: 0, y: 0, z: 0}
+    sameTargetCount: 0
   actions: []
   useActions: 0
   useDecisions: 1
   parentGraph: {fileID: 11400000}
   defaultTransition: {fileID: 0}
+--- !u!114 &-802270562616884173
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 879c370fa5dfc05498f8a4ea02079370, type: 3}
+  m_Name: Is in Combat
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  editingName: 0
+  trueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  falseRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  selectedTrue: 0
+  selectedFalse: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5fc604039227434d8b4e63ebc5e74a5, type: 3}
   m_Name: Zero FSM Behaviour
   m_EditorClassIdentifier: 
-  selectedNode: {fileID: 6617190770934678591}
+  selectedNode: {fileID: 7706404350453358325}
   wantConnection: 0
   connectionNode: {fileID: 0}
   showProperties: 1
@@ -62,12 +150,46 @@ MonoBehaviour:
   - {fileID: -2155632297162250296}
   - {fileID: 7478782538069001100}
   - {fileID: 6617190770934678591}
-  panOffset: {x: -140, y: 65}
+  - {fileID: 7706404350453358325}
+  panOffset: {x: -285, y: -70}
   overNode: 0
-  actions: []
+  actions:
+  - {fileID: 0}
+  - {fileID: 0}
   decisions:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   icon: {fileID: 0}
+--- !u!114 &1189771365066042295
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb70193d892db49468a9f5ea453bdd18, type: 3}
+  m_Name: Check if Target is Dead
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  editingName: 0
+  trueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  falseRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  selectedTrue: 0
+  selectedFalse: 0
 --- !u!114 &1238448114157446828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -96,6 +218,24 @@ MonoBehaviour:
     height: 10
   selectedTrue: 0
   selectedFalse: 0
+--- !u!114 &5041339166138805247
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b53ee809e668dd44b8a4ab37abd35772, type: 3}
+  m_Name: Chase Target
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  executionType: 1
+  editingName: 0
+  useStrafeMovement: 0
+  updateRotationInStrafe: 0
+  speed: 2
 --- !u!114 &6617190770934678591
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,15 +255,15 @@ MonoBehaviour:
   canSetAsDefault: 1
   canEditName: 1
   canEditColor: 1
-  isOpen: 0
-  isSelected: 1
+  isOpen: 1
+  isSelected: 0
   nodeRect:
     serializedVersion: 2
-    x: 515
-    y: 275
+    x: 355
+    y: 165
     width: 150
-    height: 30
-  positionRect: {x: 515, y: 275}
+    height: 84
+  positionRect: {x: 355, y: 165}
   rectWidth: 150
   editingName: 1
   nodeColor: {r: 0, g: 0.050224517, b: 0.4245283, a: 1}
@@ -131,8 +271,85 @@ MonoBehaviour:
   resizeRight: 0
   inDrag: 0
   resetCurrentDestination: 1
-  transitions: []
-  actions: []
+  transitions:
+  - decisions:
+    - trueValue: 0
+      decision: {fileID: 1238448114157446828}
+      isValid: 1
+      validated: 0
+    trueState: {fileID: 7478782538069001100}
+    falseState: {fileID: 0}
+    muteTrue: 0
+    muteFalse: 0
+    transitionType: 0
+    transitionDelay: 2
+    parentState: {fileID: 6617190770934678591}
+    trueRect:
+      serializedVersion: 2
+      x: 345
+      y: 195
+      width: 10
+      height: 10
+    falseRect:
+      serializedVersion: 2
+      x: 505
+      y: 205
+      width: 10
+      height: 10
+    selectedTrue: 0
+    selectedFalse: 0
+    trueSideRight: 0
+    falseSideRight: 1
+    decisionEditor: {fileID: 0}
+    isOpen: 0
+    scroolView: {x: 0, y: 0, z: 0}
+    sameTargetCount: 0
+  - decisions:
+    - trueValue: 1
+      decision: {fileID: 1238448114157446828}
+      isValid: 0
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: 1189771365066042295}
+      isValid: 0
+      validated: 0
+    - trueValue: 1
+      decision: {fileID: 8477135711447065602}
+      isValid: 0
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: -802270562616884173}
+      isValid: 1
+      validated: 0
+    trueState: {fileID: 7706404350453358325}
+    falseState: {fileID: 0}
+    muteTrue: 0
+    muteFalse: 0
+    transitionType: 0
+    transitionDelay: 0
+    parentState: {fileID: 6617190770934678591}
+    trueRect:
+      serializedVersion: 2
+      x: 345
+      y: 217
+      width: 10
+      height: 10
+    falseRect:
+      serializedVersion: 2
+      x: 505
+      y: 227
+      width: 10
+      height: 10
+    selectedTrue: 0
+    selectedFalse: 0
+    trueSideRight: 0
+    falseSideRight: 1
+    decisionEditor: {fileID: 0}
+    isOpen: 0
+    scroolView: {x: 0, y: 0, z: 0}
+    sameTargetCount: 0
+  actions:
+  - {fileID: 5041339166138805247}
   useActions: 1
   useDecisions: 1
   parentGraph: {fileID: 11400000}
@@ -160,11 +377,97 @@ MonoBehaviour:
   isSelected: 0
   nodeRect:
     serializedVersion: 2
-    x: 525
-    y: 165
+    x: 345
+    y: 5
     width: 150
     height: 30
-  positionRect: {x: 525, y: 165}
+  positionRect: {x: 345, y: 5}
+  rectWidth: 150
+  editingName: 1
+  nodeColor: {r: 1, g: 1, b: 1, a: 1}
+  resizeLeft: 0
+  resizeRight: 0
+  inDrag: 0
+  resetCurrentDestination: 1
+  transitions:
+  - decisions:
+    - trueValue: 0
+      decision: {fileID: 1189771365066042295}
+      isValid: 0
+      validated: 0
+    - trueValue: 1
+      decision: {fileID: 1238448114157446828}
+      isValid: 0
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: 8477135711447065602}
+      isValid: 1
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: -802270562616884173}
+      isValid: 1
+      validated: 0
+    trueState: {fileID: 6617190770934678591}
+    falseState: {fileID: 0}
+    muteTrue: 0
+    muteFalse: 0
+    transitionType: 0
+    transitionDelay: 0
+    parentState: {fileID: 7478782538069001100}
+    trueRect:
+      serializedVersion: 2
+      x: 420
+      y: 20
+      width: 0
+      height: 0
+    falseRect:
+      serializedVersion: 2
+      x: 420
+      y: 20
+      width: 0
+      height: 0
+    selectedTrue: 0
+    selectedFalse: 0
+    trueSideRight: 0
+    falseSideRight: 0
+    decisionEditor: {fileID: 0}
+    isOpen: 0
+    scroolView: {x: 0, y: 0, z: 0}
+    sameTargetCount: 0
+  actions:
+  - {fileID: -8840648123674668440}
+  useActions: 1
+  useDecisions: 1
+  parentGraph: {fileID: 11400000}
+  defaultTransition: {fileID: 0}
+--- !u!114 &7706404350453358325
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b73a6f13cf18194e889cafd0287a9ec, type: 3}
+  m_Name: Melee
+  m_EditorClassIdentifier: 
+  description: FSM State
+  selectedDecisionIndex: 0
+  canRemove: 1
+  canTranstTo: 1
+  canSetAsDefault: 1
+  canEditName: 1
+  canEditColor: 1
+  isOpen: 0
+  isSelected: 1
+  nodeRect:
+    serializedVersion: 2
+    x: 345
+    y: 295
+    width: 150
+    height: 30
+  positionRect: {x: 345, y: 295}
   rectWidth: 150
   editingName: 1
   nodeColor: {r: 1, g: 1, b: 1, a: 1}
@@ -176,7 +479,19 @@ MonoBehaviour:
   - decisions:
     - trueValue: 1
       decision: {fileID: 1238448114157446828}
-      isValid: 0
+      isValid: 1
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: 1189771365066042295}
+      isValid: 1
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: 8477135711447065602}
+      isValid: 1
+      validated: 0
+    - trueValue: 0
+      decision: {fileID: -802270562616884173}
+      isValid: 1
       validated: 0
     trueState: {fileID: 6617190770934678591}
     falseState: {fileID: 0}
@@ -184,17 +499,17 @@ MonoBehaviour:
     muteFalse: 0
     transitionType: 0
     transitionDelay: 0
-    parentState: {fileID: 7478782538069001100}
+    parentState: {fileID: 7706404350453358325}
     trueRect:
       serializedVersion: 2
-      x: 600
-      y: 180
+      x: 420
+      y: 310
       width: 0
       height: 0
     falseRect:
       serializedVersion: 2
-      x: 600
-      y: 180
+      x: 420
+      y: 310
       width: 0
       height: 0
     selectedTrue: 0
@@ -233,11 +548,11 @@ MonoBehaviour:
   isSelected: 0
   nodeRect:
     serializedVersion: 2
-    x: 305
-    y: 165
+    x: 135
+    y: 15
     width: 150
     height: 30
-  positionRect: {x: 305, y: 165}
+  positionRect: {x: 135, y: 15}
   rectWidth: 150
   editingName: 0
   nodeColor: {r: 0, g: 1, b: 0, a: 1}
@@ -251,3 +566,31 @@ MonoBehaviour:
   useDecisions: 0
   parentGraph: {fileID: 11400000}
   defaultTransition: {fileID: 7478782538069001100}
+--- !u!114 &8477135711447065602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9477c323a264a3546978223e631ffc6c, type: 3}
+  m_Name: Check Target Combat Range
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  editingName: 0
+  trueRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  falseRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 10
+    height: 10
+  selectedTrue: 0
+  selectedFalse: 0
