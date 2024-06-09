@@ -94,7 +94,7 @@ public class PlayerStateMachine : StateMachine
         {
             startPosition = (int)enStartPosition;
             transform.parent.position = startTransform[startPosition].position;
-            transform.parent.rotation = startTransform[startPosition].rotation;
+            
             
             //switch (enStartPosition)
             //{

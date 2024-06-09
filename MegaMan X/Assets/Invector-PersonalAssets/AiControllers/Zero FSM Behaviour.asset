@@ -67,7 +67,7 @@ MonoBehaviour:
       validated: 0
     - trueValue: 1
       decision: {fileID: -802270562616884173}
-      isValid: 0
+      isValid: 1
       validated: 0
     trueState: {fileID: 7706404350453358325}
     falseState: {fileID: 0}
@@ -156,6 +156,7 @@ MonoBehaviour:
   actions:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   decisions:
   - {fileID: 0}
   - {fileID: 0}
@@ -218,6 +219,24 @@ MonoBehaviour:
     height: 10
   selectedTrue: 0
   selectedFalse: 0
+--- !u!114 &4539157664239772542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40acadb25137c9a429d915ef2d77fa8f, type: 3}
+  m_Name: Melee Combat
+  m_EditorClassIdentifier: 
+  parentFSM: {fileID: 11400000}
+  executionType: 7
+  editingName: 0
+  engageInStrafe: 1
+  engageSpeed: 2
+  combatSpeed: 2
 --- !u!114 &5041339166138805247
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,7 +294,7 @@ MonoBehaviour:
   - decisions:
     - trueValue: 0
       decision: {fileID: 1238448114157446828}
-      isValid: 1
+      isValid: 0
       validated: 0
     trueState: {fileID: 7478782538069001100}
     falseState: {fileID: 0}
@@ -307,15 +326,15 @@ MonoBehaviour:
   - decisions:
     - trueValue: 1
       decision: {fileID: 1238448114157446828}
-      isValid: 0
+      isValid: 1
       validated: 0
     - trueValue: 0
       decision: {fileID: 1189771365066042295}
-      isValid: 0
+      isValid: 1
       validated: 0
     - trueValue: 1
       decision: {fileID: 8477135711447065602}
-      isValid: 0
+      isValid: 1
       validated: 0
     - trueValue: 0
       decision: {fileID: -802270562616884173}
@@ -393,11 +412,11 @@ MonoBehaviour:
   - decisions:
     - trueValue: 0
       decision: {fileID: 1189771365066042295}
-      isValid: 0
+      isValid: 1
       validated: 0
     - trueValue: 1
       decision: {fileID: 1238448114157446828}
-      isValid: 0
+      isValid: 1
       validated: 0
     - trueValue: 0
       decision: {fileID: 8477135711447065602}
@@ -459,14 +478,14 @@ MonoBehaviour:
   canSetAsDefault: 1
   canEditName: 1
   canEditColor: 1
-  isOpen: 0
+  isOpen: 1
   isSelected: 1
   nodeRect:
     serializedVersion: 2
     x: 345
     y: 295
     width: 150
-    height: 30
+    height: 62
   positionRect: {x: 345, y: 295}
   rectWidth: 150
   editingName: 1
@@ -479,11 +498,11 @@ MonoBehaviour:
   - decisions:
     - trueValue: 1
       decision: {fileID: 1238448114157446828}
-      isValid: 1
+      isValid: 0
       validated: 0
     - trueValue: 0
       decision: {fileID: 1189771365066042295}
-      isValid: 1
+      isValid: 0
       validated: 0
     - trueValue: 0
       decision: {fileID: 8477135711447065602}
@@ -491,7 +510,7 @@ MonoBehaviour:
       validated: 0
     - trueValue: 0
       decision: {fileID: -802270562616884173}
-      isValid: 1
+      isValid: 0
       validated: 0
     trueState: {fileID: 6617190770934678591}
     falseState: {fileID: 0}
@@ -502,25 +521,26 @@ MonoBehaviour:
     parentState: {fileID: 7706404350453358325}
     trueRect:
       serializedVersion: 2
-      x: 420
-      y: 310
-      width: 0
-      height: 0
+      x: 495
+      y: 325
+      width: 10
+      height: 10
     falseRect:
       serializedVersion: 2
-      x: 420
-      y: 310
-      width: 0
-      height: 0
+      x: 495
+      y: 335
+      width: 10
+      height: 10
     selectedTrue: 0
     selectedFalse: 0
-    trueSideRight: 0
-    falseSideRight: 0
+    trueSideRight: 1
+    falseSideRight: 1
     decisionEditor: {fileID: 0}
     isOpen: 0
     scroolView: {x: 0, y: 0, z: 0}
     sameTargetCount: 0
-  actions: []
+  actions:
+  - {fileID: 4539157664239772542}
   useActions: 1
   useDecisions: 1
   parentGraph: {fileID: 11400000}
