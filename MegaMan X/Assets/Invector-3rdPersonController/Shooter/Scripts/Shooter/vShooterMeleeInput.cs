@@ -362,7 +362,7 @@ namespace Invector.vCharacterController
 
         protected override void LateUpdate()
         {
-            if ((!updateIK && animator.updateMode == AnimatorUpdateMode.AnimatePhysics))
+            if ((!updateIK && animator.updateMode == AnimatorUpdateMode.Fixed))
             {
                 return;
             }

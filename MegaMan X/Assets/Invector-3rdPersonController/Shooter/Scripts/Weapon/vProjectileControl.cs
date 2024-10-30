@@ -56,9 +56,9 @@ namespace Invector.vShooter
         protected virtual void Update()
         {
             RaycastHit hitInfo;
-            if (_rigidBody.velocity.magnitude > 1)
+            if (_rigidBody.linearVelocity.magnitude > 1)
             {
-                transform.rotation = Quaternion.LookRotation(_rigidBody.velocity.normalized, transform.up);
+                transform.rotation = Quaternion.LookRotation(_rigidBody.linearVelocity.normalized, transform.up);
             }
 
             if (Physics.Linecast(previousPosition, transform.position + transform.forward * 0.5f, out hitInfo, hitLayer))
@@ -208,10 +208,10 @@ namespace Invector.vShooter
 
                             if (x != 0 || y != 0)
                             {
-                                var dir = Quaternion.Euler(x, y, 0) * _rigidBody.velocity;
+                                var dir = Quaternion.Euler(x, y, 0) * _rigidBody.linearVelocity;
                                 if (dir != Vector3.zero)
                                 {
-                                    _rigidBody.velocity = dir * (bulletLifeInfo.ricochet ? -1 : 1);
+                                    _rigidBody.linearVelocity = dir * (bulletLifeInfo.ricochet ? -1 : 1);
 
                                     transform.forward = dir * (bulletLifeInfo.ricochet ? -1 : 1);
                                 }

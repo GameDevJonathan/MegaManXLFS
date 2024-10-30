@@ -73,7 +73,7 @@ namespace Invector
 #endif
         protected virtual void OnCollisionEnter(Collision other)
         {
-            if (breakOnCollision && _rigidBody && _rigidBody.velocity.magnitude > 5f && !isBroken)
+            if (breakOnCollision && _rigidBody && _rigidBody.linearVelocity.magnitude > 5f && !isBroken)
             {
                 isBroken = true;
                 StartCoroutine(BreakObject());

@@ -87,7 +87,7 @@ namespace Invector.vCharacterController.AI
         [HideInInspector]
         public Rigidbody _rigidbody;
         [HideInInspector]
-        public PhysicMaterial frictionPhysics, maxFrictionPhysics, slippyPhysics;
+        public PhysicsMaterial frictionPhysics, maxFrictionPhysics, slippyPhysics;
         [HideInInspector]
         public CapsuleCollider _capsuleCollider;
         [HideInInspector]
@@ -220,25 +220,25 @@ namespace Invector.vCharacterController.AI
                 triggerRecoilHash = new vAnimatorParameter(animator, "TriggerRecoil");
             }
             // slides the character through walls and edges
-            frictionPhysics = new PhysicMaterial();
+            frictionPhysics = new PhysicsMaterial();
             frictionPhysics.name = "frictionPhysics";
             frictionPhysics.staticFriction = .25f;
             frictionPhysics.dynamicFriction = .25f;
-            frictionPhysics.frictionCombine = PhysicMaterialCombine.Multiply;
+            frictionPhysics.frictionCombine = PhysicsMaterialCombine.Multiply;
 
             // prevents the collider from slipping on ramps
-            maxFrictionPhysics = new PhysicMaterial();
+            maxFrictionPhysics = new PhysicsMaterial();
             maxFrictionPhysics.name = "maxFrictionPhysics";
             maxFrictionPhysics.staticFriction = 1f;
             maxFrictionPhysics.dynamicFriction = 1f;
-            maxFrictionPhysics.frictionCombine = PhysicMaterialCombine.Maximum;
+            maxFrictionPhysics.frictionCombine = PhysicsMaterialCombine.Maximum;
 
             // air physics 
-            slippyPhysics = new PhysicMaterial();
+            slippyPhysics = new PhysicsMaterial();
             slippyPhysics.name = "slippyPhysics";
             slippyPhysics.staticFriction = 0f;
             slippyPhysics.dynamicFriction = 0f;
-            slippyPhysics.frictionCombine = PhysicMaterialCombine.Minimum;
+            slippyPhysics.frictionCombine = PhysicsMaterialCombine.Minimum;
 
             targetDirection = transform.forward;
             _rigidbody = GetComponent<Rigidbody>();
@@ -503,17 +503,17 @@ namespace Invector.vCharacterController.AI
                 {
                     var _speed = isStrafing ? Mathf.Clamp(input.magnitude, 0, 1f) : speed;
                     var velocityDirection = (_hit.point - transform.position);
-                    var vel = _rigidbody.velocity;
+                    var vel = _rigidbody.linearVelocity;
                     vel.y = (velocityDirection * stepSmooth * (_speed * (velocity > 1 ? velocity : 1))).y;
 
-                    _rigidbody.velocity = vel;
+                    _rigidbody.linearVelocity = vel;
                 }
             }
         }
 
         protected virtual void CheckGroundDistance()
         {
-            if (_capsuleCollider != null && (_rigidbody.velocity.y > 0.1f || _rigidbody.velocity.y < -0.1f) || isJumping)
+            if (_capsuleCollider != null && (_rigidbody.linearVelocity.y > 0.1f || _rigidbody.linearVelocity.y < -0.1f) || isJumping)
             {
                 var dist = 10f;
 
@@ -531,7 +531,7 @@ namespace Invector.vCharacterController.AI
                 if (dist >= checkGroundDistance)
                 {
                     isGrounded = false;
-                    verticalVelocity = _rigidbody.velocity.y;
+                    verticalVelocity = _rigidbody.linearVelocity.y;
                 }
                 if ((!actions || isJumping) && !isRolling && dist < checkGroundDistance * 0.9f)
                 {
@@ -827,15 +827,15 @@ namespace Invector.vCharacterController.AI
                 this.velocity = velocity;
                 var deltaPosition = new Vector3(animator.deltaPosition.x, transform.position.y, animator.deltaPosition.z);
                 Vector3 v = (deltaPosition * (velocity > 0 ? velocity : 1f)) / Time.deltaTime;
-                v.y = _rigidbody.velocity.y;
-                _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, v, 20f * Time.deltaTime);
+                v.y = _rigidbody.linearVelocity.y;
+                _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, v, 20f * Time.deltaTime);
             }
             else if (actions || isDead || !canMove || customAction)
             {
                 this.velocity = velocity;
                 Vector3 v = Vector3.zero;
-                v.y = _rigidbody.velocity.y;
-                _rigidbody.velocity = v;
+                v.y = _rigidbody.linearVelocity.y;
+                _rigidbody.linearVelocity = v;
                 transform.position = animator.rootPosition;
             }
             else
@@ -843,14 +843,14 @@ namespace Invector.vCharacterController.AI
                 if (isStrafing)
                 {
                     Vector3 v = (transform.TransformDirection(new Vector3(input.x, 0, input.z)) * (velocity > 0 ? velocity : 1f));
-                    v.y = _rigidbody.velocity.y;
-                    _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, v, 20f * Time.deltaTime);
+                    v.y = _rigidbody.linearVelocity.y;
+                    _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, v, 20f * Time.deltaTime);
                 }
                 else
                 {
                     var _targetVelocity = transform.forward * velocity * speed;
-                    _targetVelocity.y = _rigidbody.velocity.y;
-                    _rigidbody.velocity = _targetVelocity;
+                    _targetVelocity.y = _rigidbody.linearVelocity.y;
+                    _rigidbody.linearVelocity = _targetVelocity;
                 }
             }
         }

@@ -206,7 +206,7 @@ namespace Invector.vCharacterController.AI
         protected Vector3 combatMovement;
         protected Vector3 rollDirection;
         protected Rigidbody _rigidbody;
-        protected PhysicMaterial frictionPhysics;
+        protected PhysicsMaterial frictionPhysics;
         protected Transform head;
         protected Collider colliderTarget;
         protected vWaypoint targetWaypoint;

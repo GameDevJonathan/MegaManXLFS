@@ -136,7 +136,7 @@ namespace Invector
 
         protected virtual void LateUpdate()
         {
-            if (animator == null || (character!=null && (character.currentHealth <= 0 || character.isDead || character.ragdolled)) || !animator.enabled || (!updateIK && animator.updateMode == AnimatorUpdateMode.AnimatePhysics)) return;
+            if (animator == null || (character!=null && (character.currentHealth <= 0 || character.isDead || character.ragdolled)) || !animator.enabled || (!updateIK && animator.updateMode == AnimatorUpdateMode.Fixed)) return;
 
             updateIK = false;
             // call pre Update Event

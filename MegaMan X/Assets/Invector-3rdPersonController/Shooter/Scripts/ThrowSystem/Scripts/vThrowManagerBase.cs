@@ -374,7 +374,7 @@ namespace Invector.Throw
             throwable.isKinematic = false;
             throwable.transform.parent = null;
             throwable.onThrow.Invoke(tpInput.transform);
-            throwable.selfRigidbody.velocity = StartVelocity;
+            throwable.selfRigidbody.linearVelocity = StartVelocity;
             onThrowObject.Invoke();
         }
 

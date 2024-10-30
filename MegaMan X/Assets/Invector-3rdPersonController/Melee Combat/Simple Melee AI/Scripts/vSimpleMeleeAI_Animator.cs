@@ -79,7 +79,7 @@ namespace Invector.vCharacterController.AI
 
             if (!_rigidbody.useGravity && !actions && !agent.isOnOffMeshLink)
             {
-                _rigidbody.velocity = animator.deltaPosition;
+                _rigidbody.linearVelocity = animator.deltaPosition;
             }
 
             if (!agent.updatePosition && !actions)

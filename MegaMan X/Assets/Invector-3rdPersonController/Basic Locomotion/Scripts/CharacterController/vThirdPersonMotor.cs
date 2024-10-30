@@ -404,9 +404,9 @@ namespace Invector.vCharacterController
         #region Components
 
         internal Rigidbody _rigidbody;                                                      // access the Rigidbody component
-        internal PhysicMaterial frictionPhysics, maxFrictionPhysics, slippyPhysics;         // create PhysicMaterial for the Rigidbody
+        internal PhysicsMaterial frictionPhysics, maxFrictionPhysics, slippyPhysics;         // create PhysicMaterial for the Rigidbody
         internal CapsuleCollider _capsuleCollider;                                          // access CapsuleCollider information
-        public PhysicMaterial currentMaterialPhysics { get; protected set; }
+        public PhysicsMaterial currentMaterialPhysics { get; protected set; }
         #endregion
 
         #region Hide Variables
@@ -512,27 +512,27 @@ namespace Invector.vCharacterController
         {
             base.Init();
 
-            animator.updateMode = AnimatorUpdateMode.AnimatePhysics;
+            animator.updateMode = AnimatorUpdateMode.Fixed;
             // slides the character through walls and edges
-            frictionPhysics = new PhysicMaterial();
+            frictionPhysics = new PhysicsMaterial();
             frictionPhysics.name = "frictionPhysics";
             frictionPhysics.staticFriction = .25f;
             frictionPhysics.dynamicFriction = .25f;
-            frictionPhysics.frictionCombine = PhysicMaterialCombine.Multiply;
+            frictionPhysics.frictionCombine = PhysicsMaterialCombine.Multiply;
 
             // prevents the collider from slipping on ramps
-            maxFrictionPhysics = new PhysicMaterial();
+            maxFrictionPhysics = new PhysicsMaterial();
             maxFrictionPhysics.name = "maxFrictionPhysics";
             maxFrictionPhysics.staticFriction = 1f;
             maxFrictionPhysics.dynamicFriction = 1f;
-            maxFrictionPhysics.frictionCombine = PhysicMaterialCombine.Maximum;
+            maxFrictionPhysics.frictionCombine = PhysicsMaterialCombine.Maximum;
 
             // air physics 
-            slippyPhysics = new PhysicMaterial();
+            slippyPhysics = new PhysicsMaterial();
             slippyPhysics.name = "slippyPhysics";
             slippyPhysics.staticFriction = 0f;
             slippyPhysics.dynamicFriction = 0f;
-            slippyPhysics.frictionCombine = PhysicMaterialCombine.Minimum;
+            slippyPhysics.frictionCombine = PhysicsMaterialCombine.Minimum;
 
             // rigidbody info
             _rigidbody = GetComponent<Rigidbody>();
@@ -828,10 +828,10 @@ namespace Invector.vCharacterController
             CheckStopMove(ref targetVelocity);
             if (useVerticalVelocity)
             {
-                targetVelocity.y = _rigidbody.velocity.y;
+                targetVelocity.y = _rigidbody.linearVelocity.y;
             }
 
-            _rigidbody.velocity = targetVelocity;
+            _rigidbody.linearVelocity = targetVelocity;
         }
 
         protected virtual void CheckStopMove(ref Vector3 targetVelocity)
@@ -963,7 +963,7 @@ namespace Invector.vCharacterController
             input = Vector3.Lerp(input, Vector3.zero, 2f * Time.fixedDeltaTime);
             inputSmooth = Vector3.Lerp(inputSmooth, Vector3.zero, 2f * Time.fixedDeltaTime);
             if (!_rigidbody.isKinematic)
-                _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, Vector3.zero, 4f * Time.fixedDeltaTime);
+                _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, Vector3.zero, 4f * Time.fixedDeltaTime);
             inputMagnitude = Mathf.Lerp(inputMagnitude, 0f, 2f * Time.fixedDeltaTime);
             moveSpeed = Mathf.Lerp(moveSpeed, 0f, 2f * Time.fixedDeltaTime);
             animator.SetFloat(vAnimatorParameters.InputMagnitude, 0f, 0.2f, Time.fixedDeltaTime);
@@ -982,7 +982,7 @@ namespace Invector.vCharacterController
             input = Vector3.zero;
             inputSmooth = Vector3.zero;
             if (!_rigidbody.isKinematic)
-                _rigidbody.velocity = Vector3.zero;
+                _rigidbody.linearVelocity = Vector3.zero;
             inputMagnitude = 0f;
             moveSpeed = 0f;
             animator.SetFloat(vAnimatorParameters.InputMagnitude, 0f, 0.25f, Time.fixedDeltaTime);
@@ -1048,9 +1048,9 @@ namespace Invector.vCharacterController
                 isJumping = false;
             }
             // apply extra force to the jump height   
-            var vel = _rigidbody.velocity;
+            var vel = _rigidbody.linearVelocity;
             vel.y = jumpHeight * jumpMultiplier;
-            _rigidbody.velocity = vel;
+            _rigidbody.linearVelocity = vel;
         }
 
         public virtual void SetJumpMultiplier(float jumpMultiplier)
@@ -1118,8 +1118,8 @@ namespace Invector.vCharacterController
             Vector3 targetPosition = _rigidbody.position + (moveDirection * airSpeed) * Time.fixedDeltaTime;
             Vector3 targetVelocity = (targetPosition - transform.position) / Time.fixedDeltaTime;
 
-            targetVelocity.y = _rigidbody.velocity.y;
-            _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, targetVelocity, airSmooth * Time.fixedDeltaTime);
+            targetVelocity.y = _rigidbody.linearVelocity.y;
+            _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, targetVelocity, airSmooth * Time.fixedDeltaTime);
         }
 
         protected virtual bool jumpFwdCondition
@@ -1229,10 +1229,10 @@ namespace Invector.vCharacterController
             Vector3 v = ((deltaPosition * (rollSpeed > 0 ? rollSpeed : 1f)) / Time.deltaTime) * (1f - stopMoveWeight);
             if (rollUseGravity && animator.GetNormalizedTime(baseLayer) >= rollUseGravityTime)
             {
-                v.y = _rigidbody.velocity.y;
+                v.y = _rigidbody.linearVelocity.y;
             }
 
-            _rigidbody.velocity = v;
+            _rigidbody.linearVelocity = v;
         }
 
         #endregion
@@ -1274,7 +1274,7 @@ namespace Invector.vCharacterController
                         isGrounded = false;
 
                     // check vertical velocity
-                    verticalVelocity = _rigidbody.velocity.y;
+                    verticalVelocity = _rigidbody.linearVelocity.y;
                     // apply extra gravity when falling
                     if (!applyingStepOffset && !isJumping && extraGravity != 0)
                     {
@@ -1499,7 +1499,7 @@ namespace Invector.vCharacterController
                 Debug.DrawRay(transform.position, dir * slideDownVelocity);
             }
 
-            _rigidbody.velocity = Vector3.Lerp(_rigidbody.velocity, dir * slideDownVelocity, slideDownSmooth * Time.fixedDeltaTime);
+            _rigidbody.linearVelocity = Vector3.Lerp(_rigidbody.linearVelocity, dir * slideDownVelocity, slideDownSmooth * Time.fixedDeltaTime);
             dir.y = 0f;
 
             if (_rotateSlopeEnterTime <= 0f)
