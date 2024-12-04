@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b153c38dd952e014e9762af9279d1e55
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 287241
+  packageName: Easy Scene Manager
+  packageVersion: 1.0
+  assetPath: Assets/HalfSliceStudio/EasySceneLoader/Editor/EasySceneLoader.cs
+  uploadId: 669877

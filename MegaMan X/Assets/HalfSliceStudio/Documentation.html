@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Scene Loader Documentation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-top: 30px;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Easy Scene Loader Documentation</h1>
+        <p>Hey there! Welcome to the documentation for the Easy Scene Loader extension. This handy tool makes loading and managing scenes in Unity a breeze. Let's dive in!</p>
+
+        <h2>Installation</h2>
+        <ol>
+            <li>Grab the Easy Scene Loader extension package.</li>
+            <li>Import it into your Unity project.</li>
+            <li>You're all set! The extension will be ready to use.</li>
+        </ol>
+
+        <h2>Opening the Easy Scene Loader Window</h2>
+        <p>To open the Easy Scene Loader window, simply go to <code>Tools > Easy Scene Loader</code> in the Unity menu bar. The window will pop up, and you'll see all your project's scenes organized into categories.</p>
+
+        <h2>Loading Scenes</h2>
+        <p>Loading scenes is a piece of cake with Easy Scene Loader:</p>
+        <ul>
+            <li>To load a scene in standard mode, just click on the scene name button. This will replace the currently active scene.</li>
+            <li>If you want to load a scene additively (keeping the current scene loaded), hit the "Additive" button next to the scene name. The new scene will be loaded alongside the active scene.</li>
+        </ul>
+
+        <h2>Unloading Scenes</h2>
+        <p>Need to unload a scene that was loaded additively? No problem! If a scene was loaded additively, you'll see an "Unload" button next to it. Just click that button, and the scene will be unloaded, freeing up resources.</p>
+
+        <h2>Preloading Scenes</h2>
+        <p>Easy Scene Loader also lets you preload all the scenes in your project to reduce loading times during gameplay. Here's how:</p>
+        <ol>
+            <li>Expand the "Preload Settings" section in the Easy Scene Loader window.</li>
+            <li>Set the desired preload delay (in seconds) using the "Preload Delay" field. This delay gives you time to set up any necessary game state before the scenes are preloaded.</li>
+            <li>Click the "Preload All Scenes" button to start preloading all the scenes additively in play mode.</li>
+        </ol>
+        <p>After the preload delay, all the scenes will be loaded in the background, ready to be accessed quickly when needed.</p>
+
+        <h2>Unloading Unused Scenes</h2>
+        <p>To free up memory, Easy Scene Loader can automatically unload scenes that were preloaded but are no longer in use. Here's how it works:</p>
+        <ol>
+            <li>Expand the "Unload Settings" section in the Easy Scene Loader window.</li>
+            <li>Set the desired unload delay (in seconds) using the "Unload Delay" field. This delay determines how long preloaded scenes will stay in memory before being unloaded if unused.</li>
+            <li>Click the "Unload Unused Scenes" button to initiate the delayed unloading process.</li>
+        </ol>
+        <p>After the unload delay, any preloaded scenes that are not currently in use will be automatically unloaded, freeing up memory.</p>
+
+        <h2>Scene Categories</h2>
+        <p>Easy Scene Loader organizes your scenes into categories based on their folder structure. Scenes located in the same folder will be grouped together under a category name derived from the folder name. This makes it easy to find and manage related scenes.</p>
+
+        <h2>Search Functionality</h2>
+        <p>If you have a ton of scenes in your project, finding the one you need can be a hassle. That's where the search functionality comes in handy. Just type in the name or partial name of the scene you're looking for in the search bar, and Easy Scene Loader will filter the scene list to show only matching scenes. It's like having a search engine for your scenes!</p>
+
+        <h2>Refresh Scene List</h2>
+        <p>If you've added or removed scenes from your project, you can easily refresh the scene list in Easy Scene Loader by clicking the "Refresh Scene List" button. This will update the list to reflect the current state of your project's scenes.</p>
+
+        <h2>Wrapping Up</h2>
+        <p>That's it, folks! You're now equipped with the knowledge to use Easy Scene Loader like a pro. Go ahead and streamline your scene management workflow, and happy coding!</p>
+    </div>
+</body>
+</html>
