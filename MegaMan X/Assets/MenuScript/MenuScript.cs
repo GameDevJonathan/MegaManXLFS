@@ -11,11 +11,11 @@ public class MenuScript : MonoBehaviour
     [SerializeField] private Image LoadingFillBar;
     //[SerializeField] private 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void NewGame(string SceneName)
+    public void NewGame()
     {
         Debug.Log("Loading New Game");        
         //SceneManager.LoadScene("Highway");
-        StartCoroutine(LoadingSceneAsync(SceneName));
+        StartCoroutine(LoadingSceneAsync());
     }
 
     public void Quit()
@@ -30,9 +30,10 @@ public class MenuScript : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator LoadingSceneAsync(string sceneName)
+    IEnumerator LoadingSceneAsync()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation operation 
+            = SceneManager.LoadSceneAsync(1);
 
 
         _audioSource.Stop();
@@ -40,10 +41,10 @@ public class MenuScript : MonoBehaviour
 
         while (!operation.isDone)
         {
-            float progressValue = Mathf.Clamp01(operation.progress/ 0.9f);
-            LoadingFillBar.fillAmount = progressValue;
+            
+            LoadingFillBar.fillAmount = operation.progress;
+            yield return null;
         }
 
-        yield return null;
     }
 }
