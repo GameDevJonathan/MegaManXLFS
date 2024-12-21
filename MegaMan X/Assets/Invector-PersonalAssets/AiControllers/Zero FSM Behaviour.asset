@@ -67,7 +67,7 @@ MonoBehaviour:
       validated: 0
     - trueValue: 1
       decision: {fileID: -802270562616884173}
-      isValid: 1
+      isValid: 0
       validated: 0
     trueState: {fileID: 7706404350453358325}
     falseState: {fileID: 0}
@@ -412,11 +412,11 @@ MonoBehaviour:
   - decisions:
     - trueValue: 0
       decision: {fileID: 1189771365066042295}
-      isValid: 1
+      isValid: 0
       validated: 0
     - trueValue: 1
       decision: {fileID: 1238448114157446828}
-      isValid: 1
+      isValid: 0
       validated: 0
     - trueValue: 0
       decision: {fileID: 8477135711447065602}

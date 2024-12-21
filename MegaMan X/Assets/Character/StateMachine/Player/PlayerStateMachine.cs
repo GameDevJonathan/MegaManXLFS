@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PlayerStateMachine : StateMachine
 {
-
+    
     #region Components
     public Transform MainCameraTransform { get; private set; }
     [field: Header("Required Components")]

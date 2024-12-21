@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,19 +31,18 @@ public class MenuScript : MonoBehaviour
 
     IEnumerator LoadingSceneAsync()
     {
-        AsyncOperation operation 
-            = SceneManager.LoadSceneAsync(1);
-
-
         _audioSource.Stop();
         LoadingBar.gameObject.SetActive(true);
 
+        yield return null;
+        
+        AsyncOperation operation 
+            = SceneManager.LoadSceneAsync(1);
+
         while (!operation.isDone)
-        {
-            
+        {            
             LoadingFillBar.fillAmount = operation.progress;
             yield return null;
         }
-
     }
 }
